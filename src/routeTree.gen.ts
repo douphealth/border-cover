@@ -10,33 +10,167 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AtlasRouteImport } from './routes/atlas'
+import { Route as ChangeLogRouteImport } from './routes/change-log'
+import { Route as MethodologyRouteImport } from './routes/methodology'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as SourcesRouteImport } from './routes/sources'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as CoverIndexRouteImport } from './routes/cover.index'
+import { Route as CoverSlugRouteImport } from './routes/cover.$slug'
+import { Route as GuidesIndexRouteImport } from './routes/guides.index'
+import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AtlasRoute = AtlasRouteImport.update({
+  id: '/atlas',
+  path: '/atlas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChangeLogRoute = ChangeLogRouteImport.update({
+  id: '/change-log',
+  path: '/change-log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MethodologyRoute = MethodologyRouteImport.update({
+  id: '/methodology',
+  path: '/methodology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SourcesRoute = SourcesRouteImport.update({
+  id: '/sources',
+  path: '/sources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoverIndexRoute = CoverIndexRouteImport.update({
+  id: '/cover/',
+  path: '/cover/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoverSlugRoute = CoverSlugRouteImport.update({
+  id: '/cover/$slug',
+  path: '/cover/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/guides/',
+  path: '/guides/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesSlugRoute = GuidesSlugRouteImport.update({
+  id: '/guides/$slug',
+  path: '/guides/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/atlas': typeof AtlasRoute
+  '/change-log': typeof ChangeLogRoute
+  '/methodology': typeof MethodologyRoute
+  '/privacy': typeof PrivacyRoute
+  '/sources': typeof SourcesRoute
+  '/terms': typeof TermsRoute
+  '/cover/$slug': typeof CoverSlugRoute
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/cover/': typeof CoverIndexRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/atlas': typeof AtlasRoute
+  '/change-log': typeof ChangeLogRoute
+  '/methodology': typeof MethodologyRoute
+  '/privacy': typeof PrivacyRoute
+  '/sources': typeof SourcesRoute
+  '/terms': typeof TermsRoute
+  '/cover/$slug': typeof CoverSlugRoute
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/cover': typeof CoverIndexRoute
+  '/guides': typeof GuidesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/atlas': typeof AtlasRoute
+  '/change-log': typeof ChangeLogRoute
+  '/methodology': typeof MethodologyRoute
+  '/privacy': typeof PrivacyRoute
+  '/sources': typeof SourcesRoute
+  '/terms': typeof TermsRoute
+  '/cover/$slug': typeof CoverSlugRoute
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/cover/': typeof CoverIndexRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/atlas'
+    | '/change-log'
+    | '/methodology'
+    | '/privacy'
+    | '/sources'
+    | '/terms'
+    | '/cover/$slug'
+    | '/guides/$slug'
+    | '/cover/'
+    | '/guides/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/atlas'
+    | '/change-log'
+    | '/methodology'
+    | '/privacy'
+    | '/sources'
+    | '/terms'
+    | '/cover/$slug'
+    | '/guides/$slug'
+    | '/cover'
+    | '/guides'
+  id:
+    | '__root__'
+    | '/'
+    | '/atlas'
+    | '/change-log'
+    | '/methodology'
+    | '/privacy'
+    | '/sources'
+    | '/terms'
+    | '/cover/$slug'
+    | '/guides/$slug'
+    | '/cover/'
+    | '/guides/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AtlasRoute: typeof AtlasRoute
+  ChangeLogRoute: typeof ChangeLogRoute
+  MethodologyRoute: typeof MethodologyRoute
+  PrivacyRoute: typeof PrivacyRoute
+  SourcesRoute: typeof SourcesRoute
+  TermsRoute: typeof TermsRoute
+  CoverSlugRoute: typeof CoverSlugRoute
+  GuidesSlugRoute: typeof GuidesSlugRoute
+  CoverIndexRoute: typeof CoverIndexRoute
+  GuidesIndexRoute: typeof GuidesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +182,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/atlas': {
+      id: '/atlas'
+      path: '/atlas'
+      fullPath: '/atlas'
+      preLoaderRoute: typeof AtlasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/change-log': {
+      id: '/change-log'
+      path: '/change-log'
+      fullPath: '/change-log'
+      preLoaderRoute: typeof ChangeLogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/methodology': {
+      id: '/methodology'
+      path: '/methodology'
+      fullPath: '/methodology'
+      preLoaderRoute: typeof MethodologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sources': {
+      id: '/sources'
+      path: '/sources'
+      fullPath: '/sources'
+      preLoaderRoute: typeof SourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cover/': {
+      id: '/cover/'
+      path: '/cover'
+      fullPath: '/cover/'
+      preLoaderRoute: typeof CoverIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cover/$slug': {
+      id: '/cover/$slug'
+      path: '/cover/$slug'
+      fullPath: '/cover/$slug'
+      preLoaderRoute: typeof CoverSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/': {
+      id: '/guides/'
+      path: '/guides'
+      fullPath: '/guides/'
+      preLoaderRoute: typeof GuidesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/$slug': {
+      id: '/guides/$slug'
+      path: '/guides/$slug'
+      fullPath: '/guides/$slug'
+      preLoaderRoute: typeof GuidesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AtlasRoute: AtlasRoute,
+  ChangeLogRoute: ChangeLogRoute,
+  MethodologyRoute: MethodologyRoute,
+  PrivacyRoute: PrivacyRoute,
+  SourcesRoute: SourcesRoute,
+  TermsRoute: TermsRoute,
+  CoverSlugRoute: CoverSlugRoute,
+  GuidesSlugRoute: GuidesSlugRoute,
+  CoverIndexRoute: CoverIndexRoute,
+  GuidesIndexRoute: GuidesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

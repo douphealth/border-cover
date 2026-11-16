@@ -1,0 +1,2067 @@
+{
+  "product": "BorderCover Atlas",
+  "checkedOn": "2026-11-01",
+  "sources": {
+    "uk-government": {
+      "id": "uk-government",
+      "title": "UK Government — Vehicle insurance when driving abroad",
+      "publisher": "GOV.UK",
+      "url": "https://www.gov.uk/vehicle-insurance/driving-abroad",
+      "finding": "Minimum UK third-party cover and Green Card guidance.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Government / statutory guidance",
+      "liveMonitorAvailable": true
+    },
+    "uk-mib": {
+      "id": "uk-mib",
+      "title": "Motor Insurers’ Bureau — Insurance and accident advice for driving abroad",
+      "publisher": "Motor Insurers’ Bureau",
+      "url": "https://www.mib.org.uk/learn-about-insurance/driving-abroad/",
+      "finding": "Free-circulation area; Green Card-required countries; digital Green Card acceptance from January 2025.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Government / statutory guidance",
+      "liveMonitorAvailable": true
+    },
+    "aa": {
+      "id": "aa",
+      "title": "AA — Driving abroad in Europe",
+      "publisher": "AA Insurance",
+      "url": "https://www.theaa.com/car-insurance/advice/driving-abroad-in-europe",
+      "finding": "Silver 30 days and Gold/Platinum 90 days per policy year; Ireland exception.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "allianz-uk": {
+      "id": "allianz-uk",
+      "title": "Allianz Online — Car insurance FAQs and policy wording",
+      "publisher": "Allianz UK",
+      "url": "https://www.allianz.co.uk/insurance/car-insurance/faqs.html",
+      "finding": "Bronze minimum 180; Silver comprehensive 90; Gold comprehensive 180, per policy year.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "allianz-uk-booklet": {
+      "id": "allianz-uk-booklet",
+      "title": "Allianz Online — Document of Car Insurance (2025 edition)",
+      "publisher": "Allianz UK",
+      "url": "https://www.allianz.co.uk/content/dam/onemarketing/azuk/allianzcouk/allianz-car-insurance/docs/allianz-online/Allianz-Online-Car-Document-of-Insurance-42025-2025.pdf",
+      "finding": "Section: Territorial limits and European cover, printed p.11. Ireland excluded from foreign-day limit.",
+      "checkedOn": "2026-10-30",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": false,
+      "reviewType": "Previously documented source; not revalidated in this release"
+    },
+    "saga": {
+      "id": "saga",
+      "title": "Saga — December 2025 car policy book",
+      "publisher": "Saga Car Insurance",
+      "url": "https://www.saga.co.uk/helix-contentlibrary/saga/insurance/pdfs/car/saga-car-insurance-policy-book-december-2025.pdf?cd=view",
+      "finding": "Section I, printed pp.27–28. Standard 90; Select 180; Plus unlimited per policy year, permitted destinations.",
+      "checkedOn": "2026-10-31",
+      "documentEdition": "December 2025 policy book, Section I, printed pages 27–28",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": false
+    },
+    "lv": {
+      "id": "lv",
+      "title": "LV= — Driving abroad FAQs",
+      "publisher": "LV=",
+      "url": "https://www.lv.com/car-insurance/car-faqs/driving-abroad",
+      "finding": "Comprehensive 180 days per policy year in the listed European countries; Ireland outside the foreign-use allowance. Some benefits differ.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "admiral": {
+      "id": "admiral",
+      "title": "Admiral — Driving in Europe",
+      "publisher": "Admiral",
+      "url": "https://www.admiral.com/magazine/guides/motor/driving-in-europe",
+      "finding": "Non-Essential comprehensive tiers: 90-day European cover per policy term. Essential excluded.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "first-central": {
+      "id": "first-central",
+      "title": "1st Central — Does my car insurance cover me to drive my car abroad?",
+      "publisher": "1st Central",
+      "url": "https://help.1stcentralinsurance.com/motor/cover-details/does-my-car-insurance-cover-me-to-drive-my-car-abroad",
+      "finding": "90 days per policy year, same domestic cover within specified Europe, and notice to insurer required before departure.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "aviva-uk": {
+      "id": "aviva-uk",
+      "title": "Aviva — European car insurance",
+      "publisher": "Aviva UK",
+      "url": "https://www.aviva.co.uk/insurance/motor/car-insurance/european-car-insurance/",
+      "finding": "Foreign Use is optional on Aviva Signature comprehensive; 90 days per trip and 180 days per year when included, specific product exclusions.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "aviva-ie": {
+      "id": "aviva-ie",
+      "title": "Aviva Ireland — Car insurance FAQs",
+      "publisher": "Aviva Ireland",
+      "url": "https://www.aviva.ie/insurance/car-insurance/",
+      "finding": "Automatic EU extension to 31 days; policy level and exclusions vary. UK included in territorial scope.",
+      "checkedOn": "2026-10-30",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": false,
+      "reviewType": "Previously documented source; not revalidated in this release"
+    },
+    "allianz-ie": {
+      "id": "allianz-ie",
+      "title": "Allianz Ireland — Coverage and benefits FAQs",
+      "publisher": "Allianz Ireland",
+      "url": "https://www.allianz.ie/products/car/car-insurance/faqs/coverage-and-benefits.html",
+      "finding": "Same policy cover across continental Europe up to 60 days per insurance period.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "allianz-ie-wording": {
+      "id": "allianz-ie-wording",
+      "title": "Allianz Ireland — Motor policy wording",
+      "publisher": "Allianz Ireland",
+      "url": "https://www.allianz.ie/content/dam/onemarketing/azie/allianz-ireland/en_us/documents/documents---car-insurance/eaa/Motor-Policy-Wording-remediation.pdf",
+      "finding": "Irish territorial limits and legal minimum in Europe; automatic extension 60 days per insurance period.",
+      "checkedOn": "2026-10-30",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": false,
+      "reviewType": "Previously documented source; not revalidated in this release"
+    },
+    "123ie": {
+      "id": "123ie",
+      "title": "123.ie — Driving abroad customer care",
+      "publisher": "123.ie",
+      "url": "https://www.123.ie/customer-care/driving-abroad-cover",
+      "finding": "EU minimum legal cover automatically; full Irish cover for up to 30 days requires arrangement before travel.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "axa-ie": {
+      "id": "axa-ie",
+      "title": "AXA Ireland — Green Card to UK",
+      "publisher": "AXA Ireland",
+      "url": "https://www.axa.ie/help/question/do-i-need-a-green-card/",
+      "finding": "Ireland-registered vehicles can use insurance disc as proof in UK, including Northern Ireland.",
+      "checkedOn": "2026-10-30",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": false,
+      "reviewType": "Previously documented source; not revalidated in this release"
+    },
+    "progressive": {
+      "id": "progressive",
+      "title": "Progressive — International car insurance",
+      "publisher": "Progressive",
+      "url": "https://www.progressive.com/answers/international-car-insurance/",
+      "finding": "Progressive US policies apply in Canada; separate Mexican liability; limited exception in parts of Texas.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "progressive-road": {
+      "id": "progressive-road",
+      "title": "Progressive — Car insurance for road trips",
+      "publisher": "Progressive",
+      "url": "https://www.progressive.com/answers/car-insurance-for-road-trips/",
+      "finding": "US coverage generally applies in Canada; a separate policy is needed for Mexico.",
+      "checkedOn": "2026-10-30",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": false,
+      "reviewType": "Previously documented source; not revalidated in this release"
+    },
+    "usaa": {
+      "id": "usaa",
+      "title": "USAA — Auto insurance FAQs",
+      "publisher": "USAA",
+      "url": "https://www.usaa.com/support/insurance/auto/faq",
+      "finding": "Canada liability meets legal requirements for own car; Mexico requires Mexican issued liability; Canadian rental coverage differs.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "geico": {
+      "id": "geico",
+      "title": "GEICO — Driving in Canada and Mexico (March 2026)",
+      "publisher": "GEICO",
+      "url": "https://www.geico.com/living/does-my-car-insurance-cover-me-in-canada-and-mexico/",
+      "finding": "GEICO confirms US auto cover in Canada. Typical US personal auto insurance does not extend to Mexico; separate locally valid protection is needed.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "icbc": {
+      "id": "icbc",
+      "title": "ICBC — Driving outside British Columbia",
+      "publisher": "ICBC",
+      "url": "https://icbc.com/insurance/moving-travelling/driving-outside-bc",
+      "finding": "Autoplan coverage extends across Canada and US for vacation driving.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Direct publicly accessible HTML page reviewed against published statement",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": true
+    },
+    "icbc-booklet": {
+      "id": "icbc-booklet",
+      "title": "ICBC — Autoplan insurance guide (March 2026)",
+      "publisher": "ICBC",
+      "url": "https://www.icbc.com/assets/zh-Hans/4bYpswFaIjYOKJO2cDlysF/autoplan-insurance-brochure.pdf",
+      "finding": "Basic insurance fine print printed p.4. Basic cover is Canada/US only, not Mexico.",
+      "checkedOn": "2026-10-30",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": false,
+      "reviewType": "Previously documented source; not revalidated in this release"
+    },
+    "racv": {
+      "id": "racv",
+      "title": "RACV — Motor insurance current PDS (July 2026)",
+      "publisher": "RACV",
+      "url": "https://www.racv.com.au/content/dam/racv-assets/documents/insurance/motor-insurance/pds/motor-insurance-pds-current.pdf",
+      "finding": "General exclusions printed p.24: loss or damage outside Australia; exclusions apply across policy types.",
+      "checkedOn": "2026-10-30",
+      "documentEdition": "RACV PDS with supplementary updates; verify the edition on your certificate",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": false,
+      "reviewType": "Previously documented source; not revalidated in this release"
+    },
+    "ami": {
+      "id": "ami",
+      "title": "AMI — Car policy wording (November 2024)",
+      "publisher": "AMI New Zealand",
+      "url": "https://www.ami.co.nz/content/dam/insurance-brands-nz/ami/nz/en/documents/car/ami-car-insurance-policy-wording-ami0052-11-1124.pdf",
+      "finding": "Incidents outside New Zealand exclusion, printed p.32.",
+      "checkedOn": "2026-10-30",
+      "documentEdition": "AMI0052/11, November 2024, printed page 32",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": false,
+      "reviewType": "Previously documented source; not revalidated in this release"
+    },
+    "aviva-uk-product-lines": {
+      "publisher": "Aviva UK",
+      "title": "Car insurance product tiers and Foreign Use included as standard",
+      "url": "https://www.aviva.co.uk/insurance/motor/car-insurance/",
+      "checkedOn": "2026-10-30",
+      "finding": "Aviva describes its current product lines and features; Foreign Use still depends on the issued policy and selected product. Check the individual Foreign Use terms.",
+      "recordType": "Insurer guidance",
+      "liveMonitorAvailable": false,
+      "reviewType": "Previously documented source; not revalidated in this release"
+    },
+    "axa-uk": {
+      "id": "axa-uk",
+      "title": "AXA UK — Types of car insurance cover / international territories",
+      "publisher": "AXA UK",
+      "url": "https://www.axa.co.uk/car-insurance/types-of-car-insurance/",
+      "finding": "AXA describes the same cover as selected in the UK for up to 90 days per policy year in listed European countries. Its European-driving guide excludes courtesy-car cover abroad. Verify the individual issued policy schedule.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Official insurer website text inspected against published annual allowance and territorial country list; not a customer schedule",
+      "recordType": "Insurer product guidance",
+      "liveMonitorAvailable": true
+    },
+    "axa-uk-docs": {
+      "id": "axa-uk-docs",
+      "title": "AXA UK — AXA / AXA Plus policy documents and issued-policy caveat",
+      "publisher": "AXA UK",
+      "url": "https://www.axa.co.uk/car-insurance/policy-details/",
+      "finding": "The website provides sample policy wordings for AXA and AXA Plus. AXA states that the wording that actually applies to a customer is available during quotation and in the customer account after purchase.",
+      "checkedOn": "2026-10-31",
+      "reviewType": "Official policy-document catalog inspected; sample wording is not a customer-issued schedule",
+      "recordType": "Original insurer policy-document index",
+      "liveMonitorAvailable": true
+    },
+    "direct-line": {
+      "id": "direct-line",
+      "publisher": "Direct Line",
+      "title": "Comprehensive Plus automatic foreign use",
+      "url": "https://www.directline.com/car-cover/comprehensive-plus",
+      "finding": "Comprehensive Plus includes automatic comprehensive foreign-use cover for up to 90 days abroad; policy terms apply.",
+      "checkedOn": "2026-11-01",
+      "reviewType": "Insurer primary publication inspected for this research release; not individual policy verification",
+      "recordType": "Insurer product overview",
+      "liveMonitorAvailable": false
+    },
+    "direct-line-pdf": {
+      "id": "direct-line-pdf",
+      "publisher": "Direct Line",
+      "title": "Direct Line motor policy booklet, where you can drive",
+      "url": "https://assets.directline.com/motor-docs/policy-booklet-1225.pdf",
+      "finding": "Booklet page 35: Comp+ European foreign-use extension up to 90 days per insured period; the Republic of Ireland is within the home territorial benefit.",
+      "checkedOn": "2026-11-01",
+      "reviewType": "Insurer primary publication inspected for this research release; not individual policy verification",
+      "recordType": "Insurer PDF policy booklet",
+      "liveMonitorAvailable": false,
+      "documentEdition": "Direct Line policy booklet 12/2025",
+      "pdfPages": "35-36"
+    },
+    "churchill": {
+      "id": "churchill",
+      "publisher": "Churchill",
+      "title": "Comprehensive Plus car insurance",
+      "url": "https://www.churchill.com/car-insurance/options/comprehensive-plus",
+      "finding": "Churchill describes automatic comprehensive foreign-use cover for up to 90 days; confirm the policy edition and destination.",
+      "checkedOn": "2026-11-01",
+      "reviewType": "Insurer primary publication inspected for this research release; not individual policy verification",
+      "recordType": "Insurer product overview",
+      "liveMonitorAvailable": false,
+      "documentEdition": "Website product page (no booklet edition supplied)"
+    },
+    "tesco": {
+      "id": "tesco",
+      "publisher": "Tesco Insurance",
+      "title": "Driving in Europe",
+      "url": "https://www.tescoinsurance.com/car-insurance/guides/driving-in-europe/",
+      "finding": "Bronze, Silver and Gold give the same cover level as at home for 90 days in a policy year. Republic of Ireland has a separate 90-consecutive-day rule.",
+      "checkedOn": "2026-11-01",
+      "reviewType": "Insurer primary publication inspected for this research release; not individual policy verification",
+      "recordType": "Insurer product overview",
+      "liveMonitorAvailable": true,
+      "documentEdition": "Updated published May 11, 2026"
+    },
+    "tesco-faq": {
+      "id": "tesco-faq",
+      "publisher": "Tesco Insurance",
+      "title": "Car insurance FAQs",
+      "url": "https://www.tescoinsurance.com/help/faqs/car-insurance/?goto=tab-2-9",
+      "finding": "Only permanent UK-resident named drivers qualify for 90-day EU cover; other-car driving benefit is not valid abroad.",
+      "checkedOn": "2026-11-01",
+      "reviewType": "Insurer primary publication inspected for this research release; not individual policy verification",
+      "recordType": "Insurer FAQs",
+      "liveMonitorAvailable": false
+    },
+    "esure": {
+      "id": "esure",
+      "publisher": "esure",
+      "title": "European car insurance guidance",
+      "url": "https://www.esure.com/car-insurance/european-cover",
+      "finding": "Published European same-as-home level cover up to 90 days; day-counting basis is not explicit in this overview.",
+      "checkedOn": "2026-11-01",
+      "reviewType": "Insurer primary publication inspected for this research release; not individual policy verification",
+      "recordType": "Insurer product overview",
+      "liveMonitorAvailable": false
+    },
+    "allstate-ca": {
+      "id": "allstate-ca",
+      "publisher": "Allstate",
+      "title": "Does my U.S. car insurance work in Canada?",
+      "url": "https://www.allstate.com/resources/car-insurance/car-insurance-canada",
+      "finding": "Most U.S. car insurance policies may follow a driver to Canada for short trips, but a specific Allstate contract and optional coverages need confirmation.",
+      "checkedOn": "2026-11-01",
+      "reviewType": "Insurer primary publication inspected for this research release; not individual policy verification",
+      "recordType": "Insurer country guidance",
+      "liveMonitorAvailable": false,
+      "documentEdition": "Published July 2026"
+    },
+    "allstate-mx": {
+      "id": "allstate-mx",
+      "publisher": "Allstate",
+      "title": "Mexico auto insurance for tourists",
+      "url": "https://www.allstate.com/auto-insurance/mexico-car-insurance-for-tourists",
+      "finding": "Allstate says domestic policies are unlikely to cover Mexico and Mexican-issued insurance is needed; Allstate facilitates tourist products.",
+      "checkedOn": "2026-11-01",
+      "reviewType": "Insurer primary publication inspected for this research release; not individual policy verification",
+      "recordType": "Insurer destination guidance",
+      "liveMonitorAvailable": false
+    },
+    "statefarm-mx": {
+      "id": "statefarm-mx",
+      "publisher": "State Farm",
+      "title": "Driving to Mexico",
+      "url": "https://www.statefarm.com/simple-insights/auto-and-vehicles/driving-to-mexico",
+      "finding": "State Farm advises Mexican-issued liability for drives beyond border-area exceptions. This does not verify any issued State Farm personal policy.",
+      "checkedOn": "2026-11-01",
+      "reviewType": "Insurer primary publication inspected for this research release; not individual policy verification",
+      "recordType": "Insurer educational page",
+      "liveMonitorAvailable": false
+    },
+    "statefarm-rental": {
+      "id": "statefarm-rental",
+      "publisher": "State Farm",
+      "title": "Rental car insurance abroad",
+      "url": "https://www.statefarm.com/simple-insights/auto-and-vehicles/rental-car-insurance-guide",
+      "finding": "State Farm says Canada can be an exception to typical overseas rental exclusions; users must verify their actual domestic policy.",
+      "checkedOn": "2026-11-01",
+      "reviewType": "Insurer primary publication inspected for this research release; not individual policy verification",
+      "recordType": "Insurer educational page",
+      "liveMonitorAvailable": false
+    }
+  },
+  "countries": {
+    "at": {
+      "code": "at",
+      "name": "Austria",
+      "region": "eu"
+    },
+    "be": {
+      "code": "be",
+      "name": "Belgium",
+      "region": "eu"
+    },
+    "bg": {
+      "code": "bg",
+      "name": "Bulgaria",
+      "region": "eu"
+    },
+    "hr": {
+      "code": "hr",
+      "name": "Croatia",
+      "region": "eu"
+    },
+    "cy": {
+      "code": "cy",
+      "name": "Cyprus",
+      "region": "eu"
+    },
+    "cz": {
+      "code": "cz",
+      "name": "Czechia",
+      "region": "eu"
+    },
+    "dk": {
+      "code": "dk",
+      "name": "Denmark",
+      "region": "eu"
+    },
+    "ee": {
+      "code": "ee",
+      "name": "Estonia",
+      "region": "eu"
+    },
+    "fi": {
+      "code": "fi",
+      "name": "Finland",
+      "region": "eu"
+    },
+    "fr": {
+      "code": "fr",
+      "name": "France",
+      "region": "eu"
+    },
+    "de": {
+      "code": "de",
+      "name": "Germany",
+      "region": "eu"
+    },
+    "gr": {
+      "code": "gr",
+      "name": "Greece",
+      "region": "eu"
+    },
+    "hu": {
+      "code": "hu",
+      "name": "Hungary",
+      "region": "eu"
+    },
+    "ie": {
+      "code": "ie",
+      "name": "Ireland",
+      "region": "eu"
+    },
+    "it": {
+      "code": "it",
+      "name": "Italy",
+      "region": "eu"
+    },
+    "lv": {
+      "code": "lv",
+      "name": "Latvia",
+      "region": "eu"
+    },
+    "lt": {
+      "code": "lt",
+      "name": "Lithuania",
+      "region": "eu"
+    },
+    "lu": {
+      "code": "lu",
+      "name": "Luxembourg",
+      "region": "eu"
+    },
+    "mt": {
+      "code": "mt",
+      "name": "Malta",
+      "region": "eu"
+    },
+    "nl": {
+      "code": "nl",
+      "name": "Netherlands",
+      "region": "eu"
+    },
+    "pl": {
+      "code": "pl",
+      "name": "Poland",
+      "region": "eu"
+    },
+    "pt": {
+      "code": "pt",
+      "name": "Portugal",
+      "region": "eu"
+    },
+    "ro": {
+      "code": "ro",
+      "name": "Romania",
+      "region": "eu"
+    },
+    "sk": {
+      "code": "sk",
+      "name": "Slovakia",
+      "region": "eu"
+    },
+    "si": {
+      "code": "si",
+      "name": "Slovenia",
+      "region": "eu"
+    },
+    "es": {
+      "code": "es",
+      "name": "Spain",
+      "region": "eu"
+    },
+    "se": {
+      "code": "se",
+      "name": "Sweden",
+      "region": "eu"
+    },
+    "is": {
+      "code": "is",
+      "name": "Iceland",
+      "region": "eea"
+    },
+    "li": {
+      "code": "li",
+      "name": "Liechtenstein",
+      "region": "eea"
+    },
+    "no": {
+      "code": "no",
+      "name": "Norway",
+      "region": "eea"
+    },
+    "ad": {
+      "code": "ad",
+      "name": "Andorra",
+      "region": "europe"
+    },
+    "ba": {
+      "code": "ba",
+      "name": "Bosnia & Herzegovina",
+      "region": "europe"
+    },
+    "gi": {
+      "code": "gi",
+      "name": "Gibraltar",
+      "region": "europe"
+    },
+    "mc": {
+      "code": "mc",
+      "name": "Monaco",
+      "region": "europe"
+    },
+    "me": {
+      "code": "me",
+      "name": "Montenegro",
+      "region": "europe"
+    },
+    "sm": {
+      "code": "sm",
+      "name": "San Marino",
+      "region": "europe"
+    },
+    "rs": {
+      "code": "rs",
+      "name": "Serbia",
+      "region": "europe"
+    },
+    "ch": {
+      "code": "ch",
+      "name": "Switzerland",
+      "region": "europe"
+    },
+    "va": {
+      "code": "va",
+      "name": "Vatican City",
+      "region": "europe"
+    },
+    "gb": {
+      "code": "gb",
+      "name": "United Kingdom",
+      "region": "europe"
+    },
+    "al": {
+      "code": "al",
+      "name": "Albania",
+      "region": "other-europe"
+    },
+    "az": {
+      "code": "az",
+      "name": "Azerbaijan",
+      "region": "other-europe"
+    },
+    "md": {
+      "code": "md",
+      "name": "Moldova",
+      "region": "other-europe"
+    },
+    "mk": {
+      "code": "mk",
+      "name": "North Macedonia",
+      "region": "other-europe"
+    },
+    "tr": {
+      "code": "tr",
+      "name": "Turkey",
+      "region": "other-europe"
+    },
+    "ua": {
+      "code": "ua",
+      "name": "Ukraine",
+      "region": "other-europe"
+    },
+    "us": {
+      "code": "us",
+      "name": "United States",
+      "region": "north-america"
+    },
+    "ca": {
+      "code": "ca",
+      "name": "Canada",
+      "region": "north-america"
+    },
+    "mx": {
+      "code": "mx",
+      "name": "Mexico",
+      "region": "north-america"
+    },
+    "au": {
+      "code": "au",
+      "name": "Australia",
+      "region": "oceania"
+    },
+    "nz": {
+      "code": "nz",
+      "name": "New Zealand",
+      "region": "oceania"
+    },
+    "ma": {
+      "code": "ma",
+      "name": "Morocco",
+      "region": "africa"
+    },
+    "tn": {
+      "code": "tn",
+      "name": "Tunisia",
+      "region": "africa"
+    },
+    "il": {
+      "code": "il",
+      "name": "Israel",
+      "region": "asia"
+    },
+    "jp": {
+      "code": "jp",
+      "name": "Japan",
+      "region": "asia"
+    },
+    "za": {
+      "code": "za",
+      "name": "South Africa",
+      "region": "africa"
+    },
+    "ae": {
+      "code": "ae",
+      "name": "United Arab Emirates",
+      "region": "asia"
+    },
+    "ni": {
+      "code": "ni",
+      "name": "Northern Ireland (UK)",
+      "region": "uk"
+    }
+  },
+  "insurers": [
+    {
+      "id": "aa",
+      "name": "AA",
+      "market": "uk",
+      "intro": "AA Insurance Silver, Gold and Platinum car plans.",
+      "sourceIds": [
+        "aa"
+      ],
+      "tiers": [
+        {
+          "id": "silver",
+          "name": "Silver",
+          "level": "same",
+          "annual": 30
+        },
+        {
+          "id": "gold",
+          "name": "Gold",
+          "level": "same",
+          "annual": 90
+        },
+        {
+          "id": "platinum",
+          "name": "Platinum",
+          "level": "same",
+          "annual": 90
+        }
+      ],
+      "verifiedDestinations": [
+        "ad",
+        "at",
+        "ba",
+        "be",
+        "bg",
+        "ch",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gi",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "is",
+        "it",
+        "li",
+        "lt",
+        "lu",
+        "lv",
+        "mc",
+        "me",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "rs",
+        "se",
+        "si",
+        "sk",
+        "sm",
+        "va"
+      ],
+      "irelandYearExempt": true,
+      "preTravelNotice": "AA suggests contacting it for European journeys longer than the published allowance or for business use."
+    },
+    {
+      "id": "allianz-uk",
+      "name": "Allianz Online",
+      "market": "uk",
+      "intro": "Online Bronze, Silver and Gold policies; other Allianz products may differ.",
+      "sourceIds": [
+        "allianz-uk",
+        "allianz-uk-booklet"
+      ],
+      "tiers": [
+        {
+          "id": "bronze",
+          "name": "Online Bronze",
+          "level": "minimum",
+          "annual": 180,
+          "note": "Only the minimum compulsory motor cover abroad; not own-car damage cover."
+        },
+        {
+          "id": "silver",
+          "name": "Online Silver",
+          "level": "same",
+          "annual": 90
+        },
+        {
+          "id": "gold",
+          "name": "Online Gold",
+          "level": "same",
+          "annual": 180
+        }
+      ],
+      "verifiedDestinations": [
+        "at",
+        "be",
+        "bg",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "is",
+        "it",
+        "li",
+        "lt",
+        "lu",
+        "lv",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "se",
+        "si",
+        "sk"
+      ],
+      "irelandYearExempt": true
+    },
+    {
+      "id": "saga",
+      "name": "Saga",
+      "market": "uk",
+      "intro": "Saga Standard, Select and Plus per the December 2025 booklet.",
+      "sourceIds": [
+        "saga"
+      ],
+      "tiers": [
+        {
+          "id": "standard",
+          "name": "Saga Standard",
+          "level": "same",
+          "annual": 90
+        },
+        {
+          "id": "select",
+          "name": "Saga Select",
+          "level": "same",
+          "annual": 180
+        },
+        {
+          "id": "plus",
+          "name": "Saga Plus",
+          "level": "same"
+        }
+      ],
+      "verifiedDestinations": [
+        "ad",
+        "at",
+        "ba",
+        "be",
+        "bg",
+        "ch",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gi",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "is",
+        "it",
+        "li",
+        "lt",
+        "lu",
+        "lv",
+        "mc",
+        "me",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "rs",
+        "se",
+        "si",
+        "sk",
+        "sm",
+        "va"
+      ]
+    },
+    {
+      "id": "lv",
+      "name": "LV=",
+      "market": "uk",
+      "intro": "LV= comprehensive car insurance, including the Ireland exception.",
+      "sourceIds": [
+        "lv"
+      ],
+      "tiers": [
+        {
+          "id": "comprehensive",
+          "name": "Comprehensive",
+          "level": "same",
+          "annual": 180
+        }
+      ],
+      "verifiedDestinations": [
+        "at",
+        "be",
+        "bg",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "is",
+        "it",
+        "li",
+        "lt",
+        "lu",
+        "lv",
+        "me",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "se",
+        "si",
+        "sk"
+      ],
+      "irelandYearExempt": true
+    },
+    {
+      "id": "admiral",
+      "name": "Admiral",
+      "market": "uk",
+      "intro": "Admiral comprehensive tiers; Essential excludes the standard 90-day extended cover.",
+      "sourceIds": [
+        "admiral"
+      ],
+      "tiers": [
+        {
+          "id": "comprehensive",
+          "name": "Comprehensive (not Essential)",
+          "level": "same",
+          "annual": 90
+        },
+        {
+          "id": "essential",
+          "name": "Essential",
+          "level": "minimum",
+          "note": "Excluded from Admiral’s standard 90-day extended European cover."
+        }
+      ],
+      "verifiedDestinations": [
+        "at",
+        "be",
+        "bg",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "is",
+        "it",
+        "li",
+        "lt",
+        "lu",
+        "lv",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "se",
+        "si",
+        "sk"
+      ]
+    },
+    {
+      "id": "aviva-uk",
+      "name": "Aviva UK",
+      "market": "uk",
+      "intro": "Aviva Signature Foreign Use add-on, versus standard EU minimum cover.",
+      "sourceIds": [
+        "aviva-uk",
+        "aviva-uk-product-lines"
+      ],
+      "tiers": [
+        {
+          "id": "signature",
+          "name": "Signature (without Foreign Use)",
+          "level": "minimum"
+        },
+        {
+          "id": "foreign-use",
+          "name": "Signature comprehensive + Foreign Use",
+          "level": "same",
+          "annual": 180,
+          "perTrip": 90,
+          "note": "Optional Foreign Use must be included on your policy schedule; similar, not identical, cover to home."
+        },
+        {
+          "id": "aviva",
+          "name": "Aviva (Foreign Use included)",
+          "level": "same",
+          "annual": 180,
+          "perTrip": 90,
+          "note": "Foreign Use is included as standard for this named product, subject to the current individual documents. Some ancillary benefits do not extend abroad."
+        },
+        {
+          "id": "aviva-gold",
+          "name": "Aviva Gold (Foreign Use included)",
+          "level": "same",
+          "annual": 180,
+          "perTrip": 90,
+          "note": "Foreign Use is included as standard for this named product, subject to the current individual documents. Some ancillary benefits do not extend abroad."
+        },
+        {
+          "id": "aviva-platinum",
+          "name": "Aviva Platinum (Foreign Use included)",
+          "level": "same",
+          "annual": 180,
+          "perTrip": 90,
+          "note": "Foreign Use is included as standard for this named product, subject to the current individual documents. Some ancillary benefits do not extend abroad."
+        },
+        {
+          "id": "avivaplus-premium",
+          "name": "AvivaPlus Premium (Foreign Use included)",
+          "level": "same",
+          "annual": 180,
+          "perTrip": 90,
+          "note": "Foreign Use is included as standard for this named product, subject to the current individual documents. Some ancillary benefits do not extend abroad."
+        },
+        {
+          "id": "avivaplus-basic",
+          "name": "AvivaPlus Basic (no Foreign Use)",
+          "level": "minimum",
+          "note": "Foreign Use is not offered with AvivaPlus Basic; statutory minimum only where applicable."
+        }
+      ],
+      "verifiedDestinations": [
+        "ad",
+        "at",
+        "ba",
+        "be",
+        "bg",
+        "ch",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gi",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "is",
+        "it",
+        "li",
+        "lt",
+        "lu",
+        "lv",
+        "mc",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "rs",
+        "se",
+        "si",
+        "sk",
+        "sm",
+        "va"
+      ],
+      "preTravelNotice": "Aviva Signature requires Foreign Use to be added before you rely on enhanced European cover. Check your issued schedule for this add-on."
+    },
+    {
+      "id": "first-central",
+      "name": "1st Central",
+      "market": "uk",
+      "intro": "1st Central 90 days in policy year; must notify insurer before any foreign trip.",
+      "sourceIds": [
+        "first-central"
+      ],
+      "tiers": [
+        {
+          "id": "standard",
+          "name": "Private car policy",
+          "level": "same",
+          "annual": 90,
+          "note": "1st Central instructs customers to notify them of a journey abroad regardless of duration; extensions are subject to agreement."
+        }
+      ],
+      "verifiedDestinations": [
+        "ad",
+        "at",
+        "be",
+        "bg",
+        "ch",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "is",
+        "it",
+        "li",
+        "lt",
+        "lu",
+        "lv",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "rs",
+        "se",
+        "si",
+        "sk"
+      ],
+      "preTravelNotice": "1st Central asks policyholders to let it know before taking the car abroad, even for a short trip."
+    },
+    {
+      "id": "axa-uk",
+      "name": "AXA UK",
+      "market": "uk",
+      "intro": "AXA Car Insurance and AXA Plus Car Insurance, published 90-day enhanced foreign-use allowance. Courtesy car is excluded from this enhanced benefit.",
+      "sourceIds": [
+        "axa-uk",
+        "axa-uk-docs"
+      ],
+      "tiers": [
+        {
+          "id": "axa",
+          "name": "AXA Car Insurance",
+          "level": "same",
+          "annual": 90,
+          "note": "AXA states that the UK level of cover extends abroad for up to 90 days in one policy year, excluding the courtesy car benefit. Verify your issued edition and schedule."
+        },
+        {
+          "id": "axa-plus",
+          "name": "AXA Plus Car Insurance",
+          "level": "same",
+          "annual": 90,
+          "note": "AXA states that the UK level of cover extends abroad for up to 90 days in one policy year, excluding the courtesy car benefit. Verify your issued edition and schedule."
+        }
+      ],
+      "verifiedDestinations": [
+        "ad",
+        "at",
+        "be",
+        "bg",
+        "hr",
+        "cy",
+        "cz",
+        "dk",
+        "ee",
+        "fi",
+        "fr",
+        "de",
+        "gr",
+        "hu",
+        "is",
+        "ie",
+        "it",
+        "lv",
+        "li",
+        "lt",
+        "lu",
+        "mt",
+        "me",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "rs",
+        "sk",
+        "si",
+        "es",
+        "se",
+        "ch",
+        "mc",
+        "sm",
+        "va"
+      ]
+    },
+    {
+      "id": "direct-line",
+      "name": "Direct Line",
+      "market": "uk",
+      "intro": "Comprehensive Plus has automatic 90-day Foreign Use; other policies require the extension.",
+      "sourceIds": [
+        "direct-line",
+        "direct-line-pdf"
+      ],
+      "tiers": [
+        {
+          "id": "comp-plus",
+          "name": "Comprehensive Plus (automatic Foreign Use)",
+          "level": "same",
+          "annual": 90,
+          "note": "Automatic 90-day Foreign Use extension subject to schedule and policy edition."
+        },
+        {
+          "id": "comp-ext",
+          "name": "Comprehensive + confirmed Foreign Use extension",
+          "level": "same",
+          "note": "Choose only if Foreign Use Extension is present on your issued schedule; the approved number of days is individual."
+        },
+        {
+          "id": "comp-no",
+          "name": "Comprehensive (no Foreign Use extension)",
+          "level": "minimum",
+          "note": "UK legal minimum applies in specified countries; own-car damage cover does not automatically follow."
+        },
+        {
+          "id": "ess-no",
+          "name": "Essentials / TPFT (no Foreign Use extension)",
+          "level": "minimum",
+          "note": "Territorial cover in Ireland differs from Europe; read issued schedule."
+        }
+      ],
+      "verifiedDestinations": [
+        "ad",
+        "at",
+        "ba",
+        "be",
+        "bg",
+        "ch",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "is",
+        "it",
+        "li",
+        "lt",
+        "lu",
+        "lv",
+        "me",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "rs",
+        "se",
+        "si",
+        "sk",
+        "gi",
+        "ie"
+      ],
+      "irelandYearExempt": true
+    },
+    {
+      "id": "churchill",
+      "name": "Churchill",
+      "market": "uk",
+      "intro": "Comprehensive Plus includes automatic foreign use. Ordinary comprehensive requires a confirmed extension.",
+      "sourceIds": [
+        "churchill"
+      ],
+      "tiers": [
+        {
+          "id": "comp-plus",
+          "name": "Comprehensive Plus (automatic Foreign Use)",
+          "level": "same",
+          "note": "90-day automatic foreign use stated on product overview; counting basis is not established by this page. Check the issued booklet.",
+          "unspecified": 90
+        },
+        {
+          "id": "comp-ext",
+          "name": "Comprehensive + arranged foreign-use extension",
+          "level": "same",
+          "note": "Only select when the extension has been arranged and is shown on your issued documents."
+        },
+        {
+          "id": "comp-no",
+          "name": "Comprehensive (without extension)",
+          "level": "minimum"
+        }
+      ],
+      "verifiedDestinations": [
+        "ad",
+        "at",
+        "ba",
+        "be",
+        "bg",
+        "ch",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "is",
+        "it",
+        "li",
+        "lt",
+        "lu",
+        "lv",
+        "me",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "rs",
+        "se",
+        "si",
+        "sk",
+        "ie"
+      ]
+    },
+    {
+      "id": "tesco",
+      "name": "Tesco Insurance",
+      "market": "uk",
+      "intro": "Bronze, Silver and Gold cover follow the home level in the EU for 90 days per insurance year.",
+      "sourceIds": [
+        "tesco",
+        "tesco-faq"
+      ],
+      "tiers": [
+        {
+          "id": "bronze",
+          "name": "Bronze comprehensive",
+          "level": "same",
+          "annual": 90
+        },
+        {
+          "id": "silver",
+          "name": "Silver comprehensive",
+          "level": "same",
+          "annual": 90
+        },
+        {
+          "id": "gold",
+          "name": "Gold comprehensive",
+          "level": "same",
+          "annual": 90
+        }
+      ],
+      "verifiedDestinations": [
+        "at",
+        "be",
+        "bg",
+        "hr",
+        "cy",
+        "cz",
+        "dk",
+        "ee",
+        "fi",
+        "fr",
+        "de",
+        "gr",
+        "hu",
+        "ie",
+        "it",
+        "lv",
+        "lt",
+        "lu",
+        "mt",
+        "nl",
+        "pl",
+        "pt",
+        "ro",
+        "sk",
+        "si",
+        "es",
+        "se"
+      ],
+      "irelandYearExempt": true,
+      "preTravelNotice": "Only permanent named drivers who are UK residents qualify for Tesco European cover. Temporary drivers are excluded."
+    },
+    {
+      "id": "esure",
+      "name": "esure",
+      "market": "uk",
+      "intro": "Published European allowance up to 90 days; counting basis needs confirmation.",
+      "sourceIds": [
+        "esure"
+      ],
+      "tiers": [
+        {
+          "id": "comprehensive",
+          "name": "Comprehensive (European benefit)",
+          "level": "same",
+          "unspecified": 90,
+          "note": "esure page does not specify whether the allowance is total per year or per trip; verify the wording."
+        }
+      ],
+      "verifiedDestinations": [
+        "ad",
+        "at",
+        "ba",
+        "be",
+        "bg",
+        "ch",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "is",
+        "it",
+        "li",
+        "lt",
+        "lu",
+        "lv",
+        "me",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "rs",
+        "se",
+        "si",
+        "sk",
+        "ie"
+      ]
+    },
+    {
+      "id": "hastings",
+      "name": "Hastings Direct",
+      "market": "uk",
+      "intro": "A current first-party tier-by-tier source has not been verified in this release.",
+      "sourceIds": [
+        "uk-government"
+      ],
+      "tiers": [
+        {
+          "id": "unverified",
+          "name": "Exact tier not independently verified",
+          "level": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "other-uk",
+      "name": "My insurer isn’t listed",
+      "market": "uk",
+      "intro": "UK government minimum-cover rules only; specific full cover not verified.",
+      "sourceIds": [
+        "uk-government"
+      ],
+      "tiers": [
+        {
+          "id": "unknown",
+          "name": "I’ll check my policy",
+          "level": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "aviva-ie",
+      "name": "Aviva Ireland",
+      "market": "ie",
+      "intro": "Aviva Ireland auto extension for EU trips, subject to policy conditions.",
+      "sourceIds": [
+        "aviva-ie"
+      ],
+      "tiers": [
+        {
+          "id": "standard",
+          "name": "Car insurance policy",
+          "level": "same",
+          "unspecified": 31,
+          "note": "Aviva states “up to 31 days” but does not specify the aggregation basis on this overview; confirm your wording."
+        }
+      ],
+      "verifiedDestinations": [
+        "at",
+        "be",
+        "bg",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "it",
+        "lt",
+        "lu",
+        "lv",
+        "mt",
+        "nl",
+        "pl",
+        "pt",
+        "ro",
+        "se",
+        "si",
+        "sk"
+      ]
+    },
+    {
+      "id": "allianz-ie",
+      "name": "Allianz Ireland",
+      "market": "ie",
+      "intro": "Allianz Ireland European cover and home territorial limits.",
+      "sourceIds": [
+        "allianz-ie",
+        "allianz-ie-wording"
+      ],
+      "tiers": [
+        {
+          "id": "motor",
+          "name": "Private car policy",
+          "level": "same",
+          "annual": 60
+        }
+      ],
+      "verifiedDestinations": [
+        "ad",
+        "at",
+        "ba",
+        "be",
+        "bg",
+        "ch",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gi",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "is",
+        "it",
+        "li",
+        "lt",
+        "lu",
+        "lv",
+        "mc",
+        "me",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "rs",
+        "se",
+        "si",
+        "sk",
+        "sm",
+        "va"
+      ]
+    },
+    {
+      "id": "123ie",
+      "name": "123.ie",
+      "market": "ie",
+      "intro": "Full EU extension is not automatic: you must arrange it in advance.",
+      "sourceIds": [
+        "123ie"
+      ],
+      "tiers": [
+        {
+          "id": "standard",
+          "name": "Standard (no extension)",
+          "level": "minimum"
+        },
+        {
+          "id": "approved",
+          "name": "Full-cover extension approved",
+          "level": "same",
+          "unspecified": 30,
+          "note": "Use only if 123.ie has confirmed extension for your dates and destination.",
+          "requiresPriorApproval": true
+        }
+      ],
+      "verifiedDestinations": [
+        "at",
+        "be",
+        "bg",
+        "cy",
+        "cz",
+        "de",
+        "dk",
+        "ee",
+        "es",
+        "fi",
+        "fr",
+        "gr",
+        "hr",
+        "hu",
+        "ie",
+        "it",
+        "lt",
+        "lu",
+        "lv",
+        "mt",
+        "nl",
+        "pl",
+        "pt",
+        "ro",
+        "se",
+        "si",
+        "sk"
+      ],
+      "preTravelNotice": "To obtain full Irish cover in EU countries, contact 123.ie before the journey and receive its approval. The baseline EU legal minimum is different."
+    },
+    {
+      "id": "other-ie",
+      "name": "My insurer isn’t listed",
+      "market": "ie",
+      "intro": "No insurer-specific Irish policy wording available in this database.",
+      "sourceIds": [],
+      "tiers": [
+        {
+          "id": "unknown",
+          "name": "I’ll check my policy",
+          "level": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "progressive",
+      "name": "Progressive",
+      "market": "us",
+      "intro": "U.S. personal auto policy used in your own insured car.",
+      "sourceIds": [
+        "progressive",
+        "progressive-road"
+      ],
+      "tiers": [
+        {
+          "id": "personal",
+          "name": "Personal auto policy",
+          "level": "same",
+          "note": "Policy limits and coverages follow your declarations. Rare border exceptions do not replace Mexican liability insurance."
+        }
+      ]
+    },
+    {
+      "id": "usaa",
+      "name": "USAA",
+      "market": "us",
+      "intro": "USAA FAQ confirms Canadian liability, not all physical-damage benefits.",
+      "sourceIds": [
+        "usaa"
+      ],
+      "tiers": [
+        {
+          "id": "auto",
+          "name": "Personal auto policy",
+          "level": "liability",
+          "note": "Liability in Canada confirmed. Own-vehicle collision/comprehensive requires your own policy verification."
+        }
+      ]
+    },
+    {
+      "id": "geico",
+      "name": "GEICO",
+      "market": "us",
+      "intro": "GEICO guidance for U.S. insured vehicles driven to Canada or Mexico.",
+      "sourceIds": [
+        "geico"
+      ],
+      "tiers": [
+        {
+          "id": "personal",
+          "name": "Personal auto policy",
+          "level": "same"
+        }
+      ]
+    },
+    {
+      "id": "allstate",
+      "name": "Allstate",
+      "market": "us",
+      "intro": "Allstate publishes U.S. insured-car travel guidance for Canada and Mexico.",
+      "sourceIds": [
+        "allstate-ca",
+        "allstate-mx"
+      ],
+      "tiers": [
+        {
+          "id": "personal",
+          "name": "Personal auto insurance",
+          "level": "same",
+          "note": "In Canada, benefits depend on your purchased liability/collision/comprehensive policy. Mexico requires local protection."
+        }
+      ]
+    },
+    {
+      "id": "state-farm",
+      "name": "State Farm",
+      "market": "us",
+      "intro": "State Farm advises separate Mexican liability; Canadian cover requires a policy-specific check.",
+      "sourceIds": [
+        "statefarm-mx",
+        "statefarm-rental"
+      ],
+      "tiers": [
+        {
+          "id": "personal",
+          "name": "Personal auto policy",
+          "level": "unknown",
+          "note": "Do not assume foreign cover from State Farm educational guidance; confirm with your agent."
+        }
+      ]
+    },
+    {
+      "id": "other-us",
+      "name": "My insurer isn’t listed",
+      "market": "us",
+      "intro": "U.S. policies vary by state and insurer; no company-specific verification.",
+      "sourceIds": [],
+      "tiers": [
+        {
+          "id": "unknown",
+          "name": "I’ll check my policy",
+          "level": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "icbc",
+      "name": "ICBC Autoplan",
+      "market": "ca",
+      "intro": "For a B.C.-insured vehicle with active ICBC Autoplan Basic insurance.",
+      "sourceIds": [
+        "icbc",
+        "icbc-booklet"
+      ],
+      "tiers": [
+        {
+          "id": "basic",
+          "name": "Autoplan Basic",
+          "level": "liability",
+          "note": "Optional collision and comprehensive coverage are not inferred from Basic insurance."
+        }
+      ]
+    },
+    {
+      "id": "other-ca",
+      "name": "My insurer isn’t listed",
+      "market": "ca",
+      "intro": "Other Canadian province and insurer policies must be checked individually.",
+      "sourceIds": [],
+      "tiers": [
+        {
+          "id": "unknown",
+          "name": "I’ll check my policy",
+          "level": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "racv",
+      "name": "RACV",
+      "market": "au",
+      "intro": "RACV Motor Insurance PDS: exclusions apply to loss or damage outside Australia.",
+      "sourceIds": [
+        "racv"
+      ],
+      "tiers": [
+        {
+          "id": "comprehensive",
+          "name": "Comprehensive",
+          "level": "excluded"
+        },
+        {
+          "id": "third-party",
+          "name": "Third Party Property Damage",
+          "level": "excluded"
+        },
+        {
+          "id": "complete",
+          "name": "Complete Care (confirm edition)",
+          "level": "unknown",
+          "note": "Different PDS; check Complete Care wording and endorsements before shipping."
+        }
+      ]
+    },
+    {
+      "id": "other-au",
+      "name": "My insurer isn’t listed",
+      "market": "au",
+      "intro": "International shipping of your own car needs insurer and destination confirmation.",
+      "sourceIds": [],
+      "tiers": [
+        {
+          "id": "unknown",
+          "name": "I’ll check my policy",
+          "level": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "ami",
+      "name": "AMI",
+      "market": "nz",
+      "intro": "AMI November 2024 motor wording excludes incidents outside New Zealand.",
+      "sourceIds": [
+        "ami"
+      ],
+      "tiers": [
+        {
+          "id": "comprehensive",
+          "name": "Comprehensive",
+          "level": "excluded"
+        },
+        {
+          "id": "fire-theft",
+          "name": "Third Party, Fire & Theft",
+          "level": "excluded"
+        },
+        {
+          "id": "third-party",
+          "name": "Third Party Only",
+          "level": "excluded"
+        }
+      ]
+    },
+    {
+      "id": "other-nz",
+      "name": "My insurer isn’t listed",
+      "market": "nz",
+      "intro": "International shipping of your own car needs insurer and destination confirmation.",
+      "sourceIds": [],
+      "tiers": [
+        {
+          "id": "unknown",
+          "name": "I’ll check my policy",
+          "level": "unknown"
+        }
+      ]
+    }
+  ],
+  "markets": [
+    {
+      "id": "uk",
+      "name": "United Kingdom",
+      "countryCode": "gb",
+      "defaultDestination": "fr",
+      "label": "UK policy"
+    },
+    {
+      "id": "ie",
+      "name": "Ireland",
+      "countryCode": "ie",
+      "defaultDestination": "fr",
+      "label": "Irish policy"
+    },
+    {
+      "id": "us",
+      "name": "United States",
+      "countryCode": "us",
+      "defaultDestination": "ca",
+      "label": "US policy"
+    },
+    {
+      "id": "ca",
+      "name": "Canada",
+      "countryCode": "ca",
+      "defaultDestination": "us",
+      "label": "Canadian policy"
+    },
+    {
+      "id": "au",
+      "name": "Australia",
+      "countryCode": "au",
+      "defaultDestination": "nz",
+      "label": "Australian policy"
+    },
+    {
+      "id": "nz",
+      "name": "New Zealand",
+      "countryCode": "nz",
+      "defaultDestination": "au",
+      "label": "NZ policy"
+    }
+  ],
+  "ukMinimumCountries": [
+    "ad",
+    "at",
+    "ba",
+    "be",
+    "bg",
+    "ch",
+    "cy",
+    "cz",
+    "de",
+    "dk",
+    "ee",
+    "es",
+    "fi",
+    "fr",
+    "gr",
+    "hr",
+    "hu",
+    "ie",
+    "is",
+    "it",
+    "li",
+    "lt",
+    "lu",
+    "lv",
+    "me",
+    "mt",
+    "nl",
+    "no",
+    "pl",
+    "pt",
+    "ro",
+    "rs",
+    "se",
+    "si",
+    "sk"
+  ],
+  "greenCardFreeUK": [
+    "ad",
+    "at",
+    "ba",
+    "be",
+    "bg",
+    "ch",
+    "cy",
+    "cz",
+    "de",
+    "dk",
+    "ee",
+    "es",
+    "fi",
+    "fr",
+    "gb",
+    "gi",
+    "gr",
+    "hr",
+    "hu",
+    "ie",
+    "is",
+    "it",
+    "li",
+    "lt",
+    "lu",
+    "lv",
+    "me",
+    "mt",
+    "nl",
+    "no",
+    "pl",
+    "pt",
+    "ro",
+    "rs",
+    "se",
+    "si",
+    "sk"
+  ],
+  "greenCardMayNeedUK": [
+    "al",
+    "az",
+    "il",
+    "ma",
+    "md",
+    "mk",
+    "tn",
+    "tr",
+    "ua"
+  ],
+  "release": "v7.0.0: evidence-first comparison with tier-country facts, real insurer source links and policy-year guardrails",
+  "changeLog": [
+    {
+      "date": "2026-11-01",
+      "type": "Research dataset update",
+      "description": "Added Direct Line Comp+, Churchill Comp+, Tesco Bronze/Silver/Gold, esure Europe, Allstate Canada/Mexico and State Farm Mexico sources. No insurer term change date is claimed without an earlier comparable edition."
+    },
+    {
+      "date": "2026-11-01",
+      "type": "Precision fix",
+      "description": "Separated Republic of Ireland and Northern Ireland; added explicit Ireland exceptions for Direct Line, Churchill and Tesco; added unknown status for insufficiently sourced providers."
+    },
+    {
+      "date": "2026-11-01",
+      "type": "Safety / product",
+      "description": "Added vehicle-type guardrails, detailed per-country cells and per-cell evidence status. Previously published results retain their original review dates."
+    }
+  ]
+}
