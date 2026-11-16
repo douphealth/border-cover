@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Coverage verdicts come only from `src/lib/engine.ts` (ported original pure engine) over `src/data/policies.json`; UI never hardcodes verdicts, so evidence updates are data-only edits.
+- Insurer×country pages are listed in `src/data/cover-pages.json` and evaluated at render time, so they stay in sync with the dataset.

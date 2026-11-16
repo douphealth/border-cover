@@ -27,7 +27,7 @@ export function Checker() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
-      <div className="space-y-6 rounded-2xl glass p-6 shadow-float">
+      <div className="space-y-6 self-start rounded-2xl glass p-6 shadow-float lg:sticky lg:top-20">
         <Field n="1" label="Where is your car insured?">
           <div className="grid grid-cols-3 gap-2">
             {markets.map((m) => (

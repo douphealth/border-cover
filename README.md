@@ -1,29 +1,9 @@
-# Welcome to your Lovable project
+# BorderCover Atlas
 
-This project was built with [Lovable](https://lovable.dev).
+Source-backed research tool: does your UK, Irish, US, Canadian, Australian or NZ car insurance cover you when you drive abroad?
 
-## Build with Lovable
+- **Checker** — multi-country route (up to 5 stops), plan tiers, trip & used-day tracking, Green Card/document rules, actions and linked evidence.
+- **Interactive atlas** — every destination drawn as a route from your home market, coloured by published cover status.
+- **55 insurer × country pages**, **9 guides**, methodology, evidence register (36 sources) and change log.
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+Built with TanStack Start, React 19 and Tailwind v4. Not insurance advice — always confirm with your insurer.
