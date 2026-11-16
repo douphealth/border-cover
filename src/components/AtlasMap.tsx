@@ -38,7 +38,7 @@ export function AtlasMap({ market, insurer, tier, days, onPick, selected = [] }:
           ))}
         </div>
         <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
-          {Object.entries(STATUS).filter(([k]) => counts[k]).map(([k, s]) => (
+          {Object.entries(STATUS).filter(([k]) => counts[k]).map(([k, s]: [string, any]) => (
             <span key={k} className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full" style={{ background: s.dot }} />{s.label} <b className="font-mono text-foreground">{counts[k]}</b></span>
           ))}
         </div>
