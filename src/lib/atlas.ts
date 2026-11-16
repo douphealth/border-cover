@@ -8,7 +8,7 @@ export const data: any = policies;
 export { evaluate, evaluateRoute, greenCard, getMatrixSample, HOME_DEFAULT };
 
 export type Status = "confirmed" | "minimum" | "liability" | "limited" | "needs-check" | "not-covered";
-export const STATUS: Record<string, { label: string; tone: string; dot: string }> = {
+export const STATUS: any = {
   confirmed: { label: "Published full cover", tone: "text-ok border-ok/40 bg-ok/10", dot: "var(--ok)" },
   minimum: { label: "Legal minimum only", tone: "text-warn border-warn/40 bg-warn/10", dot: "var(--warn)" },
   liability: { label: "Liability published", tone: "text-info border-info/40 bg-info/10", dot: "var(--info)" },

@@ -14,7 +14,7 @@ export function AtlasMap({ market, insurer, tier, days, onPick, selected = [] }:
   const [hover, setHover] = useState<string | null>(null);
   const W = 1000, H = 560;
   const v = VIEWS[view];
-  const proj = ([lon, lat]: [number, number]) => [((lon - v.lon[0]) / (v.lon[1] - v.lon[0])) * W, ((v.lat[1] - lat) / (v.lat[1] - v.lat[0])) * H];
+  const proj = ([lon, lat]: [number, number]) => [((lon - v.lon[0]) / (v.lon[1] - v.lon[0])) * W, ((v.lat[1] - lat) / (v.lat[1] - v.lat[0])) * H] as [number, number];
   const home = data.markets.find((m: any) => m.id === market)?.countryCode;
   const results = useMemo(() => {
     const out: Record<string, any> = {};
