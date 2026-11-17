@@ -5,6 +5,9 @@
 - All markets are research previews. Direct AA HTML observations support the imported allowance values but are not human approval.
 - The pure engine remains the sole coverage evaluator. Approved editorial revisions are displayed separately in the source register; updating policy rules still requires a reviewed structured-data revision and tests.
 - Reviewer permissions are assigned out of band in `public.user_roles`; signup never grants privileges. No reviewer is assigned yet.
+- Verification completed: 29 rule/validation/routing tests passed; 74 content routes loaded with page-specific metadata and no browser runtime errors; usage, multi-stop sharing, evidence expansion, renewal warnings and print layout were exercised. Phone width 390 and wide desktop width 2602 had no horizontal document overflow.
+- A submitted correction was read back from Cloud. Authenticated evidence approval remains unverified because the backend has no auth users; the owner must sign up and identify the actual reviewer before assigning privileges.
+- The production dependency scan reported no known advisories after compatible package updates/overrides. The database linter has no errors; its remaining warning is the intentionally authenticated role-check function, necessary for server authorization and RLS.
 - Private report submission is public insert-only through a validated server function; browser roles cannot insert/read private reports directly. Add provider-level abuse protection before a high-traffic public launch.
 - `/api/public/health` is a minimal public uptime target and reveals no private data.
 - `/api/public/jobs/source-check` accepts only managed scheduled authentication. It monitors fixed publisher URLs with timeout/size limits and no redirects, recording availability and raw content hashes. Hash changes require review and may be caused by page noise; they are not legal-rule changes. PDFs and blocked pages need manual inspection.

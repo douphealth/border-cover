@@ -37,3 +37,4 @@ use the editor.
 - Serialize only validated scenario inputs into share-link fragments; fragments avoid sending trip details in ordinary host request URLs.
 - Persistent corrections and review actions use Cloud with server-validated reviewer roles; draft evidence never silently changes published rules.
 - Keep previews noindex and require approved claim provenance plus a real production origin for sitemap generation; directory size is not an indexing eligibility signal.
+- Keep the template-supported TanStack server-function API and patch vulnerable transitive dependencies through verified compatible overrides; a latest-version bump can remove the supported input-validation method.
