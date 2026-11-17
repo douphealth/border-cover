@@ -2,27 +2,29 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { sources } from "./atlas";
+import { canIndependentlyApprove } from "./provenance";
 
-export const reportSchema = z.object({ ruleId: z.string().min(1).max(200), version: z.string().min(1).max(80), message: z.string().trim().min(10).max(2000), website: z.string().max(0).default("") });
+export const reportSchema = z.object({ ruleId: z.string().min(1).max(200), version: z.string().min(1).max(80), message: z.string().trim().min(10).max(2000), website: z.string().max(0).default(""), kind: z.enum(["correction", "insurer-request"]).default("correction") });
 
 export const submitCorrection = createServerFn({ method: "POST" }).inputValidator(reportSchema).handler(async ({ data }) => {
   // Intentionally public, insert-only. No browser role has direct report-table access.
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const { error } = await supabaseAdmin.from("correction_reports").insert({ rule_id: data.ruleId, rule_version: data.version, message: data.message });
+  const { error } = await supabaseAdmin.from("correction_reports").insert({ rule_id: data.ruleId, rule_version: data.version, message: data.message, kind: data.kind });
   if (error) { console.error("Correction insert failed", error.code); return { ok: false }; }
   return { ok: true };
 });
 
 export const reviewQueue = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).handler(async ({ context }) => {
   const { data: permitted, error } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "reviewer" });
-  if (error || !permitted) return { permitted: false, reports: [], reviews: [], observations: [] };
-  const [reports, reviews, observations] = await Promise.all([
-    context.supabase.from("correction_reports").select("id,rule_id,rule_version,message,status,created_at").order("created_at", { ascending: false }).limit(100),
+  if (error || !permitted) return { permitted: false, userId: context.userId, reports: [], reviews: [], observations: [], tasks: [] };
+  const [reports, reviews, observations, tasks] = await Promise.all([
+    context.supabase.from("correction_reports").select("id,rule_id,rule_version,message,status,created_at,kind").order("created_at", { ascending: false }).limit(100),
     context.supabase.from("evidence_reviews").select("*").order("created_at", { ascending: false }).limit(100),
     context.supabase.from("source_observations").select("*").order("observed_at", { ascending: false }).limit(100),
+    context.supabase.from("review_tasks").select("*").order("created_at", { ascending: false }).limit(100),
   ]);
-  if (reports.error || reviews.error || observations.error) throw new Error("Review records could not be loaded.");
-  return { permitted: true, reports: reports.data ?? [], reviews: reviews.data ?? [], observations: observations.data ?? [] };
+  if (reports.error || reviews.error || observations.error || tasks.error) throw new Error("Review records could not be loaded.");
+  return { permitted: true, userId: context.userId, reports: reports.data ?? [], reviews: reviews.data ?? [], observations: observations.data ?? [], tasks: tasks.data ?? [] };
 });
 
 const reviewSchema = z.object({ sourceId: z.string().refine((id) => Boolean(sources[id])), ruleId: z.string().min(1).max(200), quotation: z.string().min(20).max(8000), section: z.string().min(1).max(500), edition: z.string().min(1).max(500), reviewer: z.string().min(2).max(120), due: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), conflicts: z.string().max(2000).default("") });
@@ -37,6 +39,8 @@ export const saveReview = createServerFn({ method: "POST" }).middleware([require
 export const approveReview = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator(z.object({ id: z.string().uuid() })).handler(async ({ data, context }) => {
   const { data: permitted } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "reviewer" });
   if (!permitted) throw new Error("Reviewer access required.");
+  const { data: draft } = await context.supabase.from("evidence_reviews").select("created_by").eq("id", data.id).eq("status", "draft").maybeSingle();
+  if (!draft || !canIndependentlyApprove(draft.created_by, context.userId, Boolean(permitted))) throw new Error("A different authorized reviewer must approve this draft.");
   const { data: rows, error } = await context.supabase.from("evidence_reviews").update({ status: "approved" }).eq("id", data.id).eq("status", "draft").select("id");
   if (error || !rows?.length) throw new Error("Draft could not be approved.");
   return { ok: true };
@@ -64,4 +68,13 @@ export const publishedEvidence = createServerFn({ method: "GET" }).handler(async
   const { data, error } = await client.from("approved_evidence").select("source_id,rule_id,quotation,section,policy_edition,reviewer_name,review_due,human_verified_at,conflicts").limit(500);
   if (error) return [];
   return data ?? [];
+});
+export const updateReviewTask = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator(z.object({ id: z.string().uuid(), action: z.enum(["claim", "resolve"]) })).handler(async ({ data, context }) => {
+  const { data: permitted } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "reviewer" });
+  if (!permitted) throw new Error("Reviewer access required.");
+  let query = context.supabase.from("review_tasks").update(data.action === "claim" ? { assigned_to: context.userId } : { status: "resolved", resolved_at: new Date().toISOString() }).eq("id", data.id).eq("status", "open");
+  query = data.action === "claim" ? query.is("assigned_to", null) : query.eq("assigned_to", context.userId);
+  const { data: rows, error } = await query.select("id");
+  if (error || !rows?.length) throw new Error("Claim this task before resolving it, or refresh its status.");
+  return { ok: true };
 });

@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
 import { EvidenceDetails } from "@/components/EvidenceDetails";
+import { ClaimEvidence } from "@/components/ClaimEvidence";
 import { BenefitList } from "@/components/BenefitList";
 import { ReportIssue } from "@/components/ReportIssue";
 import { useState } from "react";
@@ -33,7 +34,7 @@ function CoverPage() {
               <div className="flex flex-wrap items-center justify-between gap-2"><h2 className="text-2xl">{r.tier.name}</h2><span className={`rounded-full border px-2.5 py-0.5 text-xs font-bold ${STATUS[r.status].tone}`}>{STATUS[r.status].label}</span></div>
               <p className="mt-3 font-semibold">{r.label}</p>
               <p className="mt-2 text-sm text-muted-foreground">{r.reason}</p>
-              <BenefitList benefits={r.benefits} /><ReportIssue ruleId={`${c.market}/${c.insurer}/${r.tier.id}/${c.dest}`} /><p className="mt-4 rounded-lg bg-muted px-3 py-2 font-mono text-xs">{r.limitText}</p>
+              <p className="mt-3 text-sm font-semibold">This does not confirm your personal cover. Policy edition unknown; claim review incomplete.</p><BenefitList benefits={r.benefits} /><ClaimEvidence claims={r.claims} /><ReportIssue ruleId={`${c.market}/${c.insurer}/${r.tier.id}/${c.dest}`} /><p className="mt-4 rounded-lg bg-muted px-3 py-2 font-mono text-xs">{r.limitText}</p>
               {r.extra?.length > 0 && <ul className="mt-3 space-y-1 text-xs text-muted-foreground">{r.extra.map((e: string) => <li key={e}>• {e}</li>)}</ul>}
             </div>
           ))}
