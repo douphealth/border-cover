@@ -85,10 +85,12 @@ export type Database = {
       }
       evidence_reviews: {
         Row: {
+          accessed_on: string | null
           approved_by: string | null
           conflicts: string
           created_at: string
           created_by: string
+          effective_from: string | null
           human_verified_at: string | null
           id: string
           policy_edition: string
@@ -101,10 +103,12 @@ export type Database = {
           status: string
         }
         Insert: {
+          accessed_on?: string | null
           approved_by?: string | null
           conflicts?: string
           created_at?: string
           created_by: string
+          effective_from?: string | null
           human_verified_at?: string | null
           id?: string
           policy_edition: string
@@ -117,10 +121,12 @@ export type Database = {
           status?: string
         }
         Update: {
+          accessed_on?: string | null
           approved_by?: string | null
           conflicts?: string
           created_at?: string
           created_by?: string
+          effective_from?: string | null
           human_verified_at?: string | null
           id?: string
           policy_edition?: string
