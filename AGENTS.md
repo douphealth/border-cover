@@ -41,3 +41,4 @@ use the editor.
 - Bind research provenance and release identifiers inside the pure result contract; release links must fail explicitly rather than silently use different rules.
 - Require independent reviewer approval in both server actions and database triggers; client-disabled approval controls are not authorization.
 - Source observations create deduplicated private review tasks through a database trigger; automated monitoring never publishes rules.
+- Reviewed releases are prepared offline from authorized approval exports and archived with content hashes; runtime surfaces consume the adopted bundled dataset, not drafts.
