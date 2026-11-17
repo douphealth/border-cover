@@ -1,5 +1,6 @@
 # BorderCover Atlas upgrade
 
+- [x] Compare the new trust/product audit with the current implementation and prepare the remaining-work plan.
 - [x] Trust signals, shared counts and synchronized scenario calculations.
 - [x] Benefit-specific results, renewal safeguards and rule regression tests.
 - [x] Claim-level observation records, persistent corrections and role-protected review controls.
