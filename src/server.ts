@@ -47,12 +47,36 @@ function isH3SwallowedErrorBody(body: string): boolean {
 // Hosting compresses every response at the edge. Never compress a body (gzip, brotli,
 // CompressionStream) or set content-encoding here or in a server route: the body gets encoded
 // twice and renders garbled.
+function publicContentType(pathname: string): string | undefined {
+  if (pathname === "/sitemap.xml") return "application/xml; charset=utf-8";
+  if (
+    pathname === "/robots.txt" ||
+    pathname === "/llms.txt" ||
+    /^\/[0-9a-f]{32}\.txt$/.test(pathname)
+  )
+    return "text/plain; charset=utf-8";
+  return undefined;
+}
+
+function withPublicContentType(request: Request, response: Response): Response {
+  if (response.status !== 200) return response;
+  const type = publicContentType(new URL(request.url).pathname);
+  if (!type) return response;
+  const headers = new Headers(response.headers);
+  headers.set("content-type", type);
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      return withPublicContentType(request, await normalizeCatastrophicSsrResponse(response));
     } catch (error) {
       console.error(error);
       return new Response(renderErrorPage(), {

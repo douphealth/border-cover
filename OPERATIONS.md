@@ -1,7 +1,9 @@
 # Launch and recovery checklist
 
 ## Current state
-- Public pages are deliberately noindex; robots disallows crawling until evidence accountability and production origin are established.
+- Public crawling stays blocked pending qualified legal review. `INDEXING_BLOCKED` in `src/lib/site.ts` keeps `noindex, nofollow` on every page, and `robots.txt` still uses `Disallow: /` for every crawler, including GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Google-Extended, Applebot-Extended and Bingbot. Do not submit the sitemap or switch robots to Allow before that review.
+- Canonical, Open Graph and sitemap URLs use `https://bordercover.shop` (`SITE_URL`, overridable at build time with `VITE_SITE_URL`, `SITE_URL` or `PUBLIC_SITE_ORIGIN`). Regenerate `public/sitemap.xml`, `public/robots.txt` and `public/llms.txt` with `bun run seo:assets`.
+- The sitemap lists launch-candidate pages only. Insurer-country URLs are added only when `isCoverIndexable` is true for every plan. Directory size is not eligibility. `/review` stays out of the sitemap.
 - All markets are research previews. Direct AA HTML observations support the imported allowance values but are not human approval.
 - The pure engine remains the sole coverage evaluator. Approved editorial revisions are displayed separately in the source register; updating policy rules still requires a reviewed structured-data revision and tests.
 - Reviewer permissions are assigned out of band in `public.user_roles`; signup never grants privileges. No reviewer is assigned yet.
@@ -37,7 +39,7 @@
 5. Confirm protected review permissions, public evidence projection and private report isolation against hosted Cloud, not just source files.
 6. Set an alert recipient and connect an external uptime monitor to the published health target. Configure diagnostic retention without collecting scenario fragments or report contents.
 7. Schedule the single weekly source check after the app is published; confirm a successful observed execution. It is not active yet because there is no published target.
-8. Once claim-level review is complete, configure canonicals and generate the eligible sitemap with `PUBLIC_SITE_ORIGIN=https://your-real-domain bun scripts/generate-sitemap.ts`. Do not index all theoretical pairings or flip preview robots to Allow.
+8. After qualified legal review, set `INDEXING_BLOCKED` to false and replace `Disallow: /` with a crawl policy that still excludes `/review`. Run `bun run seo:assets`. Insurer-country URLs enter the sitemap only when every plan passes `isCoverIndexable`. Do not index all theoretical pairings.
 
 ## Rollback drill
 - Record a known-good published version, rule dataset version and corresponding synced repository revision.
