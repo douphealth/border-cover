@@ -14,16 +14,218 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      correction_reports: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          rule_id: string
+          rule_version: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          rule_id: string
+          rule_version: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          rule_id?: string
+          rule_version?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      evidence_history: {
+        Row: {
+          actor_id: string
+          changed_at: string
+          id: string
+          record: Json
+          review_id: string
+        }
+        Insert: {
+          actor_id: string
+          changed_at?: string
+          id?: string
+          record: Json
+          review_id: string
+        }
+        Update: {
+          actor_id?: string
+          changed_at?: string
+          id?: string
+          record?: Json
+          review_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evidence_history_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "approved_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "evidence_history_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "evidence_reviews"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      evidence_reviews: {
+        Row: {
+          conflicts: string
+          created_at: string
+          created_by: string
+          human_verified_at: string | null
+          id: string
+          policy_edition: string
+          quotation: string
+          review_due: string
+          reviewer_name: string
+          rule_id: string
+          section: string
+          source_id: string
+          status: string
+        }
+        Insert: {
+          conflicts?: string
+          created_at?: string
+          created_by: string
+          human_verified_at?: string | null
+          id?: string
+          policy_edition: string
+          quotation: string
+          review_due: string
+          reviewer_name: string
+          rule_id: string
+          section: string
+          source_id: string
+          status?: string
+        }
+        Update: {
+          conflicts?: string
+          created_at?: string
+          created_by?: string
+          human_verified_at?: string | null
+          id?: string
+          policy_edition?: string
+          quotation?: string
+          review_due?: string
+          reviewer_name?: string
+          rule_id?: string
+          section?: string
+          source_id?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      source_observations: {
+        Row: {
+          content_hash: string | null
+          http_status: number | null
+          id: string
+          observed_at: string
+          outcome: string
+          source_id: string
+        }
+        Insert: {
+          content_hash?: string | null
+          http_status?: number | null
+          id?: string
+          observed_at?: string
+          outcome: string
+          source_id: string
+        }
+        Update: {
+          content_hash?: string | null
+          http_status?: number | null
+          id?: string
+          observed_at?: string
+          outcome?: string
+          source_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      approved_evidence: {
+        Row: {
+          conflicts: string | null
+          human_verified_at: string | null
+          id: string | null
+          policy_edition: string | null
+          quotation: string | null
+          review_due: string | null
+          reviewer_name: string | null
+          rule_id: string | null
+          section: string | null
+          source_id: string | null
+        }
+        Insert: {
+          conflicts?: string | null
+          human_verified_at?: string | null
+          id?: string | null
+          policy_edition?: string | null
+          quotation?: string | null
+          review_due?: string | null
+          reviewer_name?: string | null
+          rule_id?: string | null
+          section?: string | null
+          source_id?: string | null
+        }
+        Update: {
+          conflicts?: string | null
+          human_verified_at?: string | null
+          id?: string | null
+          policy_edition?: string | null
+          quotation?: string | null
+          review_due?: string | null
+          reviewer_name?: string | null
+          rule_id?: string | null
+          section?: string | null
+          source_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "reviewer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +352,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["reviewer"],
+    },
   },
 } as const
