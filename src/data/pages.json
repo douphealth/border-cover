@@ -1,1 +1,196 @@
-{"methodology": {"title": "Our research, your clarity.", "description": "Our method for verifying insurer wording, distinguishing legal minimum from extended coverage and handling annual travel limits.", "blocks": [{"t": "p", "x": "Our method for verifying insurer wording, distinguishing legal minimum from extended coverage and handling annual travel limits."}, {"t": "h2", "x": "What the system can verify\u2014and what it cannot"}, {"t": "p", "x": "BorderCover Atlas is an editorial research application based on published insurer guidance, policy documents and official government resources. It cannot retrieve a customer-specific insurance schedule, verify whether a policy is active, or provide personal cover approval. Those remain the insurer\u2019s responsibility."}, {"t": "h2", "x": "How source observations work"}, {"t": "p", "x": "For selected official HTML pages, the checker offers an on-demand published-passage check . Our Cloudflare Worker requests the publisher\u2019s web page and looks for a previously reviewed statement. If a passage appears, it means that text is currently observable on that page\u2014not that the policy has not changed elsewhere or that the user is insured."}, {"t": "p", "x": "If the publisher blocks automated access, removes the passage, or uses unreadable content, the result is unavailable / review directly . The live check never turns a research result into personal insurance approval. Cached successful checks may be up to 20 minutes old."}, {"t": "h2", "x": "Freshness and fail-closed behavior"}, {"t": "p", "x": "Every indexed evidence source has an editorial review date. When an applicable source is more than 45 days old, we label the research overdue rather than presenting its positive status as current. Sources not re-reviewed during the current release retain their older review date."}, {"t": "h2", "x": "Country and trip constraints"}, {"t": "p", "x": "Five countries can be assessed in one trip. The total trip duration is applied conservatively to each stop while counting the trip only once for annual foreign-use allowances. The tool does not know exact border-crossing dates, unlisted transit countries, entry restrictions or policy endorsements."}, {"t": "h2", "x": "What should you do before driving?"}, {"t": "p", "x": "Read the insurer\u2019s current policy wording and your schedule; confirm the selected tier, vehicle, named drivers, countries, extensions, annual day usage and documentation directly with your insurer. Ask for written confirmation of any exceptions or add-ons."}, {"t": "h2", "x": "Editorial status"}, {"t": "p", "x": "Dataset release: 31 October 2026. Individual insurer publications have their own review date in the evidence library . We do not claim continuous monitoring or guaranteed live legal accuracy."}, {"t": "p", "x": "BorderCover Atlas is an independent informational comparison tool for people driving a vehicle they own across a national border. It compares published wording, not policyholder credentials or claims decisions."}, {"t": "h2", "x": "How an answer is produced"}, {"t": "li", "x": "Identify your issuing market. UK, Ireland, USA, Canada, Australia and New Zealand have distinct starting rules."}, {"t": "li", "x": "Match an identifiable insurer and product. Only named tiers with cited evidence are awarded the corresponding published benefits."}, {"t": "li", "x": "Check the precise territory. The app does not assume that \u201cEurope\u201d includes every possible European or neighbouring country."}, {"t": "li", "x": "Apply the correct day-counting method. Annual totals include previously used days; per-trip limits apply to the individual journey. Unknown counting methods are disclosed."}, {"t": "li", "x": "Separate cover from paperwork. Third-party legal minimum, own-car damage, Green Card evidence, locally issued liability and breakdown assistance are different questions."}, {"t": "h2", "x": "Our evidence standard"}, {"t": "p", "x": "Primary sources are government/regulator guidance, an insurer\u2019s official website, current policy booklets and product disclosure statements. A source is recorded with a URL and the date it was consulted. A checked date describes a research check, not continuous monitoring , and it is not a representation that a personal policy has been authenticated."}, {"t": "p", "x": "Some old FAQs conflict with newer policy booklets. We prioritise the newer, product-specific booklet where the conflict is clear, and we preserve a warning to check the edition. We do not publish invented prices, star ratings, coverage percentages or guarantee labels."}, {"t": "h2", "x": "What the statuses mean"}, {"t": "li", "x": "Extended: the published source describes the insured level travelling to that destination, within the shown limit. Personal exclusions may still apply."}, {"t": "li", "x": "Minimum: legal third-party protection is the only published or statutory baseline identified, not own-car comprehensive cover."}, {"t": "li", "x": "Liability: bodily injury/property damage liability is verified, but other benefits are not."}, {"t": "li", "x": "Over limit: the selected trip exceeds a documented enhanced-cover allowance; contact the insurer."}, {"t": "li", "x": "Not covered: the source expressly excludes the ordinary domestic motor policy abroad or requires a separate locally issued policy."}, {"t": "li", "x": "Verify: insurer or country data is insufficient for a safe claim. We do not infer coverage."}, {"t": "h2", "x": "Coverage and limitations"}, {"t": "p", "x": "The initial comparison includes six issuing markets, 16 named insurers and 57 destination choices . This is a selective verified dataset, not a claim to include every insurer, policy edition, country law or endorsement. Not every insurer has verified cover in every destination."}, {"t": "p", "x": "We currently do not ask for or verify your insurance certificate, vehicle registration, trip permits, residency or underwriting information. Not designed for rentals, leases without permission, trailers, business use, permanent imports or claims advice. The website does not use a live insurer API and is not continuously updated."}, {"t": "h2", "x": "Update and correction protocol"}, {"t": "p", "x": "The dataset is readable in /data/policies.json and the website bundles its source links. Before publishing a new version, verify changes against the latest official source, update the affected record, re-run the test suite and deploy a new ZIP. No automatic cover changes should be inferred from the passage of time."}, {"t": "h2", "x": "Commercial independence"}, {"t": "p", "x": "At launch this website does not sell insurance, collect leads, charge fees or contain affiliate tracking links. If partnerships are added later, they should be labelled and kept separate from evidence and cover conclusions."}, {"t": "h2", "x": "Original sources"}, {"t": "p", "x": "Research links checked 30 October 2026. Please confirm the current policy edition and your personal schedule."}, {"t": "h3", "x": "A source is not a certificate."}, {"t": "p", "x": "These pages explain published insurer terms. Actual protection depends on your individual issued policy, vehicle, drivers, dates and endorsements."}, {"t": "h3", "x": "Check the precise tier."}, {"t": "p", "x": "The same insurer can issue policies with very different overseas cover."}]}, "privacy": {"title": "Private by default. No account needed.", "description": "How BorderCover Atlas processes coverage checks in your browser, handles share links and uses Cloudflare hosting.", "blocks": [{"t": "p", "x": "How BorderCover Atlas processes coverage checks in your browser, handles share links and uses Cloudflare hosting."}, {"t": "h2", "x": "Your selections"}, {"t": "p", "x": "The browser processes your insurer, tier, route and travel days locally using published evidence JSON. Those details are reflected in a shareable URL only when you choose to share or copy it. We do not operate accounts, request registration or collect vehicle registration numbers."}, {"t": "h2", "x": "On-demand official publication checks"}, {"t": "p", "x": "If you press \u201cCheck published passage\u201d, our Cloudflare-hosted application requests the selected official publisher server-side. The request includes only a fixed source ID, not your insurer selection, destination or personal details. Cloudflare may process normal connection logs and IP addresses according to its own terms. A publisher may still receive a request from the Cloudflare Worker."}, {"t": "p", "x": "BorderCover Atlas has no account creation, advertising pixels, analytics scripts or third-party form endpoints in this release."}, {"t": "h2", "x": "What happens when you check coverage?"}, {"t": "p", "x": "Your insurer selection, destination and trip-day calculation are processed in your browser using a static data file downloaded from the site. We do not intentionally submit these selections to a database or collect them through an application form. Completed checklist tick boxes stay in the current browser tab and are not saved to local storage."}, {"t": "h2", "x": "What happens when you share?"}, {"t": "p", "x": "The optional Share action creates a link containing your chosen market, insurer, tier, destination, trip days and days previously used. Anyone with that link can read those selections. When opened, a link also sends its URL to the website host in the normal course of a web request; do not share it if that information is sensitive."}, {"t": "h2", "x": "What about hosting logs?"}, {"t": "p", "x": "Cloudflare, which delivers this static website, may process IP addresses, user agents, request URLs and ordinary security and delivery logs under its own services and privacy terms. Those systems are separate from the tool\u2019s in-browser calculation."}, {"t": "h2", "x": "External insurer links"}, {"t": "p", "x": "Opening a cited external website takes you to that organisation, which may have its own cookies, analytics and privacy practices. BorderCover Atlas does not control those external sites."}, {"t": "h2", "x": "Contact and requests"}, {"t": "p", "x": "No support or correction inbox has been configured for this version. For binding policy questions contact your actual insurer. For a dataset correction, maintainers can amend the source-backed JSON and republish a reviewed version."}, {"t": "h3", "x": "A source is not a certificate."}, {"t": "p", "x": "These pages explain published insurer terms. Actual protection depends on your individual issued policy, vehicle, drivers, dates and endorsements."}, {"t": "h3", "x": "Check the precise tier."}, {"t": "p", "x": "The same insurer can issue policies with very different overseas cover."}]}, "terms": {"title": "Before you rely on a result.", "description": "Understand the limitations of BorderCover Atlas coverage information and the need to check your policy documents.", "blocks": [{"t": "p", "x": "Understand the limitations of BorderCover Atlas coverage information and the need to check your policy documents."}, {"t": "h2", "x": "Not an insurance quotation or proof of coverage"}, {"t": "p", "x": "No result is an active-policy lookup, guarantee, renewal certificate, legal opinion or a substitute for destination insurance requirements. Do not start a trip in reliance on this tool alone. Confirm benefits and documents with the insurer and relevant country authorities."}, {"t": "h2", "x": "Live text observations are not insurer guarantees"}, {"t": "p", "x": "Seeing a passage on a publisher\u2019s current website does not establish that a particular issued policy includes that benefit. Automated checks may fail or be cached for up to 20 minutes."}, {"t": "p", "x": "This website is a general-information tool. It does not issue insurance, verify your personal policy, bind an insurer, sell a contract or decide whether a claim is covered."}, {"t": "h2", "x": "Not financial or legal advice"}, {"t": "p", "x": "Descriptions are based on selected publicly accessible insurer and government sources checked on the date shown. They may be incomplete, change without notice or differ from your personal schedule, endorsements, state or provincial law, vehicle registration, driver status, trip purpose and route."}, {"t": "h2", "x": "Your duty to verify"}, {"t": "p", "x": "Before driving abroad, obtain your current insurance certificate, policy wording and any required documentary extension. Confirm the destination and all transit countries with the insurer. Verify the legal liability, Green Card, temporary import, roadworthiness and registration rules that apply in each country. Do not start a trip relying only on an automated result."}, {"t": "h2", "x": "Use and accuracy"}, {"t": "p", "x": "The service is provided on an information-only basis, without a guarantee of completeness or uninterrupted availability. To the extent permitted by law, the publisher is not responsible for decisions taken without verification against binding insurance documents or applicable law. Nothing here removes any statutory consumer rights."}, {"t": "h2", "x": "Names and trademarks"}, {"t": "p", "x": "Insurer names are used only for factual comparison and attribution. No insurer is represented as a partner, sponsor or endorser of BorderCover Atlas."}, {"t": "h2", "x": "Affiliate status"}, {"t": "p", "x": "This release contains no affiliate tracking links, sponsored insurer rankings, price quotes or lead capture. If this changes, the relevant relationships must be disclosed."}, {"t": "h3", "x": "A source is not a certificate."}, {"t": "p", "x": "These pages explain published insurer terms. Actual protection depends on your individual issued policy, vehicle, drivers, dates and endorsements."}, {"t": "h3", "x": "Check the precise tier."}, {"t": "p", "x": "The same insurer can issue policies with very different overseas cover."}]}}
+{
+  "methodology": {
+    "title": "Our research, your clarity.",
+    "description": "Our method for verifying insurer wording, distinguishing legal minimum from extended coverage and handling annual travel limits.",
+    "blocks": [
+      {
+        "t": "p",
+        "x": "BorderCover Atlas compares published insurer and government information. It does not confirm that your personal policy is active or approve a claim."
+      },
+      {
+        "t": "h2",
+        "x": "What a result means"
+      },
+      {
+        "t": "p",
+        "x": "Published overseas cover means the source describes equivalent purchased policy cover in the listed territory, subject to exclusions, limits and your issued documents. Legal liability, own-car damage/theft, breakdown/recovery and required documents are assessed separately. Unresearched benefits and insufficient evidence are never permission to drive."
+      },
+      {
+        "t": "h2",
+        "x": "Counting a journey"
+      },
+      {
+        "t": "p",
+        "x": "Annual allowances include entered previous usage. Per-trip allowances apply to one journey. Unknown usage prevents a remaining-allowance calculation. Departure and return days are counted inclusively. A renewal crossing is flagged; no automatic renewed allowance or policy-edition continuity is assumed."
+      },
+      {
+        "t": "p",
+        "x": "Up to five declared destination or transit countries can be compared. The full trip duration applies conservatively to every listed stop, while the journey is counted once. Undeclared transit countries are outside the result."
+      },
+      {
+        "t": "h2",
+        "x": "Dates and evidence"
+      },
+      {
+        "t": "p",
+        "x": "The legacy dataset release is 2026-11-01. Source records retain their imported dates and review notes; these do not establish a named human verification. Exact automated observations carry a separate retrieval date. Missing policy editions, quotations, reviewer names and review deadlines are shown as missing."
+      },
+      {
+        "t": "p",
+        "x": "Automated source retrieval can detect a changed, blocked or unavailable page. It does not certify legal accuracy, reset human review dates or change published insurance rules. The editorial register shows approved revisions separately; updates to rules require a reviewed dataset change and regression tests."
+      },
+      {
+        "t": "h2",
+        "x": "Editorial accountability"
+      },
+      {
+        "t": "p",
+        "x": "The application owner, named lead reviewer and review response times have not been supplied. These remain public-launch requirements. Issue reports are stored privately for authorized reviewers; receiving a report does not establish that a reviewer has acted on it."
+      },
+      {
+        "t": "h2",
+        "x": "Research scope"
+      },
+      {
+        "t": "p",
+        "x": "The register includes six markets, named insurer profiles and generic fallback profiles. Every market remains a research preview until its material rules have accountable claim-level review. AA France and Ireland have recorded automated quotations, not human approvals."
+      },
+      {
+        "t": "h2",
+        "x": "Independence and limits"
+      },
+      {
+        "t": "p",
+        "x": "This release does not quote, sell or bind insurance and includes no paid rankings or affiliate tracking links. Confirm your policy schedule, tier, drivers, route, travel dates, endorsements, business use and destination law with your insurer. Legal assessment of launch-market wording remains outstanding."
+      }
+    ]
+  },
+  "privacy": {
+    "title": "Private by default. No account needed.",
+    "description": "How trip selections, fragment-based sharing, correction reports and reviewer accounts are handled.",
+    "blocks": [
+      {
+        "t": "p",
+        "x": "Public coverage checks need no account. Scenario calculations use the bundled research data. Do not enter policy numbers, vehicle registration numbers or identity documents."
+      },
+      {
+        "t": "h2",
+        "x": "Trip links"
+      },
+      {
+        "t": "p",
+        "x": "Share creates a URL fragment containing the selected market, insurer, plan, countries, days, previous usage and any entered travel dates. Anyone holding the link can read those inputs. Fragments are not normally sent in web requests to the host, but people can copy or disclose them. Share only what you are comfortable revealing."
+      },
+      {
+        "t": "h2",
+        "x": "Correction reports"
+      },
+      {
+        "t": "p",
+        "x": "Sending an issue report stores its text, rule reference, rule version and timestamp in Lovable Cloud. Reports are available only to authorized reviewers. Do not include personal or sensitive information. Editorial response times and a named contact have not yet been established."
+      },
+      {
+        "t": "h2",
+        "x": "Reviewer accounts"
+      },
+      {
+        "t": "p",
+        "x": "Reviewer sign-in is powered by Lovable Cloud. Creating an account does not grant review permissions. Email/password and supported social providers process sign-in details under their own terms. Review revisions record a supplied public reviewer name, evidence and dates; private account identifiers are not exposed in the public evidence register."
+      },
+      {
+        "t": "h2",
+        "x": "Hosting and external sites"
+      },
+      {
+        "t": "p",
+        "x": "Hosting and error-monitoring services may process ordinary connection and diagnostic information. The app does not intentionally send trip inputs to analytics. External source links open publisher websites with their own privacy practices. Automated source checks use fixed public publisher URLs, not your personal trip details."
+      },
+      {
+        "t": "h2",
+        "x": "Contact and retention"
+      },
+      {
+        "t": "p",
+        "x": "A named privacy contact and documented report/account retention period are still required before public launch. No invented contact address or deletion-response promise is provided."
+      }
+    ]
+  },
+  "terms": {
+    "title": "Before you rely on a result.",
+    "description": "Understand the limitations of BorderCover Atlas coverage information and the need to check your policy documents.",
+    "blocks": [
+      {
+        "t": "p",
+        "x": "Understand the limitations of BorderCover Atlas coverage information and the need to check your policy documents."
+      },
+      {
+        "t": "h2",
+        "x": "Not an insurance quotation or proof of coverage"
+      },
+      {
+        "t": "p",
+        "x": "No result is an active-policy lookup, guarantee, renewal certificate, legal opinion or a substitute for destination insurance requirements. Do not start a trip in reliance on this tool alone. Confirm benefits and documents with the insurer and relevant country authorities."
+      },
+      {
+        "t": "p",
+        "x": "This website is a general-information tool. It does not issue insurance, verify your personal policy, bind an insurer, sell a contract or decide whether a claim is covered."
+      },
+      {
+        "t": "h2",
+        "x": "Not financial or legal advice"
+      },
+      {
+        "t": "p",
+        "x": "Descriptions are based on selected publicly accessible insurer and government sources checked on the date shown. They may be incomplete, change without notice or differ from your personal schedule, endorsements, state or provincial law, vehicle registration, driver status, trip purpose and route."
+      },
+      {
+        "t": "h2",
+        "x": "Your duty to verify"
+      },
+      {
+        "t": "p",
+        "x": "Before driving abroad, obtain your current insurance certificate, policy wording and any required documentary extension. Confirm the destination and all transit countries with the insurer. Verify the legal liability, Green Card, temporary import, roadworthiness and registration rules that apply in each country. Do not start a trip relying only on an automated result."
+      },
+      {
+        "t": "h2",
+        "x": "Use and accuracy"
+      },
+      {
+        "t": "p",
+        "x": "The service is provided on an information-only basis, without a guarantee of completeness or uninterrupted availability. To the extent permitted by law, the publisher is not responsible for decisions taken without verification against binding insurance documents or applicable law. Nothing here removes any statutory consumer rights."
+      },
+      {
+        "t": "h2",
+        "x": "Names and trademarks"
+      },
+      {
+        "t": "p",
+        "x": "Insurer names are used only for factual comparison and attribution. No insurer is represented as a partner, sponsor or endorser of BorderCover Atlas."
+      },
+      {
+        "t": "h2",
+        "x": "Affiliate status"
+      },
+      {
+        "t": "p",
+        "x": "This release contains no affiliate tracking links, sponsored insurer rankings, price quotes or lead capture. If this changes, the relevant relationships must be disclosed."
+      },
+      {
+        "t": "h3",
+        "x": "A source is not a certificate."
+      },
+      {
+        "t": "p",
+        "x": "These pages explain published insurer terms. Actual protection depends on your individual issued policy, vehicle, drivers, dates and endorsements."
+      },
+      {
+        "t": "h3",
+        "x": "Check the precise tier."
+      },
+      {
+        "t": "p",
+        "x": "The same insurer can issue policies with very different overseas cover."
+      }
+    ]
+  }
+}

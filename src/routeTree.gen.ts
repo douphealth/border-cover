@@ -14,12 +14,15 @@ import { Route as AtlasRouteImport } from './routes/atlas'
 import { Route as ChangeLogRouteImport } from './routes/change-log'
 import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ReviewRouteImport } from './routes/review'
 import { Route as SourcesRouteImport } from './routes/sources'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as CoverIndexRouteImport } from './routes/cover.index'
 import { Route as CoverSlugRouteImport } from './routes/cover.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides.index'
 import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
+import { Route as ApiPublicHealthRouteImport } from './routes/api/public/health'
+import { Route as ApiPublicJobsSourceCheckRouteImport } from './routes/api/public/jobs/source-check'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -44,6 +47,11 @@ const MethodologyRoute = MethodologyRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewRoute = ReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SourcesRoute = SourcesRouteImport.update({
@@ -76,6 +84,17 @@ const GuidesSlugRoute = GuidesSlugRouteImport.update({
   path: '/guides/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHealthRoute = ApiPublicHealthRouteImport.update({
+  id: '/api/public/health',
+  path: '/api/public/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicJobsSourceCheckRoute =
+  ApiPublicJobsSourceCheckRouteImport.update({
+    id: '/api/public/jobs/source-check',
+    path: '/api/public/jobs/source-check',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -83,12 +102,15 @@ export interface FileRoutesByFullPath {
   '/change-log': typeof ChangeLogRoute
   '/methodology': typeof MethodologyRoute
   '/privacy': typeof PrivacyRoute
+  '/review': typeof ReviewRoute
   '/sources': typeof SourcesRoute
   '/terms': typeof TermsRoute
   '/cover/$slug': typeof CoverSlugRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/cover/': typeof CoverIndexRoute
   '/guides/': typeof GuidesIndexRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/jobs/source-check': typeof ApiPublicJobsSourceCheckRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -96,12 +118,15 @@ export interface FileRoutesByTo {
   '/change-log': typeof ChangeLogRoute
   '/methodology': typeof MethodologyRoute
   '/privacy': typeof PrivacyRoute
+  '/review': typeof ReviewRoute
   '/sources': typeof SourcesRoute
   '/terms': typeof TermsRoute
   '/cover/$slug': typeof CoverSlugRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/cover': typeof CoverIndexRoute
   '/guides': typeof GuidesIndexRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/jobs/source-check': typeof ApiPublicJobsSourceCheckRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -110,12 +135,15 @@ export interface FileRoutesById {
   '/change-log': typeof ChangeLogRoute
   '/methodology': typeof MethodologyRoute
   '/privacy': typeof PrivacyRoute
+  '/review': typeof ReviewRoute
   '/sources': typeof SourcesRoute
   '/terms': typeof TermsRoute
   '/cover/$slug': typeof CoverSlugRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/cover/': typeof CoverIndexRoute
   '/guides/': typeof GuidesIndexRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/jobs/source-check': typeof ApiPublicJobsSourceCheckRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -125,12 +153,15 @@ export interface FileRouteTypes {
     | '/change-log'
     | '/methodology'
     | '/privacy'
+    | '/review'
     | '/sources'
     | '/terms'
     | '/cover/$slug'
     | '/guides/$slug'
     | '/cover/'
     | '/guides/'
+    | '/api/public/health'
+    | '/api/public/jobs/source-check'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -138,12 +169,15 @@ export interface FileRouteTypes {
     | '/change-log'
     | '/methodology'
     | '/privacy'
+    | '/review'
     | '/sources'
     | '/terms'
     | '/cover/$slug'
     | '/guides/$slug'
     | '/cover'
     | '/guides'
+    | '/api/public/health'
+    | '/api/public/jobs/source-check'
   id:
     | '__root__'
     | '/'
@@ -151,12 +185,15 @@ export interface FileRouteTypes {
     | '/change-log'
     | '/methodology'
     | '/privacy'
+    | '/review'
     | '/sources'
     | '/terms'
     | '/cover/$slug'
     | '/guides/$slug'
     | '/cover/'
     | '/guides/'
+    | '/api/public/health'
+    | '/api/public/jobs/source-check'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -165,12 +202,15 @@ export interface RootRouteChildren {
   ChangeLogRoute: typeof ChangeLogRoute
   MethodologyRoute: typeof MethodologyRoute
   PrivacyRoute: typeof PrivacyRoute
+  ReviewRoute: typeof ReviewRoute
   SourcesRoute: typeof SourcesRoute
   TermsRoute: typeof TermsRoute
   CoverSlugRoute: typeof CoverSlugRoute
   GuidesSlugRoute: typeof GuidesSlugRoute
   CoverIndexRoute: typeof CoverIndexRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
+  ApiPublicHealthRoute: typeof ApiPublicHealthRoute
+  ApiPublicJobsSourceCheckRoute: typeof ApiPublicJobsSourceCheckRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -208,6 +248,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/review': {
+      id: '/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof ReviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sources': {
@@ -252,6 +299,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/health': {
+      id: '/api/public/health'
+      path: '/api/public/health'
+      fullPath: '/api/public/health'
+      preLoaderRoute: typeof ApiPublicHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/jobs/source-check': {
+      id: '/api/public/jobs/source-check'
+      path: '/api/public/jobs/source-check'
+      fullPath: '/api/public/jobs/source-check'
+      preLoaderRoute: typeof ApiPublicJobsSourceCheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -261,12 +322,15 @@ const rootRouteChildren: RootRouteChildren = {
   ChangeLogRoute: ChangeLogRoute,
   MethodologyRoute: MethodologyRoute,
   PrivacyRoute: PrivacyRoute,
+  ReviewRoute: ReviewRoute,
   SourcesRoute: SourcesRoute,
   TermsRoute: TermsRoute,
   CoverSlugRoute: CoverSlugRoute,
   GuidesSlugRoute: GuidesSlugRoute,
   CoverIndexRoute: CoverIndexRoute,
   GuidesIndexRoute: GuidesIndexRoute,
+  ApiPublicHealthRoute: ApiPublicHealthRoute,
+  ApiPublicJobsSourceCheckRoute: ApiPublicJobsSourceCheckRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,11 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
+import { EvidenceDetails } from "@/components/EvidenceDetails";
+import { BenefitList } from "@/components/BenefitList";
+import { ReportIssue } from "@/components/ReportIssue";
 import { useState } from "react";
 import { PageHead, seo } from "@/components/Shell";
 import { countries, coverBySlug, covers, evaluateCover, flag, insurers, sources, STATUS } from "@/lib/atlas";
 
 export const Route = createFileRoute("/cover/$slug")({
-  loader: ({ params }) => { const c = coverBySlug(params.slug); if (!c) throw notFound(); const ins = insurers.find((i) => i.id === c.insurer && i.market === c.market)!; return { c, insName: ins.name, destName: countries[c.dest].name }; },
+  loader: ({ params }) => { const c = coverBySlug(params.slug); if (!c) throw notFound(); const ins = insurers.find((i) => i.id === c.insurer && i.market === c.market); if (!ins) throw notFound(); return { c, insName: ins.name, destName: countries[c.dest].name }; },
   head: ({ loaderData }) => ({ meta: loaderData ? seo(`Does ${loaderData.insName} car insurance cover ${loaderData.destName}? | BorderCover Atlas`, `${loaderData.insName} cover in ${loaderData.destName} by plan: cover level, day limits, Green Card rules and source links.`) : [{ title: "Page unavailable" }, { name: "robots", content: "noindex" }] }),
   component: CoverPage,
   notFoundComponent: () => <PageHead kicker="404" title="We don't have that pairing yet." />,
@@ -15,7 +18,8 @@ function CoverPage() {
   const { c, insName, destName } = Route.useLoaderData();
   const [days, setDays] = useState(14);
   const results = evaluateCover(c, days);
-  const ins = insurers.find((i) => i.id === c.insurer && i.market === c.market)!;
+  const ins = insurers.find((i) => i.id === c.insurer && i.market === c.market);
+  if (!ins || !results.length) return <PageHead kicker="Unavailable" title="This pairing needs review." />;
   const srcIds = [...new Set(results.flatMap((r: any) => r.sourceIds))] as string[];
   const related = covers.filter((x) => x.insurer === c.insurer && x.slug !== c.slug);
   return (
@@ -26,10 +30,10 @@ function CoverPage() {
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {results.map((r: any) => (
             <div key={r.tier.id} className="flex flex-col rounded-2xl glass p-6 shadow-float">
-              <div className="flex items-center justify-between"><h2 className="text-2xl">{r.tier.name}</h2><span className={`rounded-full border px-2.5 py-0.5 text-xs font-bold ${STATUS[r.status].tone}`}>{STATUS[r.status].label}</span></div>
+              <div className="flex flex-wrap items-center justify-between gap-2"><h2 className="text-2xl">{r.tier.name}</h2><span className={`rounded-full border px-2.5 py-0.5 text-xs font-bold ${STATUS[r.status].tone}`}>{STATUS[r.status].label}</span></div>
               <p className="mt-3 font-semibold">{r.label}</p>
               <p className="mt-2 text-sm text-muted-foreground">{r.reason}</p>
-              <p className="mt-4 rounded-lg bg-muted px-3 py-2 font-mono text-xs">{r.limitText}</p>
+              <BenefitList benefits={r.benefits} /><ReportIssue ruleId={`${c.market}/${c.insurer}/${r.tier.id}/${c.dest}`} /><p className="mt-4 rounded-lg bg-muted px-3 py-2 font-mono text-xs">{r.limitText}</p>
               {r.extra?.length > 0 && <ul className="mt-3 space-y-1 text-xs text-muted-foreground">{r.extra.map((e: string) => <li key={e}>• {e}</li>)}</ul>}
             </div>
           ))}
@@ -44,12 +48,7 @@ function CoverPage() {
             </ol></div>
         </div>
         <div className="rounded-2xl glass p-6"><h3 className="text-xl">Evidence</h3>
-          <div className="mt-4 grid gap-3 md:grid-cols-2">{srcIds.filter((id) => sources[id]).map((id) => (
-            <a key={id} href={sources[id].url} target="_blank" rel="noreferrer" className="rounded-xl border p-4 transition hover:border-primary">
-              <div className="flex items-center justify-between text-xs text-muted-foreground"><span>{sources[id].recordType}</span><span className="font-mono">{sources[id].checkedOn}</span></div>
-              <div className="mt-1 flex items-center gap-1.5 font-semibold">{sources[id].title}<ExternalLink className="h-3.5 w-3.5 opacity-60" /></div>
-              <p className="mt-1 text-sm text-muted-foreground">{sources[id].finding}</p>
-            </a>))}</div>
+          <div className="mt-4"><EvidenceDetails sourceIds={srcIds} /></div>
           <p className="mt-4 text-xs text-muted-foreground">{results[0].disclosure}</p>
         </div>
         {related.length > 0 && <div className="flex flex-wrap gap-2">{related.map((x) => <Link key={x.slug} to="/cover/$slug" params={{ slug: x.slug }} className="rounded-full border px-4 py-2 text-sm hover:border-primary">{flag(x.dest)} {insName} in {countries[x.dest].name}</Link>)}</div>}
