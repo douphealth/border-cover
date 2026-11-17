@@ -1,6 +1,6 @@
 import { CheckCircle2, CircleHelp, AlertTriangle, XCircle } from "lucide-react";
 
-const names: Record<string, string> = { liability: "Legal liability", ownCar: "Own-car damage & theft", breakdown: "Breakdown & recovery", documents: "Required documents" };
+const names: Record<string, string> = { liability: "Legal liability", ownCar: "Own-car damage & theft", breakdown: "Breakdown & recovery", documents: "Required documents", notification: "Notification & approval" };
 const states: Record<string, string> = { published: "Published terms", "not-researched": "Not researched", "insufficient-evidence": "Insufficient evidence", "confirmation-required": "Insurer confirmation required", "explicit-exclusion": "Excluded benefit / separate cover" };
 export function BenefitList({ benefits }: { benefits: Record<string, { state: string; detail: string }> }) {
   return <dl className="divide-y">{Object.entries(benefits).map(([key, b]) => {
