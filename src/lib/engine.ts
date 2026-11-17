@@ -7,7 +7,22 @@
 export const HOME_DEFAULT = {uk:'fr',ie:'fr',us:'ca',ca:'us',au:'nz',nz:'au'};
 const EUROPE = new Set(['eu','eea','europe','other-europe']);
 const ASIA_AFRICA = new Set(['asia','africa']);
-const fullLabel = (level) => ({same:'Same as home policy (subject to exclusions)',minimum:'Minimum compulsory / third-party liability',liability:'Insurer publishes liability; other cover unverified',excluded:'Not covered under this policy wording',unknown:'Not verified for this policy and country'})[level] || 'Review policy';
+const fullLabel = (level) => ({same:'Published equivalent policy cover — conditions apply',minimum:'Minimum compulsory / third-party liability',liability:'Insurer publishes liability; other cover unverified',excluded:'Published exclusion / separate insurance needed',unknown:'Not verified for this policy and country'})[level] || 'Review policy';
+
+export function tripDates(input){
+ const parse=(value)=>{
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(value ?? ''))return null;
+  const time=Date.parse(value+'T00:00:00Z');
+  return Number.isFinite(time) && new Date(time).toISOString().slice(0,10)===value ? time : null;
+ };
+ if(!input.departure && !input.returnDate && !input.renewal)return {days:Number(input.days),crossesRenewal:false};
+ if(!input.departure || !input.returnDate)return {error:'Enter both departure and return dates, or clear all dates.'};
+ const start=parse(input.departure), end=parse(input.returnDate), renewal=input.renewal ? parse(input.renewal) : null;
+ if(start===null || end===null || end<start || (input.renewal && renewal===null))return {error:'Enter valid dates with return on or after departure.'};
+ const days=(end-start)/86400000+1;
+ if(days>3660)return {error:'Trip dates must span no more than 3,660 days.'};
+ return {days,crossesRenewal:renewal!==null && start<renewal && renewal<=end};
+}
 
 export function evaluate(input, data){
  const insurers=data.insurers, countries=data.countries;
@@ -15,7 +30,9 @@ export function evaluate(input, data){
  const insurer=insurers.find(x=>x.id===input.insurer && x.market===input.market);
  const tier=insurer?.tiers.find(x=>x.id===input.tier);
  const dest=countries[input.destination];
- const days=Number(input.days), usedKnown=input.used !== null && input.used !== undefined && input.used !== '';
+ const dates=tripDates(input);
+ if(dates.error)return dates;
+ const days=dates.days, usedKnown=input.used !== null && input.used !== undefined && input.used !== '';
  const used=usedKnown ? Number(input.used) : null;
  if(!market || !insurer || !tier || !dest || !Number.isInteger(days) || days<1 || days>3660 || (usedKnown && (!Number.isInteger(used) || used<0 || used>3660))){
   return {error:'Check your selections. Trip days must be 1–3,660 and used days must be 0–3,660.'};
@@ -209,11 +226,25 @@ export function evaluate(input, data){
  if(green.kind==='may') actionList.push('Ask your insurer for the required Green Card or border-insurance documents in advance.');
  if(dest.code==='mx' && ['us','ca'].includes(market.id)) actionList.push('Purchase Mexican-issued liability coverage for the specific vehicle and trip.');
  actionList.push('Check insurance rules for every country on your route, plus breakdown/recovery cover.');
+ if(annual!==null && dates.crossesRenewal){
+  if(status==='confirmed')status='needs-check';
+  extra.push('Your trip crosses the entered renewal date. The allowance reset and renewed policy edition are not verified; no automatic split or renewed allowance has been assumed.');
+  actionList.unshift('Ask the insurer to confirm cover and day counting on both sides of renewal.');
+ }
  const label=fullLabel(level);
  const remaining=annual===null || !usedKnown ? null : Math.max(0,annual-used);
+ const remainingAfterTrip=remaining===null ? null : Math.max(0,annual-used-days);
+ const excludedBenefit=market.id==='au' && insurer.id==='racv' ? 'ownCar' : 'liability';
+ const unavailable=!named ? 'not-researched' : basis==='insurer-general' ? 'insufficient-evidence' : 'confirmation-required';
+ const benefits={
+  liability:{state:level==='same'||level==='minimum'||level==='liability' ? 'published' : level==='excluded' && excludedBenefit==='liability' ? 'explicit-exclusion' : unavailable, detail:level==='minimum' ? 'Legal-minimum baseline only; confirm continued validity and applicable limits.' : level==='same'||level==='liability' ? 'Published liability protection; your active policy and limits still apply.' : 'Destination-valid liability must be confirmed separately.'},
+  ownCar:{state:level==='same' ? 'published' : level==='minimum' || (level==='excluded' && excludedBenefit==='ownCar') ? 'explicit-exclusion' : 'confirmation-required',detail:level==='same' ? 'Equivalent to the cover you actually purchased, subject to exclusions and overseas allowance.' : level==='minimum' ? 'Own-car damage and theft are not part of the identified legal-minimum benefit.' : 'Own-car damage and theft are not verified for this journey.'},
+  breakdown:{state:'not-researched',detail:'Breakdown, recovery, courtesy car and legal costs are not established by motor cover. Check the separate assistance wording.'},
+  documents:{state:green.kind==='check'||green.kind==='may' ? 'confirmation-required' : 'published',detail:green.title+' — '+green.detail}
+ };
  return {
   status, level, label, reason, note, extra, insurer, tier, dest, market,
-  days,used,usedKnown,annual,perTrip,unspecified,remaining,exceeded,limitText:limits.join(' · '),
+  days,used,usedKnown,annual,perTrip,unspecified,remaining,remainingAfterTrip,benefits,crossesRenewal:dates.crossesRenewal,exceeded,limitText:limits.join(' · '),
   green,sourceIds:[...new Set(sourceIds)],actionList,checkedOn:data.checkedOn,
   confidence:basis==='insurer' ? 'General insurer wording · not your certificate' : basis==='government' ? 'Government legal-minimum rule · not your certificate' : 'Insurer-specific evidence unavailable',
   disclosure:'Research result only—not confirmation of your personal cover. Check your certificate, policy booklet, schedule, renewal edition and endorsements with your insurer before driving.'

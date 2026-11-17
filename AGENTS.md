@@ -32,3 +32,7 @@ use the editor.
 ## Project rules
 - Coverage verdicts come only from `src/lib/engine.ts` (ported original pure engine) over `src/data/policies.json`; UI never hardcodes verdicts, so evidence updates are data-only edits.
 - Insurer×country pages are listed in `src/data/cover-pages.json` and evaluated at render time, so they stay in sync with the dataset.
+- Use one versioned pure result contract for benefit states, date safeguards and exports; parallel engines would make surfaces disagree.
+- Keep supporting quotations and provenance in structured evidence records, with automated observations separate from human approval; imported dates do not establish accountable review.
+- Serialize only validated scenario inputs into share-link fragments; fragments avoid sending trip details in ordinary host request URLs.
+- Persistent corrections and review actions use Cloud with server-validated reviewer roles; draft evidence never silently changes published rules.
