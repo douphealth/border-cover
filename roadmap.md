@@ -1,6 +1,6 @@
 # BorderCover Atlas upgrade
 
-- [ ] Homepage visual refresh: coastal photography, editorial hierarchy and accessible animated details; preserve all research logic.
+- [x] Homepage visual refresh: coastal photography, editorial hierarchy and accessible animated details; desktop/phone journey and reduced motion verified, research logic unchanged.
 
 - [x] Compare the new trust/product audit with the current implementation and prepare the remaining-work plan.
 - [x] Generic boundaries, explicit allowance assumptions, research-depth presentation and date/update labels.
