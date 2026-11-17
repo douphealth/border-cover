@@ -2,10 +2,15 @@ import { describe, expect, it } from "vitest";
 import policies from "@/data/policies.json";
 import evidence from "@/data/evidence.json";
 import covers from "@/data/cover-pages.json";
-import { evaluate, evaluateRoute, tripDates } from "@/lib/engine";
+import { evaluate as rawEvaluate, evaluateRoute, tripDates } from "@/lib/engine";
 import { datasetStats, eligibleCountries } from "@/lib/evidence";
 import { defaultScenario, parseScenario, scenarioHash } from "@/lib/scenario";
 
+function evaluate(input: Parameters<typeof rawEvaluate>[0], data: typeof policies) {
+  const result = rawEvaluate(input, data);
+  if ("error" in result) throw new Error(result.error);
+  return result;
+}
 const aa = (tier = "silver", days = 14, used: number | null = 0, destination = "fr") => evaluate({ market: "uk", insurer: "aa", tier, days, used, destination }, policies);
 describe("Published allowances and unresolved inputs", () => {
   it("AA Silver has 30 policy-year days and 16 remain after 14 + 0", () => { const r = aa(); expect(r.annual).toBe(30); expect(r.remainingAfterTrip).toBe(16); });
@@ -16,7 +21,7 @@ describe("Published allowances and unresolved inputs", () => {
   it("exhausted allowance does not fabricate an uninsured verdict", () => { expect(aa("silver",1,30).status).toBe("limited"); expect(aa("silver",1,30).benefits.liability.state).toBe("published"); });
   it("Ireland is outside AA's foreign-use annual allowance", () => { expect(aa("silver",180,90,"ie").annual).toBeNull(); expect(aa("silver",180,90,"ie").status).toBe("confirmed"); });
   it("unknown previous usage cannot yield a positive annual assessment", () => { expect(aa("silver",14,null).status).toBe("needs-check"); expect(aa("silver",14,null).remainingAfterTrip).toBeNull(); });
-  it("unresearched insurer evidence is not an invented exclusion", () => { const r = evaluate({ market:"au", insurer:"other-au", tier:"unknown",destination:"fr",days:14,used:0 },policies); expect(r.error).toBeUndefined(); expect(r.status).toBe("needs-check"); expect(r.benefits.liability.state).toBe("not-researched"); });
+  it("unresearched insurer evidence is not an invented exclusion", () => { const r = evaluate({ market:"au", insurer:"other-au", tier:"unknown",destination:"fr",days:14,used:0 },policies); expect(r.status).toBe("needs-check"); expect(r.benefits.liability.state).toBe("not-researched"); });
   it("AMI published territorial exclusion stays explicit", () => { const ins = policies.insurers.find((i) => i.id === "ami"); const r = evaluate({market:"nz",insurer:"ami",tier:ins?.tiers[0].id,destination:"au",days:14,used:0},policies); expect(r.status).toBe("not-covered"); });
   it("a route counts trip days once while reporting every stop", () => { const r = evaluateRoute({market:"uk",insurer:"aa",tier:"silver",days:14,used:0,stops:["fr","be"]},policies); expect(r.stops).toHaveLength(2); expect(r.remainingAfterTrip).toBe(16); expect(r.stops.map((s) => s.dest.code)).toEqual(["fr","be"]); });
   it("unresolved transit country prevents a positive route", () => { expect(evaluateRoute({market:"uk",insurer:"aa",tier:"silver",days:14,used:0,stops:["fr","us"]},policies).status).toBe("needs-check"); });
@@ -24,7 +29,7 @@ describe("Published allowances and unresolved inputs", () => {
   it("renewal crossings require confirmation without automatic reset", () => { const r = evaluate({market:"uk",insurer:"aa",tier:"silver",destination:"fr",days:14,used:0,departure:"2026-12-01",returnDate:"2026-12-14",renewal:"2026-12-10"},policies); expect(r.crossesRenewal).toBe(true); expect(r.status).toBe("needs-check"); });
   it("renewal on departure is not an in-trip transition", () => { expect(tripDates({departure:"2026-12-01",returnDate:"2026-12-14",renewal:"2026-12-01"}).crossesRenewal).toBe(false); });
   it("invalid calendar dates fail", () => { expect(tripDates({departure:"2026-02-30",returnDate:"2026-03-01"}).error).toBeDefined(); });
-  it("negative prior usage fails", () => { expect(aa("silver",14,-1).error).toBeDefined(); });
+  it("negative prior usage fails", () => { expect(() => aa("silver",14,-1)).toThrow(); });
 });
 describe("Dataset integrity and sharing", () => {
   it("counts distinguish 24 named and 6 generic profiles", () => { expect(datasetStats.namedProfiles).toBe(24); expect(datasetStats.fallbackProfiles).toBe(6); expect(datasetStats.countries).toBe(58); expect(eligibleCountries("uk")).toHaveLength(56); });
