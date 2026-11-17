@@ -160,7 +160,7 @@
   header, footer, .no-print { display: none !important; }
   body { background: var(--card); }
   main { max-width: none; }
-  .print-result { display: block; }
+  .print-result { display: block !important; }
   details > * { display: block !important; }
   details { break-inside: avoid; }
   .glass { box-shadow: none; }
