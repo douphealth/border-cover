@@ -6,12 +6,15 @@ import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PageHead, seo } from "@/components/Shell";
+import { PageHead } from "@/components/Shell";
 import { reviewGaps } from "@/lib/evidence";
 import { sources } from "@/lib/atlas";
 import { reviewQueue, saveReview, approveReview, resolveCorrection, updateReviewTask, exportApprovedResearch } from "@/lib/review.functions";
+import { pageDescription, pageTitle, seo, staticTrail } from "@/lib/site";
 
-export const Route = createFileRoute("/review")({ head: () => ({ meta: seo("Editorial review | BorderCover Atlas", "Private evidence review and corrections, with authorized reviewer access and historical provenance.") }), component: ReviewPage });
+const trail = staticTrail("Editorial review", "/review");
+
+export const Route = createFileRoute("/review")({ head: () => seo(pageTitle("Editorial review"), pageDescription("Private evidence review and corrections, with authorized reviewer access and historical provenance."), "/review", { indexable: false }), component: ReviewPage });
 function ReviewPage() {
   const [signedIn, setSignedIn] = useState(false);
   const [queue, setQueue] = useState<Awaited<ReturnType<typeof reviewQueue>> | null>(null);
@@ -25,7 +28,7 @@ function ReviewPage() {
   useEffect(() => { supabase.auth.getSession().then(({ data }) => setSignedIn(Boolean(data.session))); const { data } = supabase.auth.onAuthStateChange((event, session) => { if (event === "SIGNED_IN" || event === "SIGNED_OUT") { setSignedIn(Boolean(session)); setQueue(null); } if (event === "PASSWORD_RECOVERY") setMode("newpassword"); }); return () => data.subscription.unsubscribe(); }, []);
   const load = async () => { try { setQueue(await fetchQueue()); setMessage(""); } catch { setMessage("Review records could not be loaded. Please sign in again."); } };
   const social = async (provider: "google" | "lovable") => { const result = await lovable.auth.signInWithOAuth(provider, { redirect_uri: `${window.location.origin}/review` }); if (result.error) setMessage("Sign-in could not be completed."); };
-  return <><PageHead kicker="Editorial workspace" title="Evidence before confidence." intro="Protected correction reports and review records. Signing in does not grant reviewer permissions." /><div className="mx-auto max-w-7xl space-y-8 px-5">
+  return <><PageHead kicker="Editorial workspace" title="Evidence before confidence." intro="Protected correction reports and review records. Signing in does not grant reviewer permissions." crumbs={trail.crumbs} /><div className="mx-auto max-w-7xl space-y-8 px-5">
     {!signedIn || mode === "newpassword" ? <form className="max-w-md space-y-4" onSubmit={async (e) => {
       e.preventDefault(); setMessage("");
       if (mode === "newpassword") { const { error } = await supabase.auth.updateUser({ password }); setMessage(error ? "Password could not be changed." : "Password updated."); if (!error) setMode("signin"); }

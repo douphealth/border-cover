@@ -1,2 +1,8 @@
+# Indexing hold: public launch is blocked pending qualified legal review.
+# User-agent: * also covers GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot,
+# ClaudeBot, Google-Extended, Applebot-Extended and Bingbot. They stay disallowed
+# until that review is complete. Do not switch this file to Allow before then.
 User-agent: *
 Disallow: /
+
+Sitemap: https://bordercover.shop/sitemap.xml

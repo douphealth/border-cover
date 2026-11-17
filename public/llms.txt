@@ -1,0 +1,33 @@
+# BorderCover Atlas
+
+> An independent, source-backed research tool for driving your own car abroad. It does not sell, quote or bind insurance. Personal policy confirmation remains essential.
+
+Public crawling is disallowed until qualified legal review. robots.txt uses `Disallow: /` for every user agent, and HTML pages send `noindex`.
+
+## Key pages
+
+- [Checker](https://bordercover.shop/): Compare published overseas motor cover, trip allowances, transit-country conditions and original evidence. Personal policy confirmation remains essential.
+- [Atlas](https://bordercover.shop/atlas): Published policy terms and unresolved conditions, country by country.
+- [Insurer pages](https://bordercover.shop/cover): Tier-by-tier research pages for named insurers and driving destinations.
+- [Guides](https://bordercover.shop/guides): Plain-English guides to Green Cards, Mexican liability, Ireland–UK driving and more.
+- [Methodology](https://bordercover.shop/methodology): How published wording is compared, and what a result does not confirm.
+- [Evidence register](https://bordercover.shop/sources): Original documents, observed quotations and separately approved editorial evidence.
+- [Change log](https://bordercover.shop/change-log): Dated record of research dataset updates.
+- [Privacy](https://bordercover.shop/privacy): How trip selections, fragment links, correction reports and reviewer accounts are handled.
+- [Terms](https://bordercover.shop/terms): Limitations of the research and the need to confirm a personal policy.
+
+## Guides
+
+- [Driving an Australian car in New Zealand](https://bordercover.shop/guides/australia-car-insurance-in-new-zealand): What RACV says about cover outside Australia when taking your own car to New Zealand, and what to confirm before shipping.
+- [Irish car insurance in the UK](https://bordercover.shop/guides/ie-car-insurance-in-uk): Understand car insurance from Ireland to Great Britain or Northern Ireland: home territorial cover, Green Cards and documentation.
+- [Irish car insurance in France](https://bordercover.shop/guides/irish-car-insurance-in-france): Aviva Ireland, Allianz Ireland and 123.ie foreign-use cover in France: 31, 60 and 30-day conditions compared.
+- [An NZ-insured car in Australia](https://bordercover.shop/guides/new-zealand-car-insurance-in-australia): Review AMI motor-policy exclusions for driving a New Zealand-registered car in Australia and the separate cover to arrange.
+- [Does UK insurance cover France?](https://bordercover.shop/guides/uk-car-insurance-in-france): Understand UK car insurance in France: legal third-party cover, insurer day limits, Green Cards and what to take on a road trip.
+- [UK car insurance in Ireland](https://bordercover.shop/guides/uk-car-insurance-in-ireland): UK-to-Ireland motor insurance: UK third-party minimum, AA and LV Ireland exceptions, and whether a Green Card is needed.
+- [The Green Card decision guide](https://bordercover.shop/guides/uk-green-card-rules): Which European destinations are Green Card-free for UK drivers, and where you may need proof or border insurance.
+- [US car insurance in Canada](https://bordercover.shop/guides/us-car-insurance-in-canada): Check Progressive, GEICO and USAA insurance when driving your own US-insured car into Canada. Cover levels, proof and limitations.
+- [US car insurance in Mexico](https://bordercover.shop/guides/us-car-insurance-in-mexico): Find out why regular US car insurance usually does not meet Mexican liability requirements, and what coverage to buy before driving south.
+
+## Limits
+
+Coverage statements describe published insurer and government documents. They are not a quotation, a certificate of insurance, or legal advice. Insurer-country URLs stay out of the sitemap until every plan on the page passes claim-level indexing eligibility. The private editorial workspace is not listed.
