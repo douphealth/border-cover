@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Compass } from "lucide-react";
 import { data } from "@/lib/atlas";
+import { datasetStats } from "@/lib/evidence";
 
 const NAV = [
   { to: "/", label: "Checker" },
@@ -14,12 +15,12 @@ const NAV = [
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b glass">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-3">
         <Link to="/" className="flex items-center gap-2.5">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-brass text-primary-foreground"><Compass className="h-5 w-5" /></span>
           <span className="font-display text-lg font-semibold">BorderCover <span className="text-brass">Atlas</span></span>
         </Link>
-        <nav className="flex gap-1 overflow-x-auto text-sm">
+        <nav aria-label="Main navigation" className="flex max-w-full gap-1 overflow-x-auto text-sm">
           {NAV.map((n) => (
             <Link key={n.to} to={n.to} activeOptions={{ exact: n.to === "/" }} className="whitespace-nowrap rounded-full px-3 py-1.5 text-muted-foreground transition hover:text-foreground" activeProps={{ className: "bg-secondary text-foreground" }}>{n.label}</Link>
           ))}
@@ -42,7 +43,7 @@ export function Footer() {
           <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
           <Link to="/terms" className="hover:text-foreground">Terms</Link>
         </div>
-        <div className="font-mono text-xs text-muted-foreground">Evidence checked {data.checkedOn}<br />{Object.keys(data.sources).length} source records · {data.insurers.length} insurer profiles</div>
+        <div className="text-xs leading-relaxed text-muted-foreground">Legacy dataset release {data.checkedOn}<br />{datasetStats.sources} source records · {datasetStats.namedProfiles} named market profiles<br />{datasetStats.fallbackProfiles} generic fallback profiles · {datasetStats.plans} plans<br /><Link to="/review" className="underline">Editorial review</Link> · Ownership and reviewer details pending.</div>
       </div>
     </footer>
   );
@@ -75,4 +76,5 @@ export const seo = (title: string, description: string) => [
   { title }, { name: "description", content: description },
   { property: "og:title", content: title }, { property: "og:description", content: description },
   { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
+  { name: "robots", content: "noindex, nofollow" },
 ];

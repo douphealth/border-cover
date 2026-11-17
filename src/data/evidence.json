@@ -1,0 +1,39 @@
+{
+  "version": "atlas-rules-2.1",
+  "observations": [
+    {
+      "id": "aa-europe-2026-11-17",
+      "sourceId": "aa",
+      "retrievedOn": "2026-11-17",
+      "method": "Direct HTML retrieval and automated passage inspection; not human editorial verification",
+      "section": "European countries where you're covered to drive",
+      "quotation": "The Gold and Platinum levels of comprehensive car insurance cover you for up to 90 days during the 12 months of your policy. The Silver level covers you for 30 days.",
+      "humanVerifiedOn": null,
+      "reviewer": null,
+      "reviewDue": null,
+      "effectiveFrom": null,
+      "policyEdition": null,
+      "conflicts": []
+    },
+    {
+      "id": "aa-ireland-2026-11-17",
+      "sourceId": "aa",
+      "retrievedOn": "2026-11-17",
+      "method": "Direct HTML retrieval and automated passage inspection; not human editorial verification",
+      "section": "European countries where you're covered to drive",
+      "quotation": "The Republic of Ireland is within the territorial limit of our car insurance, so policyholders get the same level as cover there as they do in the UK all year round.",
+      "humanVerifiedOn": null,
+      "reviewer": null,
+      "reviewDue": null,
+      "effectiveFrom": null,
+      "policyEdition": null,
+      "conflicts": []
+    }
+  ],
+  "claims": [
+    { "id": "uk-aa-silver-europe-allowance", "market": "uk", "insurer": "aa", "product": "AA car insurance", "tier": "silver", "destinationScope": "verifiedDestinationsExceptIreland", "rule": "annual", "value": 30, "observationIds": ["aa-europe-2026-11-17"] },
+    { "id": "uk-aa-gold-europe-allowance", "market": "uk", "insurer": "aa", "product": "AA car insurance", "tier": "gold", "destinationScope": "verifiedDestinationsExceptIreland", "rule": "annual", "value": 90, "observationIds": ["aa-europe-2026-11-17"] },
+    { "id": "uk-aa-platinum-europe-allowance", "market": "uk", "insurer": "aa", "product": "AA car insurance", "tier": "platinum", "destinationScope": "verifiedDestinationsExceptIreland", "rule": "annual", "value": 90, "observationIds": ["aa-europe-2026-11-17"] },
+    { "id": "uk-aa-ireland-territory", "market": "uk", "insurer": "aa", "product": "AA car insurance", "tier": "all", "destinationScope": "ie", "rule": "territorialException", "value": true, "observationIds": ["aa-ireland-2026-11-17"] }
+  ]
+}

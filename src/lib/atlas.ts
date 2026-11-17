@@ -9,7 +9,7 @@ export { evaluate, evaluateRoute, greenCard, getMatrixSample, HOME_DEFAULT };
 
 export type Status = "confirmed" | "minimum" | "liability" | "limited" | "needs-check" | "not-covered";
 export const STATUS: any = {
-  confirmed: { label: "Published full cover", tone: "text-ok border-ok/40 bg-ok/10", dot: "var(--ok)" },
+  confirmed: { label: "Published overseas cover", tone: "text-ok border-ok/40 bg-ok/10", dot: "var(--ok)" },
   minimum: { label: "Legal minimum only", tone: "text-warn border-warn/40 bg-warn/10", dot: "var(--warn)" },
   liability: { label: "Liability published", tone: "text-info border-info/40 bg-info/10", dot: "var(--info)" },
   limited: { label: "Limited / days exceeded", tone: "text-warn border-warn/40 bg-warn/10", dot: "var(--warn)" },
@@ -36,7 +36,7 @@ export const staticDocs = pages as Record<string, Doc>;
 
 export function evaluateCover(c: CoverPage, days = 14) {
   const ins = insurers.find((i) => i.id === c.insurer && i.market === c.market);
-  return ins.tiers.map((t: any) => evaluate({ market: c.market, insurer: c.insurer, tier: t.id, destination: c.dest, days, used: 0 }, data));
+  return ins?.tiers.map((t: any) => evaluate({ market: c.market, insurer: c.insurer, tier: t.id, destination: c.dest, days, used: 0 }, data)) ?? [];
 }
 
 // Approximate centroids [lon, lat] for the atlas map
