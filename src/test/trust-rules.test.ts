@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import policies from "@/data/policies.json";
 import evidence from "@/data/evidence.json";
 import { evaluate, evaluateRoute } from "@/lib/engine";
-import { canIndependentlyApprove, evidenceSchema, observationState, publishedResearch } from "@/lib/provenance";
+import { canIndependentlyApprove, evidenceSchema, observationState, publishedResearch, validatePolicyReferences } from "@/lib/provenance";
 import { defaultScenario, parseScenario, scenarioHash } from "@/lib/scenario";
 import { isIndexEligible } from "@/lib/evidence";
 
@@ -16,6 +16,7 @@ describe("Uncertainty and provenance boundaries", () => {
   it("Silver allowance minus one is within the published cap", () => { expect(evaluateRoute({ ...defaultScenario, days: 29 }, policies).status).toBe("confirmed"); });
   it("unsupported tiers fail validation", () => { expect(evaluateRoute({ ...defaultScenario, tier: "invented" }, policies).error).toBeDefined(); });
   it("missing claim observations block publication", () => { expect(evidenceSchema.safeParse({ ...evidence, claims: [{ ...evidence.claims[0], observationIds: [] }] }).success).toBe(false); });
+  it("a release cannot change Silver's 30-day rule through mismatched evidence", () => { expect(validatePolicyReferences({ ...publishedResearch, claims: [{ ...publishedResearch.claims[0], value: 90 }] }, policies)).toBe(false); });
   it("duplicate claim IDs fail validation", () => { expect(evidenceSchema.safeParse({ ...evidence, claims: [evidence.claims[0], evidence.claims[0]] }).success).toBe(false); });
   it("invalid evidence calendar dates fail validation", () => { expect(evidenceSchema.safeParse({ ...evidence, observations: [{ ...evidence.observations[0], retrievedOn: "2026-02-30" }] }).success).toBe(false); });
   const reviewed = { ...publishedResearch.observations[0], humanVerifiedOn: "2026-11-17", reviewer: "Example reviewer", policyEdition: "Example edition", reviewDue: "2026-12-01", authorId: "author", approvedBy: "approver" };

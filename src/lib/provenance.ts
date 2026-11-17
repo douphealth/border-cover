@@ -11,6 +11,14 @@ export const evidenceSchema = z.object({ version: z.string().min(1), observation
 export type Observation = z.infer<typeof observation>;
 export const publishedResearch = evidenceSchema.parse(evidence);
 export const RELEASE_ID = publishedResearch.version;
+export function validatePolicyReferences(research: z.infer<typeof evidenceSchema>, policies: { insurers: Array<{ id: string; market: string; tiers: Array<{ id: string; annual?: number }> }>; sources: Record<string, unknown> }) {
+  return research.observations.every((o) => Boolean(policies.sources[o.sourceId])) && research.claims.every((c) => {
+    const insurer = policies.insurers.find((i) => i.id === c.insurer && i.market === c.market);
+    if (!insurer) return false;
+    if (c.tier !== "all" && !insurer.tiers.some((t) => t.id === c.tier)) return false;
+    return c.rule !== "annual" || insurer.tiers.find((t) => t.id === c.tier)?.annual === c.value;
+  });
+}
 export function observationState(o: Observation, today: string) {
   if (o.conflicts.length) return "conflicting";
   if (o.availability === "unavailable") return "unavailable";

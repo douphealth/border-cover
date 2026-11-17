@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { sources } from "./atlas";
-import { canIndependentlyApprove } from "./provenance";
+import { canIndependentlyApprove, publishedResearch } from "./provenance";
 
 export const reportSchema = z.object({ ruleId: z.string().min(1).max(200), version: z.string().min(1).max(80), message: z.string().trim().min(10).max(2000), website: z.string().max(0).default(""), kind: z.enum(["correction", "insurer-request"]).default("correction") });
 
@@ -77,4 +77,26 @@ export const updateReviewTask = createServerFn({ method: "POST" }).middleware([r
   const { data: rows, error } = await query.select("id");
   if (error || !rows?.length) throw new Error("Claim this task before resolving it, or refresh its status.");
   return { ok: true };
+});
+
+export const exportApprovedResearch = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator(z.object({ version: z.string().regex(/^atlas-rules-\d+\.\d+$/) })).handler(async ({ data, context }) => {
+  const { data: permitted } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "reviewer" });
+  if (!permitted) throw new Error("Reviewer access required.");
+  const { data: rows, error } = await context.supabase.from("evidence_reviews").select("*").eq("status", "approved").gt("review_due", new Date().toISOString().slice(0,10));
+  if (error) throw new Error("Approved evidence could not be exported.");
+  const observations = [];
+  const claims = [];
+  for (const claim of publishedResearch.claims) {
+    const matching = rows?.filter((r) => r.rule_id === claim.id && r.approved_by && r.approved_by !== r.created_by && !r.conflicts && r.human_verified_at) ?? [];
+    if (!matching.length) continue;
+    const ids = [];
+    for (const row of matching) {
+      const hash = async (id: string) => Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`${data.version}:${id}`)))).map((b) => b.toString(16).padStart(2,"0")).join("");
+      ids.push(row.id);
+      observations.push({ id: row.id, sourceId: row.source_id, retrievedOn: row.created_at.slice(0,10), quotation: row.quotation, section: row.section, humanVerifiedOn: row.human_verified_at?.slice(0,10) ?? null, reviewer: row.reviewer_name, reviewDue: row.review_due, effectiveFrom: null, policyEdition: row.policy_edition, conflicts: [], authorId: await hash(row.created_by), approvedBy: await hash(row.approved_by ?? "") });
+    }
+    claims.push({ ...claim, observationIds: ids });
+  }
+  if (!claims.length) throw new Error("No current independently approved claims match the structured claim IDs. Export is blocked.");
+  return { version: data.version, observations, claims };
 });
