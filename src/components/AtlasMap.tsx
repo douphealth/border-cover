@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import { Button } from "./ui/button";
+import { eligibleCountries } from "@/lib/evidence";
 import { COORDS, countries, data, evaluate, flag, STATUS } from "@/lib/atlas";
 
 const VIEWS = {
@@ -6,9 +8,9 @@ const VIEWS = {
   europe: { lon: [-25, 50], lat: [30, 68] },
 } as const;
 
-type Props = { market: string; insurer: string; tier: string; days: number; onPick?: (code: string) => void; selected?: string[] };
+type Props = { market: string; insurer: string; tier: string; days: number; used?: number | null; departure?: string; returnDate?: string; renewal?: string; onPick?: (code: string) => void; selected?: string[] };
 
-export function AtlasMap({ market, insurer, tier, days, onPick, selected = [] }: Props) {
+export function AtlasMap({ market, insurer, tier, days, used = 0, departure = "", returnDate = "", renewal = "", onPick, selected = [] }: Props) {
   const defaultView = market === "uk" || market === "ie" ? "europe" : "world";
   const [view, setView] = useState<keyof typeof VIEWS>(defaultView);
   const [hover, setHover] = useState<string | null>(null);
@@ -20,21 +22,22 @@ export function AtlasMap({ market, insurer, tier, days, onPick, selected = [] }:
     const out: Record<string, any> = {};
     for (const code of Object.keys(countries)) {
       if (code === home || (home === "gb" && code === "ni")) continue;
-      const r = evaluate({ market, insurer, tier, destination: code, days, used: 0 }, data);
+      const r = evaluate({ market, insurer, tier, destination: code, days, used, departure, returnDate, renewal }, data);
       if (!r.error) out[code] = r;
     }
     return out;
-  }, [market, insurer, tier, days, home]);
+  }, [market, insurer, tier, days, used, departure, returnDate, renewal, home]);
   const counts = Object.values(results).reduce((a: any, r: any) => ((a[r.status] = (a[r.status] || 0) + 1), a), {});
   const [hx, hy] = proj(COORDS[home] ?? [0, 0]);
   const hv = hover ? results[hover] : null;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl glass shadow-float">
+    <div className="relative overflow-hidden rounded-lg border bg-card">
+      <p className="border-b px-5 py-3 text-xs text-muted-foreground">{Object.keys(results).length} eligible international destinations. Domestic destinations excluded. Counts include countries outside the current map view.</p>
       <div className="flex flex-wrap items-center justify-between gap-3 border-b px-5 py-3">
         <div className="flex gap-1 rounded-full bg-muted p-1 text-xs font-semibold">
           {(["europe", "world"] as const).map((k) => (
-            <button key={k} onClick={() => setView(k)} className={`rounded-full px-3 py-1.5 capitalize transition ${view === k ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>{k}</button>
+            <Button variant="ghost" size="sm" key={k} onClick={() => setView(k)} className={`rounded-full px-3 py-1.5 capitalize transition ${view === k ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>{k}</Button>
           ))}
         </div>
         <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
@@ -57,7 +60,7 @@ export function AtlasMap({ market, insurer, tier, days, onPick, selected = [] }:
           const [x, y] = proj(c); if (x < -20 || x > W + 20 || y < -20 || y > H + 20) return null;
           const sel = selected.includes(code);
           return (
-            <g key={code} className="cursor-pointer" onMouseEnter={() => setHover(code)} onMouseLeave={() => setHover(null)} onClick={() => onPick?.(code)}>
+            <g key={code} role={onPick ? "button" : undefined} tabIndex={0} aria-label={`${countries[code].name}: ${STATUS[r.status].label}`} onFocus={() => setHover(code)} onBlur={() => setHover(null)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPick?.(code); } }} className="cursor-pointer" onMouseEnter={() => setHover(code)} onMouseLeave={() => setHover(null)} onClick={() => onPick?.(code)}>
               <circle cx={x} cy={y} r={14} fill="transparent" />
               {sel && <circle cx={x} cy={y} r={9} fill="none" stroke="var(--primary)" strokeWidth={2} />}
               <circle cx={x} cy={y} r={hover === code ? 7 : 4.5} fill={STATUS[r.status].dot} stroke="var(--background)" strokeWidth={1.5} style={{ transition: "r .2s" }} />
@@ -67,6 +70,7 @@ export function AtlasMap({ market, insurer, tier, days, onPick, selected = [] }:
         <circle cx={hx} cy={hy} r={4} fill="var(--primary)" className="pulse-ring" />
         <circle cx={hx} cy={hy} r={6} fill="var(--primary)" stroke="var(--background)" strokeWidth={2} />
       </svg>
+      <details className="border-t p-4"><summary className="cursor-pointer text-sm font-semibold">All destination results</summary><div className="mt-3 grid max-h-80 gap-1 overflow-y-auto sm:grid-cols-2">{eligibleCountries(market).map((c) => <Button key={c.code} variant="ghost" className="h-auto min-h-10 justify-between gap-2 whitespace-normal text-left text-xs" onClick={() => onPick?.(c.code)}><span>{flag(c.code)} {c.name}</span><span>{results[c.code] ? STATUS[results[c.code].status].label : "Invalid scenario"}</span></Button>)}</div></details>
       {hv && (
         <div className="pointer-events-none absolute bottom-4 left-4 max-w-xs rounded-xl glass p-4 text-sm shadow-float animate-rise">
           <div className="font-display text-lg">{flag(hv.dest.code)} {hv.dest.name}</div>
