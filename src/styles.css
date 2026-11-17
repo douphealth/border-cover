@@ -155,6 +155,8 @@
   .route-line { stroke-dashoffset: 0; }
 }
 @media print {
+  #check > div { display: block !important; }
+  #check > div > .print-result { width: 100% !important; }
   header, footer, .no-print { display: none !important; }
   body { background: var(--card); }
   main { max-width: none; }
