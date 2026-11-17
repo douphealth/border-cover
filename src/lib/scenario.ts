@@ -20,7 +20,9 @@ export function parseScenario(hash: string): Scenario | null {
     const params = new URLSearchParams(hash.replace(/^#/, ""));
     const raw = params.get("trip");
     if (!raw) return null;
-    const parsed = scenarioSchema.safeParse(JSON.parse(raw));
+    const value = JSON.parse(raw);
+    if (!value || typeof value !== "object" || typeof value.releaseId !== "string") return null;
+    const parsed = scenarioSchema.safeParse(value);
     return parsed.success ? parsed.data : null;
   } catch { return null; }
 }
