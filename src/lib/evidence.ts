@@ -1,5 +1,6 @@
 import evidence from "@/data/evidence.json";
 import { data, covers, countries, insurers, markets, sources } from "./atlas";
+import { observationState, publishedResearch } from "./provenance";
 
 export const RULE_VERSION = evidence.version;
 export const datasetStats = {
@@ -28,11 +29,12 @@ export function claimsFor(insurer: string, tier: string, destination: string) {
 }
 
 // Eligibility is deliberately strict: an imported date is not named human approval.
-export function isIndexEligible(insurer: string, tier: string, destination: string) {
+export function isIndexEligible(insurer: string, tier: string, destination: string, today = new Date().toISOString().slice(0,10)) {
   const claims = claimsFor(insurer, tier, destination);
-  return claims.length > 0 && claims.every((c) => c.observationIds.every((id) => {
-    const o = evidence.observations.find((x) => x.id === id);
-    return Boolean(o?.humanVerifiedOn && o?.reviewer && o?.policyEdition);
+  const required = ["liability", "ownCar", "documents", "notification", "breakdown"];
+  return required.every((rule) => claims.some((c) => c.rule === rule)) && claims.length > 0 && claims.every((c) => c.observationIds.length > 0 && c.observationIds.every((id) => {
+    const o = publishedResearch.observations.find((x) => x.id === id);
+    return Boolean(o && sources[o.sourceId] && observationState(o, today) === "current");
   }));
 }
 
@@ -47,3 +49,9 @@ export function reviewGaps() {
 }
 
 export const datasetRelease = data.checkedOn;
+
+export function marketResearch(market: string) {
+  const claims = publishedResearch.claims.filter((c) => c.market === market);
+  const current = claims.filter((c) => c.observationIds.length && c.observationIds.every((id) => { const o = publishedResearch.observations.find((o) => o.id === id); return o && observationState(o, new Date().toISOString().slice(0,10)) === "current"; })).length;
+  return { current, total: claims.length, label: claims.length ? "Partial research · human review incomplete" : "Claim-level evidence unavailable" };
+}

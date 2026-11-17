@@ -2,13 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { AlertTriangle, Check, ChevronDown, MapPin, Printer, Search, Share2, ShieldCheck, X } from "lucide-react";
 import { countries, data, evaluateRoute, flag, HOME_DEFAULT, insurersFor, markets, STATUS } from "@/lib/atlas";
-import { eligibleCountries, RULE_VERSION } from "@/lib/evidence";
+import { eligibleCountries, marketResearch, RULE_VERSION } from "@/lib/evidence";
 import { defaultScenario, parseScenario, scenarioHash, type Scenario } from "@/lib/scenario";
 import { AtlasMap } from "./AtlasMap";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { BenefitList } from "./BenefitList";
 import { EvidenceDetails } from "./EvidenceDetails";
+import { ClaimEvidence } from "./ClaimEvidence";
 import { ReportIssue } from "./ReportIssue";
 
 export function Checker() {
@@ -17,8 +18,9 @@ export function Checker() {
   const [adding, setAdding] = useState(false);
   const [notice, setNotice] = useState("");
   const [printedOn, setPrintedOn] = useState("");
+  const [stage, setStage] = useState<"policy" | "journey" | "result">("policy");
   useEffect(() => {
-    const restore = () => { const s = parseScenario(window.location.hash); if (s) setScenario(s); else if (window.location.hash.includes("trip=")) setNotice("This trip link is invalid. Default selections are shown."); };
+    const restore = () => { const s = parseScenario(window.location.hash); if (s) { setScenario(s); setStage("result"); } else if (window.location.hash.includes("trip=")) setNotice("This trip link is invalid or its historical release is unavailable. It has not been replayed; default selections are shown."); };
     restore(); window.addEventListener("hashchange", restore);
     return () => window.removeEventListener("hashchange", restore);
   }, []);
@@ -27,6 +29,7 @@ export function Checker() {
   const ins = list.find((i) => i.id === insurer) ?? list[0];
   const patch = (value: Partial<Scenario>) => setScenario((s) => ({ ...s, ...value }));
   const r: any = useMemo(() => evaluateRoute(scenario, data), [scenario]);
+  useEffect(() => { const timer = setTimeout(() => { if (!r.error) setNotice(`Research updated: ${r.stops.length} countries; ${STATUS[r.status].label}. Personal cover is not confirmed.`); }, 800); return () => clearTimeout(timer); }, [r]);
   const toggleStop = (code: string) => setScenario((s) => ({ ...s, stops: s.stops.includes(code) ? s.stops.length > 1 ? s.stops.filter((c) => c !== code) : s.stops : s.stops.length < 5 ? [...s.stops, code] : s.stops }));
   const options = eligibleCountries(market).filter((c) => !stops.includes(c.code) && c.name.toLowerCase().includes(query.toLowerCase()));
   const status = !r.error ? STATUS[r.status] : null;
@@ -35,17 +38,19 @@ export function Checker() {
     if (!first) return;
     patch({ market: m, insurer: first.id, tier: first.tiers[0].id, stops: [HOME_DEFAULT[m as keyof typeof HOME_DEFAULT]] });
   };
-  return <div className="grid items-start gap-8 lg:grid-cols-[360px_minmax(0,1fr)] xl:grid-cols-[380px_minmax(0,1fr)]">
-    <aside className="no-print space-y-7 lg:sticky lg:top-24">
+  return <><nav aria-label="Trip stages" className="no-print mb-5 grid grid-cols-3 gap-2 lg:hidden">{(["policy", "journey", "result"] as const).map((s) => <Button key={s} variant={stage === s ? "default" : "outline"} aria-current={stage === s ? "step" : undefined} onClick={() => setStage(s)}>{s === "policy" ? "Policy" : s === "journey" ? "Journey" : "Result"}</Button>)}</nav><div className="trip-summary no-print mb-5 flex items-center justify-between gap-2 border-y bg-background py-3 text-xs lg:hidden"><p className="min-w-0 break-words">{ins.name} · {stops.map((c) => countries[c].name).join(" → ")} · {r.error ? days : r.days} days</p><Button variant="ghost" size="sm" onClick={() => setStage("policy")}>Edit</Button></div><div className="grid items-start gap-8 lg:grid-cols-[360px_minmax(0,1fr)] xl:grid-cols-[380px_minmax(0,1fr)]">
+    <aside className={`no-print space-y-7 lg:sticky lg:top-24 ${stage === "result" ? "hidden lg:block" : ""}`}>
+      <div className={`space-y-7 ${stage !== "policy" ? "hidden lg:block" : ""}`}>
       <Field n="01" label="Where is your car insured?">
-        <div className="grid grid-cols-3 gap-2">{markets.map((m) => <Button key={m.id} variant={market === m.id ? "default" : "outline"} aria-pressed={market === m.id} onClick={() => changeMarket(m.id)}>{flag(m.countryCode)} {m.id.toUpperCase()}</Button>)}</div>
-        <p className="mt-2 text-xs text-muted-foreground">Research preview · published terms, not personal approval.</p>
+        <div className="grid grid-cols-3 gap-2">{markets.map((m) => <Button key={m.id} variant={market === m.id ? "default" : "outline"} aria-pressed={market === m.id} onClick={() => changeMarket(m.id)} aria-label={`${m.name ?? m.id.toUpperCase()} · ${marketResearch(m.id).label}`}>{flag(m.countryCode)} {m.id.toUpperCase()}</Button>)}</div>
+        <div className="mt-3 space-y-1 text-xs text-muted-foreground">{markets.map((m) => <p key={m.id}><span className="font-semibold">{m.id.toUpperCase()}</span> · {marketResearch(m.id).label} · {marketResearch(m.id).current}/{marketResearch(m.id).total} claim records current</p>)}</div>
       </Field>
       <Field n="02" label="Insurer and plan">
         <label htmlFor="insurer" className="sr-only">Insurer</label><select id="insurer" value={ins.id} onChange={(e) => { const next = list.find((i) => i.id === e.target.value); if (next) patch({ insurer: next.id, tier: next.tiers[0].id }); }} className="h-11 w-full rounded-md border bg-card px-3 text-sm">{list.map((i) => <option key={i.id} value={i.id}>{i.name}</option>)}</select>
         <div className="mt-3 flex flex-wrap gap-2">{ins.tiers.map((t: any) => <Button key={t.id} size="sm" variant={tier === t.id ? "secondary" : "outline"} aria-pressed={tier === t.id} className={tier === t.id ? "border border-primary" : ""} onClick={() => patch({ tier: t.id })}>{tier === t.id && <Check />}{t.name}</Button>)}</div>
       </Field>
-      <Field n="03" label={`Destination & transit countries · ${stops.length}/5`}>
+      <ReportIssue ruleId={`request/${market}`} kind="insurer-request" /><Button className="w-full lg:hidden" onClick={() => setStage("journey")}>Continue to journey</Button></div>
+      <div className={`space-y-7 ${stage !== "journey" ? "hidden lg:block" : ""}`}><Field n="03" label={`Destination & transit countries · ${stops.length}/5`}>
         <div className="flex flex-wrap gap-2">{stops.map((c) => <span key={c} className="flex items-center gap-2 rounded-md border bg-card py-1 pl-3 text-sm">{flag(c)} {countries[c].name}<Button size="icon" variant="ghost" disabled={stops.length === 1} aria-label={`Remove ${countries[c].name}`} onClick={() => toggleStop(c)}><X /></Button></span>)}</div>
         {stops.length < 5 && <Button variant="outline" className="mt-3 w-full justify-between" onClick={() => setAdding(!adding)} aria-expanded={adding}><span className="flex items-center gap-2"><MapPin />Add country</span><ChevronDown /></Button>}
         {adding && stops.length < 5 && <div className="mt-2 rounded-md border bg-card p-2"><label className="relative block"><Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" /><Input autoFocus aria-label="Search countries" placeholder="Search country…" value={query} onChange={(e) => setQuery(e.target.value)} className="pl-9" /></label><div className="mt-2 max-h-48 overflow-y-auto">{options.map((c) => <Button key={c.code} variant="ghost" className="w-full justify-start" onClick={() => { toggleStop(c.code); setAdding(false); setQuery(""); }}>{flag(c.code)} {c.name}</Button>)}{!options.length && <p className="p-2 text-sm text-muted-foreground">No matching countries.</p>}</div></div>}
@@ -56,26 +61,31 @@ export function Checker() {
         {used !== null && <NumberRange label="Days already used abroad" value={used} min={0} onChange={(used) => patch({ used })} />}
         <details className="mt-4 border-t pt-3"><summary className="cursor-pointer text-sm font-semibold">Travel dates & renewal</summary><div className="mt-3 grid gap-3">{([['departure', 'Departure date'], ['returnDate', 'Return date'], ['renewal', 'Policy renewal date']] as const).map(([key, label]) => <label key={key} className="text-xs text-muted-foreground">{label}<Input className="mt-1" type="date" value={scenario[key]} onChange={(e) => patch({ [key]: e.target.value })} /></label>)}<p className="text-xs text-muted-foreground">Both departure and return days count. No renewal reset is assumed without policy wording.</p><Button size="sm" variant="ghost" onClick={() => patch({ departure: "", returnDate: "", renewal: "" })}>Clear dates</Button></div></details>
       </Field>
+      <Button className="w-full lg:hidden" disabled={Boolean(r.error)} onClick={() => { setStage("result"); setNotice("Research result updated. Personal cover is not confirmed."); setTimeout(() => { const outcome = document.getElementById("research-outcome"); outcome?.focus({ preventScroll: true }); const section = outcome?.closest("section"); if (section) window.scrollTo({ top: section.getBoundingClientRect().top + window.scrollY - 180, behavior: "instant" }); }, 0); }}>Check published terms</Button></div>
     </aside>
-    <div className="min-w-0 space-y-6 print-result">
+    <div className={`min-w-0 space-y-6 print-result ${stage !== "result" ? "hidden lg:block" : ""}`}>
       {r.error ? <div role="alert" className="rounded-lg border border-destructive p-6 text-destructive">{r.error}</div> : <section className="result-summary rounded-lg border bg-card shadow-float">
         <div className="p-5 sm:p-7">
           <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-sm font-medium text-muted-foreground">{stops.map((c) => countries[c].name).join(' → ')} · {ins.name} {r.tier.name}</p><span className={`mt-3 inline-flex items-center gap-2 rounded-md border px-2.5 py-1 text-xs font-semibold ${status.tone}`}>{r.status === "confirmed" ? <ShieldCheck className="h-4 w-4" /> : <AlertTriangle className="h-4 w-4" />}{status.label}</span></div><div className="no-print flex gap-1"><Button variant="ghost" size="icon" title="Share trip" aria-label="Share trip" onClick={async () => { const url = `${window.location.origin}/${scenarioHash(scenario)}`; try { await navigator.clipboard.writeText(url); setNotice("Trip link copied. Anyone with it can read these selections."); } catch { setNotice(url); } }}><Share2 /></Button><Button variant="ghost" size="icon" title="Print checklist" aria-label="Print checklist" onClick={() => { setPrintedOn(new Date().toISOString().slice(0,10)); setTimeout(() => window.print(), 100); }}><Printer /></Button></div></div>
-          <h2 className="mt-4 text-2xl font-semibold leading-snug sm:text-3xl">{r.annual !== null && r.level === "same" ? `Published equivalent cover: up to ${r.annual} days per policy year` : r.label}</h2>
-          {r.annual !== null && <div className="mt-5 grid gap-4 border-y py-4 sm:grid-cols-2"><div><p className="text-xs text-muted-foreground">Your entered usage</p><p className="mt-1 font-semibold">{r.days} trip days + {used === null ? "unknown" : used} previously used</p></div><div><p className="text-xs text-muted-foreground">Remaining after this trip</p><p className={`mt-1 font-semibold ${r.exceeded ? "text-warn" : "text-primary"}`}>{r.crossesRenewal ? "Renewal counting needs confirmation" : r.remainingAfterTrip === null ? "Cannot calculate without previous usage" : `${r.remainingAfterTrip} days${r.exceeded ? " · enhanced allowance exceeded" : ""}`}</p></div></div>}
+          <p className="mt-3 text-sm font-semibold">This does not confirm your personal cover.</p><p className="mt-2 text-xs text-muted-foreground">{scenario.departure && scenario.returnDate ? `${scenario.departure} → ${scenario.returnDate}` : "Travel dates not entered"} · Policy edition unknown · Claim review incomplete</p>
+          <h2 id="research-outcome" tabIndex={-1} className="mt-4 text-2xl font-semibold leading-snug sm:text-3xl">{r.annual !== null && r.level === "same" ? `Published equivalent terms identified: up to ${r.annual} days per policy year` : r.label}</h2>
+
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{r.reason}</p>
-          <p className="mt-3 text-sm font-semibold">Personal cover still depends on your policy documents.</p>
+
           <p className="mt-2 text-xs text-muted-foreground">{r.limitText}</p>
           {!!r.extra?.length && <ul className="mt-4 space-y-2 text-xs text-muted-foreground">{r.extra.map((x: string) => <li key={x} className="flex gap-2"><AlertTriangle className="h-3.5 w-3.5 shrink-0 text-warn" />{x}</li>)}</ul>}
         </div>
-        <div className="border-t px-5 sm:px-7">{r.stops.map((s: any) => <details key={s.dest.code} open={r.stops.length === 1} className="border-b last:border-b-0"><summary className="cursor-pointer py-4 text-sm font-semibold">{flag(s.dest.code)} {s.dest.name} <span className={`ml-2 text-xs ${STATUS[s.status].tone.split(' ')[0]}`}>{STATUS[s.status].label}</span></summary><BenefitList benefits={s.benefits} /><ReportIssue ruleId={`${market}/${ins.id}/${tier}/${s.dest.code}`} /></details>)}</div>
+        <div className="border-t px-5 sm:px-7">{r.stops.map((s: any) => <details key={s.dest.code} open={r.stops.length === 1} className="border-b last:border-b-0"><summary className="cursor-pointer py-4 text-sm font-semibold">{flag(s.dest.code)} {s.dest.name} <span className={`ml-2 text-xs ${STATUS[s.status].tone.split(' ')[0]}`}>{STATUS[s.status].label}</span></summary><BenefitList benefits={s.benefits} />{s.officialGuidance && <div className="border-l-2 border-info pl-3"><h3 className="text-sm font-semibold">Official guidance · not insurer-specific cover</h3><p className="mt-2 text-xs text-muted-foreground">{s.officialGuidance.detail}</p><EvidenceDetails sourceIds={s.officialGuidance.sourceIds} /></div>}<ReportIssue ruleId={`${market}/${ins.id}/${tier}/${s.dest.code}`} /></details>)}</div>
         <div className="border-t p-5 sm:p-7"><h3 className="font-semibold">Before you go</h3><ul className="mt-3 space-y-3">{r.actionList.map((a: string) => <li key={a}><label className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground"><input type="checkbox" className="mt-1 shrink-0 accent-primary" />{a}</label></li>)}</ul></div>
-        <div className="border-t bg-muted/40 p-5 sm:p-7"><h3 className="mb-3 font-semibold">Evidence & recorded dates</h3><EvidenceDetails sourceIds={r.sourceIds} /><p className="mt-4 text-xs leading-relaxed text-muted-foreground">{r.disclosure} <Link to="/methodology" className="underline">Research standards</Link>.</p><p className="mt-2 text-xs text-muted-foreground">Rule version {RULE_VERSION} · legacy dataset release {data.checkedOn}{printedOn && ` · checklist printed ${printedOn}`}</p></div>
+        <div className="border-t bg-muted/40 p-5 sm:p-7"><h3 className="mb-3 font-semibold">Evidence & research dates</h3>{r.stops.map((s: any) => <div key={s.dest.code}><h4 className="text-sm font-semibold">{s.dest.name}</h4><ClaimEvidence claims={s.claims} /></div>)}<EvidenceDetails sourceIds={r.sourceIds} /><p className="mt-4 text-xs leading-relaxed text-muted-foreground">{r.disclosure} <Link to="/methodology" className="underline">Research standards</Link>.</p><p className="mt-2 text-xs text-muted-foreground">Rule version {RULE_VERSION} · Imported research snapshot {data.checkedOn}{printedOn && ` · checklist printed ${printedOn}`}</p></div>
+        <div className="border-t px-5 py-5 sm:px-7"><h3 className="font-semibold">Calculation details</h3>
+          {r.annual !== null && <div className="mt-5 grid gap-4 border-y py-4 sm:grid-cols-2"><div><p className="text-xs text-muted-foreground">Your entered usage</p><p className="mt-1 font-semibold">{r.days} trip days + {used === null ? "unknown" : used} previously used</p></div><div><p className="text-xs text-muted-foreground">Calculated unused published allowance</p><p className={`mt-1 font-semibold ${r.exceeded ? "text-warn" : "text-primary"}`}>{r.crossesRenewal ? "Renewal counting needs confirmation" : r.remainingAfterTrip === null ? "Cannot calculate without previous usage" : `${r.remainingAfterTrip} days${r.exceeded ? " · enhanced allowance exceeded" : ""}`}</p></div><p className="text-xs leading-relaxed text-muted-foreground sm:col-span-2">Published allowance: {r.annual} days per policy year − {used === null ? "unknown" : used} entered previous days − {r.days} trip days. Assumes prior usage belongs to the same policy year and your issued edition matches the published terms. Trip days count once across selected countries; no renewal reset is assumed.</p></div>}
+        </div>
       </section>}
       {notice && <p role="status" className="no-print break-all text-sm text-primary">{notice}</p>}
       <details className="no-print border-y py-4"><summary className="cursor-pointer text-sm font-semibold">Destination atlas <span className="ml-2 font-normal text-muted-foreground">{eligibleCountries(market).length} international destinations</span></summary><div className="mt-4"><AtlasMap market={market} insurer={ins.id} tier={tier} days={r.error ? days : r.days} used={used} departure={scenario.departure} returnDate={scenario.returnDate} renewal={scenario.renewal} selected={stops} onPick={toggleStop} /></div></details>
     </div>
-  </div>;
+  </div></>;
 }
 
 function Field({ n, label, children }: { n: string; label: string; children: React.ReactNode }) {

@@ -38,3 +38,7 @@ use the editor.
 - Persistent corrections and review actions use Cloud with server-validated reviewer roles; draft evidence never silently changes published rules.
 - Keep previews noindex and require approved claim provenance plus a real production origin for sitemap generation; directory size is not an indexing eligibility signal.
 - Keep the template-supported TanStack server-function API and patch vulnerable transitive dependencies through verified compatible overrides; a latest-version bump can remove the supported input-validation method.
+- Bind research provenance and release identifiers inside the pure result contract; release links must fail explicitly rather than silently use different rules.
+- Require independent reviewer approval in both server actions and database triggers; client-disabled approval controls are not authorization.
+- Source observations create deduplicated private review tasks through a database trigger; automated monitoring never publishes rules.
+- Reviewed releases are prepared offline from authorized approval exports and archived with content hashes; runtime surfaces consume the adopted bundled dataset, not drafts.

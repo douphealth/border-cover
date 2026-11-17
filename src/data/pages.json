@@ -21,7 +21,7 @@
       },
       {
         "t": "p",
-        "x": "Annual allowances include entered previous usage. Per-trip allowances apply to one journey. Unknown usage prevents a remaining-allowance calculation. Departure and return days are counted inclusively. A renewal crossing is flagged; no automatic renewed allowance or policy-edition continuity is assumed."
+        "x": "Annual allowances include entered previous usage. Per-trip allowances apply to one journey. Unknown usage and unresolved renewal counting prevent a definitive unused-allowance calculation. Departure and return days are counted inclusively. A renewal crossing is flagged; no automatic renewed allowance or policy-edition continuity is assumed."
       },
       {
         "t": "p",
@@ -33,7 +33,7 @@
       },
       {
         "t": "p",
-        "x": "The legacy dataset release is 2026-11-01. Source records retain their imported dates and review notes; these do not establish a named human verification. Exact automated observations carry a separate retrieval date. Missing policy editions, quotations, reviewer names and review deadlines are shown as missing."
+        "x": "The imported research snapshot is dated 2026-11-01. Source records retain their imported dates and review notes; these do not establish a named human verification. Exact automated observations carry a separate retrieval date. Missing policy editions, quotations, reviewer names and review deadlines are shown as missing."
       },
       {
         "t": "p",
@@ -45,7 +45,7 @@
       },
       {
         "t": "p",
-        "x": "The application owner, named lead reviewer and review response times have not been supplied. These remain public-launch requirements. Issue reports are stored privately for authorized reviewers; receiving a report does not establish that a reviewer has acted on it."
+        "x": "The application owner, named lead reviewer and review response times have not been supplied. These remain public-launch requirements. Consequential evidence approval requires a different authorized reviewer from the draft author. Issue reports and unlisted-insurer requests are stored privately for authorized reviewers; receiving a report does not establish that a reviewer has acted on it."
       },
       {
         "t": "h2",
@@ -79,7 +79,7 @@
       },
       {
         "t": "p",
-        "x": "Share creates a URL fragment containing the selected market, insurer, plan, countries, days, previous usage and any entered travel dates. Anyone holding the link can read those inputs. Fragments are not normally sent in web requests to the host, but people can copy or disclose them. Share only what you are comfortable revealing."
+        "x": "Share creates a URL fragment containing the research release identifier, selected market, insurer, plan, countries, days, previous usage and any entered travel dates. An unavailable historical release is not silently replayed against current rules. Anyone holding the link can read those inputs. Fragments are not normally sent in web requests to the host, but people can copy or disclose them. Share only what you are comfortable revealing."
       },
       {
         "t": "h2",

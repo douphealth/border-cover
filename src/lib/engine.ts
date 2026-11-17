@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { claimEvidence, RELEASE_ID } from './provenance';
 /**
  * BorderCover Atlas evidence comparison engine v2.0.
  * Pure functions: accepts the published evidence dataset and a user's selected scenario.
@@ -55,6 +56,8 @@ export function evaluate(input, data){
   level='unknown'; status='needs-check'; basis='domestic';
   reason=`This is within the country where your policy was issued. Your current schedule—not our international table—controls your home cover.`;
   note='Check your active policy schedule, permitted drivers, vehicle use and exclusions.';
+ } else if(!named){
+  reason='Insurer-specific terms not researched. Official country guidance does not establish your insurer’s cover, exclusions or allowance.';
  } else if(market.id==='uk'){
   if(dest.code==='ie' && ['direct-line','tesco'].includes(insurer.id)){
    // Direct Line current policy booklet p35; Tesco's current published Ireland exception.
@@ -231,18 +234,27 @@ export function evaluate(input, data){
   extra.push('Your trip crosses the entered renewal date. The allowance reset and renewed policy edition are not verified; no automatic split or renewed allowance has been assumed.');
   actionList.unshift('Ask the insurer to confirm cover and day counting on both sides of renewal.');
  }
- const label=fullLabel(level);
- const remaining=annual===null || !usedKnown ? null : Math.max(0,annual-used);
+ const label=!named ? 'Insurer-specific terms not researched' : fullLabel(level);
+ const remaining=annual===null || !usedKnown || dates.crossesRenewal ? null : Math.max(0,annual-used);
  const remainingAfterTrip=remaining===null ? null : Math.max(0,annual-used-days);
  const excludedBenefit=market.id==='au' && insurer.id==='racv' ? 'ownCar' : 'liability';
  const unavailable=!named ? 'not-researched' : basis==='insurer-general' ? 'insufficient-evidence' : 'confirmation-required';
  const benefits={
   liability:{state:level==='same'||level==='minimum'||level==='liability' ? 'published' : level==='excluded' && excludedBenefit==='liability' ? 'explicit-exclusion' : unavailable, detail:level==='minimum' ? 'Legal-minimum baseline only; confirm continued validity and applicable limits.' : level==='same'||level==='liability' ? 'Published liability protection; your active policy and limits still apply.' : 'Destination-valid liability must be confirmed separately.'},
-  ownCar:{state:level==='same' ? 'published' : level==='minimum' || (level==='excluded' && excludedBenefit==='ownCar') ? 'explicit-exclusion' : 'confirmation-required',detail:level==='same' ? 'Equivalent to the cover you actually purchased, subject to exclusions and overseas allowance.' : level==='minimum' ? 'Own-car damage and theft are not part of the identified legal-minimum benefit.' : 'Own-car damage and theft are not verified for this journey.'},
+  ownCar:{state:!named ? 'not-researched' : level==='same' ? 'published' : level==='minimum' || (level==='excluded' && excludedBenefit==='ownCar') ? 'explicit-exclusion' : 'confirmation-required',detail:level==='same' ? 'Equivalent to the cover you actually purchased, subject to exclusions and overseas allowance.' : level==='minimum' ? 'Own-car damage and theft are not part of the identified legal-minimum benefit.' : 'Own-car damage and theft are not verified for this journey.'},
   breakdown:{state:'not-researched',detail:'Breakdown, recovery, courtesy car and legal costs are not established by motor cover. Check the separate assistance wording.'},
-  documents:{state:green.kind==='check'||green.kind==='may' ? 'confirmation-required' : 'published',detail:green.title+' — '+green.detail}
+  documents:{state:green.kind==='check'||green.kind==='may'||green.kind==='na' ? 'confirmation-required' : 'published',detail:green.title+' — '+green.detail},
+  notification:{state:insurer.preTravelNotice ? 'published' : 'not-researched',detail:insurer.preTravelNotice || 'Pre-travel notification and approval requirements have not been established. Ask your insurer.'}
  };
+ const claims=claimEvidence(market.id,insurer.id,tier.id,dest.code,insurer.verifiedDestinations || [],input.asOf || new Date().toISOString().slice(0,10));
+ const states=claims.flatMap(c=>c.observations.map(o=>o.state));
+ const researchState=states.includes('conflicting') ? 'conflicting' : states.includes('unavailable') ? 'unavailable' : states.includes('overdue') ? 'overdue' : states.length && states.every(s=>s==='current') ? 'partial-reviewed' : named ? 'unreviewed' : 'not-researched';
+ if(['conflicting','overdue','unavailable'].includes(researchState)){
+  status='needs-check';extra.push('Supporting research is '+researchState+'. Confirm the affected claims before relying on the published outcome.');
+ }
+ const officialGuidance=!named && market.id==='uk' && ukStatutory ? {sourceIds:['uk-government'],detail:'GOV.UK describes a legal-minimum baseline for active UK motor insurance in this country. It does not verify an unlisted insurer, enhanced cover or your personal policy.'} : null;
  return {
+  releaseId:RELEASE_ID,researchState,claims,officialGuidance,
   status, level, label, reason, note, extra, insurer, tier, dest, market,
   days,used,usedKnown,annual,perTrip,unspecified,remaining,remainingAfterTrip,benefits,crossesRenewal:dates.crossesRenewal,exceeded,limitText:limits.join(' · '),
   green,sourceIds:[...new Set(sourceIds)],actionList,checkedOn:data.checkedOn,

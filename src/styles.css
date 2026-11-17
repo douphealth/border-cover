@@ -150,17 +150,19 @@
 .result-summary { border-top: 4px solid var(--primary); }
 .google-signin { background: #fff; border-color: #747775; color: #1f1f1f; }
 .evidence-detail[open] > summary { color: var(--primary); }
+.trip-summary { position: sticky; top: 106px; z-index: 30; }
+#research-outcome { scroll-margin-top: 180px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .route-line { stroke-dashoffset: 0; }
 }
 @media print {
-  #check > div { display: block !important; }
+  #check > div:not(.no-print) { display: block !important; }
   #check > div > .print-result { width: 100% !important; }
   header, footer, .no-print { display: none !important; }
   body { background: var(--card); }
   main { max-width: none; }
-  .print-result { display: block; }
+  .print-result { display: block !important; }
   details > * { display: block !important; }
   details { break-inside: avoid; }
   .glass { box-shadow: none; }

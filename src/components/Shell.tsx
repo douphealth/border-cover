@@ -43,7 +43,7 @@ export function Footer() {
           <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
           <Link to="/terms" className="hover:text-foreground">Terms</Link>
         </div>
-        <div className="text-xs leading-relaxed text-muted-foreground">Legacy dataset release {data.checkedOn}<br />{datasetStats.sources} source records · {datasetStats.namedProfiles} named market profiles<br />{datasetStats.fallbackProfiles} generic fallback profiles · {datasetStats.plans} plans<br /><Link to="/review" className="underline">Editorial review</Link> · Ownership and reviewer details pending.</div>
+        <div className="text-xs leading-relaxed text-muted-foreground">Imported research snapshot {data.checkedOn}<br />{datasetStats.sources} source records · {datasetStats.namedProfiles} named market profiles<br />{datasetStats.fallbackProfiles} generic fallback profiles · {datasetStats.plans} plans<br /><Link to="/review" className="underline">Editorial review</Link> · Ownership and reviewer details pending.</div>
       </div>
     </footer>
   );

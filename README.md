@@ -8,6 +8,9 @@ Source-backed research tool: does your UK, Irish, US, Canadian, Australian or NZ
 - **Evidence-first results** — distinct benefit states, unknown prior usage, inclusive dates and a renewal-crossing warning without a fabricated allowance reset.
 - **Private corrections and editorial review** — Cloud records, reviewer role enforcement and approved evidence displayed separately from legacy observations.
 - **Validated share links and printable checklist** — trip inputs only in a URL fragment, with rule version, evidence and unresolved conditions.
+- **Trust safeguards** — generic insurer selections remain unresearched; policy-year arithmetic suppresses unknown/renewal answers; claim-linked quotations and explicit research dates.
+- **Three-stage phone journey** — Policy → Journey → Result, preserved inputs and a compact editable summary.
+- **Independent editorial approval and release tooling** — separate author/approver, assigned source-review tasks, immutable research snapshots and validated approved-candidate export; no real human approval is claimed yet.
 
 ## Verification and launch
 

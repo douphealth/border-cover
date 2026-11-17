@@ -22,6 +22,20 @@
       "when": 1794899086145,
       "tag": "0002_consolidate_evidence_read_policy",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794902151857,
+      "tag": "0003_independent_approval_and_review_tasks",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794902488768,
+      "tag": "0004_evidence_applicability_dates",
+      "breakpoints": true
     }
   ]
 }
