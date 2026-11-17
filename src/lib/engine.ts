@@ -234,7 +234,7 @@ export function evaluate(input, data){
   extra.push('Your trip crosses the entered renewal date. The allowance reset and renewed policy edition are not verified; no automatic split or renewed allowance has been assumed.');
   actionList.unshift('Ask the insurer to confirm cover and day counting on both sides of renewal.');
  }
- const label=fullLabel(level);
+ const label=!named ? 'Insurer-specific terms not researched' : fullLabel(level);
  const remaining=annual===null || !usedKnown || dates.crossesRenewal ? null : Math.max(0,annual-used);
  const remainingAfterTrip=remaining===null ? null : Math.max(0,annual-used-days);
  const excludedBenefit=market.id==='au' && insurer.id==='racv' ? 'ownCar' : 'liability';

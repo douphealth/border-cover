@@ -1,6 +1,7 @@
 # BorderCover Atlas upgrade
 
 - [x] Compare the new trust/product audit with the current implementation and prepare the remaining-work plan.
+- [ ] Full approved implementation: generic boundaries, provenance/release workflow, mobile stages, independent review, tasks and verification.
 - [x] Trust signals, shared counts and synchronized scenario calculations.
 - [x] Benefit-specific results, renewal safeguards and rule regression tests.
 - [x] Claim-level observation records, persistent corrections and role-protected review controls.

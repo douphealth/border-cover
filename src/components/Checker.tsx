@@ -29,6 +29,7 @@ export function Checker() {
   const ins = list.find((i) => i.id === insurer) ?? list[0];
   const patch = (value: Partial<Scenario>) => setScenario((s) => ({ ...s, ...value }));
   const r: any = useMemo(() => evaluateRoute(scenario, data), [scenario]);
+  useEffect(() => { const timer = setTimeout(() => { if (!r.error) setNotice(`Research updated: ${r.stops.length} countries; ${STATUS[r.status].label}. Personal cover is not confirmed.`); }, 800); return () => clearTimeout(timer); }, [r]);
   const toggleStop = (code: string) => setScenario((s) => ({ ...s, stops: s.stops.includes(code) ? s.stops.length > 1 ? s.stops.filter((c) => c !== code) : s.stops : s.stops.length < 5 ? [...s.stops, code] : s.stops }));
   const options = eligibleCountries(market).filter((c) => !stops.includes(c.code) && c.name.toLowerCase().includes(query.toLowerCase()));
   const status = !r.error ? STATUS[r.status] : null;
