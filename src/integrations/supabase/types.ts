@@ -18,6 +18,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          kind: string
           message: string
           rule_id: string
           rule_version: string
@@ -26,6 +27,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          kind?: string
           message: string
           rule_id: string
           rule_version: string
@@ -34,6 +36,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          kind?: string
           message?: string
           rule_id?: string
           rule_version?: string
@@ -82,6 +85,7 @@ export type Database = {
       }
       evidence_reviews: {
         Row: {
+          approved_by: string | null
           conflicts: string
           created_at: string
           created_by: string
@@ -97,6 +101,7 @@ export type Database = {
           status: string
         }
         Insert: {
+          approved_by?: string | null
           conflicts?: string
           created_at?: string
           created_by: string
@@ -112,6 +117,7 @@ export type Database = {
           status?: string
         }
         Update: {
+          approved_by?: string | null
           conflicts?: string
           created_at?: string
           created_by?: string
@@ -123,6 +129,36 @@ export type Database = {
           reviewer_name?: string
           rule_id?: string
           section?: string
+          source_id?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      review_tasks: {
+        Row: {
+          assigned_to: string | null
+          created_at: string
+          id: string
+          reason: string
+          resolved_at: string | null
+          source_id: string
+          status: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          created_at?: string
+          id?: string
+          reason: string
+          resolved_at?: string | null
+          source_id: string
+          status?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          created_at?: string
+          id?: string
+          reason?: string
+          resolved_at?: string | null
           source_id?: string
           status?: string
         }
