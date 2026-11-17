@@ -15,6 +15,13 @@
       "when": 1794898856035,
       "tag": "0001_harden_review_publication",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794899086145,
+      "tag": "0002_consolidate_evidence_read_policy",
+      "breakpoints": true
     }
   ]
 }
