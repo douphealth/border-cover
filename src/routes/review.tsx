@@ -11,7 +11,7 @@ import { reviewGaps } from "@/lib/evidence";
 import { sources } from "@/lib/atlas";
 import { reviewQueue, saveReview, approveReview, resolveCorrection, updateReviewTask, exportApprovedResearch } from "@/lib/review.functions";
 
-export const Route = createFileRoute("/review")({ head: () => ({ meta: seo("Editorial review | BorderCover Atlas", "Private evidence review and corrections, with authorized reviewer access and historical provenance.") }), component: ReviewPage });
+export const Route = createFileRoute("/review")({ head: () => ({ meta: [...seo("Editorial review | BorderCover Atlas", "Private evidence review and corrections, with authorized reviewer access and historical provenance.").filter((t) => !("name" in t && t.name === "robots")), { name: "robots", content: "noindex, nofollow" }] }), component: ReviewPage });
 function ReviewPage() {
   const [signedIn, setSignedIn] = useState(false);
   const [queue, setQueue] = useState<Awaited<ReturnType<typeof reviewQueue>> | null>(null);

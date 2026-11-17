@@ -12,9 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AtlasRouteImport } from './routes/atlas'
 import { Route as ChangeLogRouteImport } from './routes/change-log'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ReviewRouteImport } from './routes/review'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SourcesRouteImport } from './routes/sources'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as CoverIndexRouteImport } from './routes/cover.index'
@@ -39,6 +41,11 @@ const ChangeLogRoute = ChangeLogRouteImport.update({
   path: '/change-log',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MethodologyRoute = MethodologyRouteImport.update({
   id: '/methodology',
   path: '/methodology',
@@ -52,6 +59,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const ReviewRoute = ReviewRouteImport.update({
   id: '/review',
   path: '/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SourcesRoute = SourcesRouteImport.update({
@@ -100,9 +112,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/atlas': typeof AtlasRoute
   '/change-log': typeof ChangeLogRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/methodology': typeof MethodologyRoute
   '/privacy': typeof PrivacyRoute
   '/review': typeof ReviewRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sources': typeof SourcesRoute
   '/terms': typeof TermsRoute
   '/cover/$slug': typeof CoverSlugRoute
@@ -116,9 +130,11 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/atlas': typeof AtlasRoute
   '/change-log': typeof ChangeLogRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/methodology': typeof MethodologyRoute
   '/privacy': typeof PrivacyRoute
   '/review': typeof ReviewRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sources': typeof SourcesRoute
   '/terms': typeof TermsRoute
   '/cover/$slug': typeof CoverSlugRoute
@@ -133,9 +149,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/atlas': typeof AtlasRoute
   '/change-log': typeof ChangeLogRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/methodology': typeof MethodologyRoute
   '/privacy': typeof PrivacyRoute
   '/review': typeof ReviewRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sources': typeof SourcesRoute
   '/terms': typeof TermsRoute
   '/cover/$slug': typeof CoverSlugRoute
@@ -151,9 +169,11 @@ export interface FileRouteTypes {
     | '/'
     | '/atlas'
     | '/change-log'
+    | '/llms.txt'
     | '/methodology'
     | '/privacy'
     | '/review'
+    | '/sitemap.xml'
     | '/sources'
     | '/terms'
     | '/cover/$slug'
@@ -167,9 +187,11 @@ export interface FileRouteTypes {
     | '/'
     | '/atlas'
     | '/change-log'
+    | '/llms.txt'
     | '/methodology'
     | '/privacy'
     | '/review'
+    | '/sitemap.xml'
     | '/sources'
     | '/terms'
     | '/cover/$slug'
@@ -183,9 +205,11 @@ export interface FileRouteTypes {
     | '/'
     | '/atlas'
     | '/change-log'
+    | '/llms.txt'
     | '/methodology'
     | '/privacy'
     | '/review'
+    | '/sitemap.xml'
     | '/sources'
     | '/terms'
     | '/cover/$slug'
@@ -200,9 +224,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AtlasRoute: typeof AtlasRoute
   ChangeLogRoute: typeof ChangeLogRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   MethodologyRoute: typeof MethodologyRoute
   PrivacyRoute: typeof PrivacyRoute
   ReviewRoute: typeof ReviewRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SourcesRoute: typeof SourcesRoute
   TermsRoute: typeof TermsRoute
   CoverSlugRoute: typeof CoverSlugRoute
@@ -236,6 +262,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChangeLogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/methodology': {
       id: '/methodology'
       path: '/methodology'
@@ -255,6 +288,13 @@ declare module '@tanstack/react-router' {
       path: '/review'
       fullPath: '/review'
       preLoaderRoute: typeof ReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sources': {
@@ -320,9 +360,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AtlasRoute: AtlasRoute,
   ChangeLogRoute: ChangeLogRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   MethodologyRoute: MethodologyRoute,
   PrivacyRoute: PrivacyRoute,
   ReviewRoute: ReviewRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SourcesRoute: SourcesRoute,
   TermsRoute: TermsRoute,
   CoverSlugRoute: CoverSlugRoute,

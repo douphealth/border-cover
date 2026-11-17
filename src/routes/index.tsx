@@ -7,7 +7,7 @@ import rivieraDrive from "@/assets/riviera-drive.jpg";
 
 
 export const Route = createFileRoute("/")({
-  head: () => ({ meta: [...seo("BorderCover Atlas — Overseas car insurance research", "Compare published overseas motor cover, trip allowances, transit-country conditions and original evidence. Personal policy confirmation remains essential."), { name: "robots", content: "noindex, nofollow" }] }),
+  head: () => ({ meta: [...seo("BorderCover Atlas — Overseas car insurance research", "Compare published overseas motor cover, trip allowances, transit-country conditions and original evidence. Personal policy confirmation remains essential.")] }),
   component: Index,
 });
 function Index() {
