@@ -1,0 +1,6 @@
+alter view public.approved_evidence set (security_invoker=true);
+grant select(id,source_id,rule_id,quotation,section,policy_edition,reviewer_name,review_due,conflicts,human_verified_at,status) on public.evidence_reviews to anon;
+create policy approved_public_evidence on public.evidence_reviews for select to anon using(status='approved');
+create policy approved_signedin_evidence on public.evidence_reviews for select to authenticated using(status='approved');
+revoke all on function public.audit_evidence_review() from public,anon,authenticated;
+create or replace function public.audit_evidence_review() returns trigger language plpgsql security definer set search_path=public as $$ begin if new.status='approved' and old.status is distinct from new.status then if new.review_due<=current_date or length(trim(new.reviewer_name))<2 or length(trim(new.policy_edition))<1 or length(trim(new.conflicts))>0 then raise exception 'Approval requires current review deadline, attribution, edition and no unresolved conflicts'; end if;new.human_verified_at=now();end if;if old.status='approved' then raise exception 'Create a new draft revision rather than editing approved evidence';end if;insert into public.evidence_history(review_id,actor_id,record) values(new.id,auth.uid(),to_jsonb(new));return new;end $$;
