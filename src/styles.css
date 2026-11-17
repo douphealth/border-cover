@@ -148,6 +148,7 @@
   h1, h2, h3, p, dd { overflow-wrap: break-word; }
 }
 .result-summary { border-top: 4px solid var(--primary); }
+.google-signin { background: #fff; border-color: #747775; color: #1f1f1f; }
 .evidence-detail[open] > summary { color: var(--primary); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

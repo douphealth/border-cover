@@ -1,33 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ExternalLink } from "lucide-react";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { PageHead, seo } from "@/components/Shell";
+import { EvidenceDetails } from "@/components/EvidenceDetails";
+import { Button } from "@/components/ui/button";
 import { sources } from "@/lib/atlas";
+import { publishedEvidence } from "@/lib/review.functions";
 
-export const Route = createFileRoute("/sources")({
-  head: () => ({ meta: seo("Evidence register — all sources | BorderCover Atlas", "Every insurer and government document behind BorderCover Atlas, with publisher, finding and date checked.") }),
-  component: SourcesPage,
-});
-
+const evidenceOptions = queryOptions({ queryKey: ["approved-evidence"], queryFn: () => publishedEvidence() });
+export const Route = createFileRoute("/sources")({ loader: ({ context }) => context.queryClient.ensureQueryData(evidenceOptions), head: () => ({ meta: seo("Evidence register | BorderCover Atlas", "Original documents, historical dates, exact observed quotations and separately approved editorial evidence.") }), component: SourcesPage });
 function SourcesPage() {
-  const all = Object.values(sources) as any[];
+  const all = Object.values(sources);
   const types = [...new Set(all.map((s) => s.recordType))];
-  const [t, setT] = useState("all");
-  return (
-    <>
-      <PageHead kicker={`${all.length} records`} title="The evidence register." intro="Every verdict traces back to one of these documents." />
-      <div className="mx-auto max-w-7xl px-5">
-        <div className="mb-5 flex flex-wrap gap-2">{["all", ...types].map((x) => <button key={x} onClick={() => setT(x)} className={`rounded-full border px-4 py-1.5 text-sm ${t === x ? "border-primary bg-primary/15" : "text-muted-foreground"}`}>{x}</button>)}</div>
-        <div className="overflow-hidden rounded-2xl glass">
-          {all.filter((s) => t === "all" || s.recordType === t).map((s) => (
-            <a key={s.id} href={s.url} target="_blank" rel="noreferrer" className="grid gap-2 border-b p-5 transition last:border-0 hover:bg-muted/50 md:grid-cols-[1fr_2fr_auto]">
-              <div><div className="text-xs text-muted-foreground">{s.publisher}</div><div className="flex items-center gap-1.5 font-semibold">{s.title}<ExternalLink className="h-3.5 w-3.5 opacity-50" /></div></div>
-              <p className="text-sm text-muted-foreground">{s.finding}</p>
-              <span className="font-mono text-xs text-muted-foreground">{s.checkedOn}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </>
-  );
+  const [type, setType] = useState("all");
+  const { data: approved } = useSuspenseQuery(evidenceOptions);
+  return <><PageHead kicker={`${all.length} source records`} title="The evidence register." intro="Historical source records and automated observations are not fresh human verification." /><div className="mx-auto max-w-5xl space-y-6 px-5"><div className="flex flex-wrap gap-2">{["all", ...types].map((t) => <Button key={t} variant={type === t ? "default" : "outline"} onClick={() => setType(t)}>{t}</Button>)}</div><EvidenceDetails sourceIds={all.filter((s) => type === "all" || s.recordType === type).map((s) => s.id)} /><section className="border-t pt-6"><h2 className="text-xl font-semibold">Approved editorial revisions</h2>{!approved.length ? <p className="mt-3 text-sm text-muted-foreground">No named human approvals published yet.</p> : approved.map((a, i) => <div key={i} className="border-b py-4"><p className="text-sm font-semibold">{a.source_id} · {a.policy_edition}</p><blockquote className="my-2 text-sm">{a.quotation}</blockquote><p className="text-xs text-muted-foreground">{a.reviewer_name} · verified {a.human_verified_at} · review due {a.review_due}</p><p className="text-xs text-muted-foreground">{a.conflicts}</p></div>)}</section></div></>;
 }
