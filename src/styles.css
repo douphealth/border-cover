@@ -36,6 +36,9 @@
   --color-warn: var(--warn);
   --color-info: var(--info);
   --color-grid: var(--grid);
+  --color-hero-foreground: var(--hero-foreground);
+  --color-hero-muted: var(--hero-muted);
+  --color-hero-accent: var(--hero-accent);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -94,6 +97,13 @@
   --gradient-glow: none;
   --shadow-float: 0 4px 20px -12px oklch(0.25 0.035 250 / 20%);
   --font-display: "Manrope", system-ui, sans-serif;
+  --hero-foreground: oklch(0.99 0.003 170);
+  --hero-muted: oklch(0.91 0.009 170);
+  --hero-accent: oklch(0.88 0.065 165);
+  --hero-ink: oklch(0.19 0.025 170);
+  --hero-shade: linear-gradient(90deg, oklch(0.17 0.025 170 / 88%) 0%, oklch(0.17 0.025 170 / 64%) 31%, oklch(0.17 0.025 170 / 13%) 67%, transparent 100%);
+  --hero-mobile-shade: linear-gradient(90deg, oklch(0.17 0.025 170 / 87%), oklch(0.17 0.025 170 / 53%));
+  --home-result-shadow: 0 8px 32px -20px oklch(0.25 0.035 250 / 24%);
 }
 
 @layer base {
@@ -152,6 +162,38 @@
 .evidence-detail[open] > summary { color: var(--primary); }
 .trip-summary { position: sticky; top: 106px; z-index: 30; }
 #research-outcome { scroll-margin-top: 180px; }
+.drive-hero { height: 410px; color: var(--hero-foreground); }
+.drive-hero-image { object-position: center 60%; animation: coastal-drift 24s ease-in-out infinite alternate; }
+.drive-hero-shade { background: var(--hero-shade); }
+.hero-title { font-family: "Fraunces", Georgia, serif; font-weight: 400; }
+.hero-copy { animation: rise .8s ease-out both; }
+.home-page .hero-primary { background: var(--hero-accent); color: var(--hero-ink); box-shadow: none; transition: transform .2s, background .2s; }
+.home-page .hero-primary:hover { background: var(--hero-foreground); transform: translateY(-2px); }
+.home-page .hero-secondary { color: var(--hero-foreground); border: 1px solid color-mix(in oklab, var(--hero-foreground) 35%, transparent); }
+.home-page .hero-secondary:hover { background: color-mix(in oklab, var(--hero-foreground) 12%, transparent); }
+.hero-arrow { animation: road-arrow 3s ease-in-out infinite; }
+.roadmark-line { display: block; width: 90px; height: 1px; position: relative; background: color-mix(in oklab, var(--hero-foreground) 50%, transparent); }
+.roadmark-line::after { content: ""; position: absolute; width: 5px; height: 5px; top: -2px; border-radius: 50%; background: var(--hero-accent); animation: route-travel 6s ease-in-out infinite; }
+.home-checker { scroll-margin-top: 85px; }
+.home-checker aside { border-top: 3px solid var(--primary); padding-top: 22px; }
+.home-checker aside > div { animation: rise .6s ease-out both; }
+.home-checker .result-summary { box-shadow: var(--home-result-shadow); border-radius: 6px; animation: rise .8s .1s ease-out both; }
+.home-checker input[type="range"] { cursor: pointer; }
+.home-checker input[type="checkbox"] { accent-color: var(--primary); }
+.home-checker select { transition: border-color .2s, box-shadow .2s; }
+.home-checker select:hover { border-color: var(--primary); }
+.research-dot { box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 10%, transparent); }
+@keyframes coastal-drift { from { transform: scale(1); } to { transform: scale(1.045) translateX(-.5%); } }
+@keyframes road-arrow { 0%, 75%, 100% { transform: translateY(0); } 85% { transform: translateY(3px); } }
+@keyframes route-travel { 0% { left: 0; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: calc(100% - 5px); opacity: 0; } }
+@media (max-width: 639px) {
+  .drive-hero { height: 380px; }
+  .drive-hero-image { object-position: 58% center; }
+  .drive-hero-shade { background: var(--hero-mobile-shade); }
+  .hero-copy { padding-top: 24px; padding-bottom: 24px; }
+  .hero-copy > p:first-child { font-size: 10px; }
+  .checker-heading h2 { font-size: 21px; }
+}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .route-line { stroke-dashoffset: 0; }
@@ -160,6 +202,7 @@
   #check > div:not(.no-print) { display: block !important; }
   #check > div > .print-result { width: 100% !important; }
   header, footer, .no-print { display: none !important; }
+  .drive-hero, .research-ribbon, .checker-heading { display: none !important; }
   body { background: var(--card); }
   main { max-width: none; }
   .print-result { display: block !important; }

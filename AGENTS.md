@@ -42,3 +42,4 @@ use the editor.
 - Require independent reviewer approval in both server actions and database triggers; client-disabled approval controls are not authorization.
 - Source observations create deduplicated private review tasks through a database trigger; automated monitoring never publishes rules.
 - Reviewed releases are prepared offline from authorized approval exports and archived with content hashes; runtime surfaces consume the adopted bundled dataset, not drafts.
+- Keep homepage photography and motion in the index presentation with scoped semantic CSS tokens; visual changes must not alter the shared research engine or scenario behavior.
