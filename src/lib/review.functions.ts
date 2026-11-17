@@ -27,11 +27,11 @@ export const reviewQueue = createServerFn({ method: "POST" }).middleware([requir
   return { permitted: true, userId: context.userId, reports: reports.data ?? [], reviews: reviews.data ?? [], observations: observations.data ?? [], tasks: tasks.data ?? [] };
 });
 
-const reviewSchema = z.object({ sourceId: z.string().refine((id) => Boolean(sources[id])), ruleId: z.string().min(1).max(200), quotation: z.string().min(20).max(8000), section: z.string().min(1).max(500), edition: z.string().min(1).max(500), reviewer: z.string().min(2).max(120), due: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), conflicts: z.string().max(2000).default("") });
+export const reviewSchema = z.object({ sourceId: z.string().refine((id) => Boolean(sources[id])), ruleId: z.string().min(1).max(200), quotation: z.string().min(20).max(8000), section: z.string().min(1).max(500), edition: z.string().min(1).max(500), reviewer: z.string().min(2).max(120), due: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), conflicts: z.string().max(2000).default(""), accessed: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), effective: z.string().regex(/^$|^\d{4}-\d{2}-\d{2}$/).default("") });
 export const saveReview = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator(reviewSchema).handler(async ({ data, context }) => {
   const { data: permitted } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "reviewer" });
   if (!permitted) throw new Error("Reviewer access required.");
-  const { error } = await context.supabase.from("evidence_reviews").insert({ source_id: data.sourceId, rule_id: data.ruleId, quotation: data.quotation, section: data.section, policy_edition: data.edition, reviewer_name: data.reviewer, review_due: data.due, conflicts: data.conflicts, created_by: context.userId });
+  const { error } = await context.supabase.from("evidence_reviews").insert({ source_id: data.sourceId, rule_id: data.ruleId, quotation: data.quotation, section: data.section, policy_edition: data.edition, reviewer_name: data.reviewer, review_due: data.due, conflicts: data.conflicts, created_by: context.userId, accessed_on: data.accessed, effective_from: data.effective || null });
   if (error) throw new Error("Review could not be saved.");
   return { ok: true };
 });
@@ -87,13 +87,13 @@ export const exportApprovedResearch = createServerFn({ method: "POST" }).middlew
   const observations = [];
   const claims = [];
   for (const claim of publishedResearch.claims) {
-    const matching = rows?.filter((r) => r.rule_id === claim.id && r.approved_by && r.approved_by !== r.created_by && !r.conflicts && r.human_verified_at) ?? [];
+    const matching = rows?.filter((r) => r.rule_id === claim.id && r.approved_by && r.approved_by !== r.created_by && !r.conflicts && r.human_verified_at && r.accessed_on) ?? [];
     if (!matching.length) continue;
     const ids = [];
     for (const row of matching) {
       const hash = async (id: string) => Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`${data.version}:${id}`)))).map((b) => b.toString(16).padStart(2,"0")).join("");
       ids.push(row.id);
-      observations.push({ id: row.id, sourceId: row.source_id, retrievedOn: row.created_at.slice(0,10), quotation: row.quotation, section: row.section, humanVerifiedOn: row.human_verified_at?.slice(0,10) ?? null, reviewer: row.reviewer_name, reviewDue: row.review_due, effectiveFrom: null, policyEdition: row.policy_edition, conflicts: [], authorId: await hash(row.created_by), approvedBy: await hash(row.approved_by ?? "") });
+      observations.push({ id: row.id, sourceId: row.source_id, retrievedOn: row.accessed_on ?? "", quotation: row.quotation, section: row.section, humanVerifiedOn: row.human_verified_at?.slice(0,10) ?? null, reviewer: row.reviewer_name, reviewDue: row.review_due, effectiveFrom: row.effective_from, policyEdition: row.policy_edition, conflicts: [], authorId: await hash(row.created_by), approvedBy: await hash(row.approved_by ?? "") });
     }
     claims.push({ ...claim, observationIds: ids });
   }
