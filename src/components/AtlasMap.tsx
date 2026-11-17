@@ -23,7 +23,7 @@ export function AtlasMap({ market, insurer, tier, days, used = 0, departure = ""
     for (const code of Object.keys(countries)) {
       if (code === home || (home === "gb" && code === "ni")) continue;
       const r = evaluate({ market, insurer, tier, destination: code, days, used, departure, returnDate, renewal }, data);
-      if (!r.error) out[code] = r;
+      if (!("error" in r)) out[code] = r;
     }
     return out;
   }, [market, insurer, tier, days, used, departure, returnDate, renewal, home]);
