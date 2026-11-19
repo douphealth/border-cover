@@ -8,6 +8,8 @@ import { useState } from "react";
 import { PageHead, seo } from "@/components/Shell";
 import { countries, coverBySlug, covers, evaluateCover, flag, insurers, sources, STATUS } from "@/lib/atlas";
 import { OfferSlot } from "@/components/OfferSlot";
+import { AmazonPicks } from "@/components/AmazonPicks";
+import { drivingPicks } from "@/lib/amazon-picks";
 
 export const Route = createFileRoute("/cover/$slug")({
   loader: ({ params }) => { const c = coverBySlug(params.slug); if (!c) throw notFound(); const ins = insurers.find((i) => i.id === c.insurer && i.market === c.market); if (!ins) throw notFound(); return { c, insName: ins.name, destName: countries[c.dest].name }; },
@@ -56,6 +58,7 @@ function CoverPage() {
         {related.length > 0 && <div className="flex flex-wrap gap-2">{related.map((x) => <Link key={x.slug} to="/cover/$slug" params={{ slug: x.slug }} className="rounded-full border px-4 py-2 text-sm hover:border-primary">{flag(x.dest)} {insName} in {countries[x.dest].name}</Link>)}</div>}
       </div>
       <OfferSlot id="breakdown-cover" context={destName} />
+      <AmazonPicks title={`Driving kit for ${destName}`} intro="Car equipment rules differ by country. Check the official list for your route before you go." picks={drivingPicks(c.market, c.dest)} />
     </>
   );
 }
